@@ -3,7 +3,7 @@ Setting up SSH on my laptop to be able to make a secure connection to the VM.
 
 ## Key terminology
 - Virtual Machine (VM)
-- Hypervisor (studied during assesment week)
+- Hypervisor (studied during assessment week)
 - SSH (Secure Shell Protocol) -> for verification of identity
 - SSH == Asymmetric Encryption (Public Key / Private Key pair)
 
