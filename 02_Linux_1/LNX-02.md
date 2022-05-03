@@ -8,6 +8,8 @@ Getting familiar with Linux structure of files and directories.
 - mkdir (make directory)
 - touch (make file)
 - cat (concatenate)
+- Absolute path is the complete path starting from the root (/)
+- Relative path is the path starting from the current working directory
 
 ## Exercise
 ### Sources
