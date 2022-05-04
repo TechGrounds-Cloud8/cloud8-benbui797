@@ -13,8 +13,8 @@ Getting familiar with Linux structure of files and directories.
 
 ## Exercise
 ### Sources
-https://linuxhandbook.com/linux-directory-structure/
-https://www.w3cschoool.com/linux-tutorial
+https://linuxhandbook.com/linux-directory-structure/  
+https://www.w3cschoool.com/linux-tutorial  
 
 ### Overcome challenges
 - I had some previous experience with bash commands.

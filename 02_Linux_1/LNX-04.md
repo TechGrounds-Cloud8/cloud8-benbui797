@@ -16,6 +16,7 @@ Introduction to creating new users on a Linux system, giving them permissions an
 - groupadd GROUPNAME (add new group)
 - primary / secondary group (primary group defines the permissions)
 - usermod -a -G GROUP USER (add user to group (-G), -a (without -a user will be removed from any other group))
+- usermod -aG sudo USER (gives user sudo rights)
 - gpasswd -d USER GROUP (remove user from group)
 - userdel USERNAME (command to delete user)
 

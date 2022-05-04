@@ -17,7 +17,7 @@ Learning to do common text operations using Linux CLI.
 
 ## Exercise
 ### Sources
-- https://www.w3cschoool.com/linux-grep
+- https://www.w3cschoool.com/linux-grep  
 - I was already familiar with some of the commands
 
 ### Overcome challenges
