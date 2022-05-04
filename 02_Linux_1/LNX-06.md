@@ -55,7 +55,7 @@ https://www.w3cschoool.com/kill-process-linux
 https://www.geeksforgeeks.org/kill-command-in-linux-with-examples/?ref=lbp
 
 
-### Overcome challanges
+### Overcome challenges
 - I did not know telnet so had to look up how to install and run it. The first link was a comprehensive guide and also introduced the systemctl command, which basically answered the questions of the exercise.
 - I looked up multiple ways to retrieve (memory) information about processes. top is very clear.
 

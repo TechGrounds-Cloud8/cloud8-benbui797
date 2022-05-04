@@ -41,7 +41,7 @@ https://www.w3cschoool.com/user-password
 https://www.w3cschoool.com/local-groups
 https://linuxhandbook.com/linux-list-users/  
 
-### Overcome challanges
+### Overcome challenges
 I had to look up some additional commands, but the sites linked above were very useful and provided all information I needed (and more).
 
 ### Results

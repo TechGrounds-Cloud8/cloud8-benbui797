@@ -16,7 +16,7 @@ Getting familiar with Linux structure of files and directories.
 https://linuxhandbook.com/linux-directory-structure/
 https://www.w3cschoool.com/linux-tutorial
 
-### Overcome challanges
+### Overcome challenges
 - I had some previous experience with bash commands.
 - I cannot find a desktop/public/picture directory inside my home folder. I believe the installed container is a lightweight version that doesnt have these folders installed by default.
 

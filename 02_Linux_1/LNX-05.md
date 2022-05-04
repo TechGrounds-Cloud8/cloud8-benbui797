@@ -78,7 +78,7 @@ https://www.w3cschoool.com/linux-chmod-command
 https://www.w3cschoool.com/linux-chown-command
 https://www.section.io/engineering-education/user-groups-and-permissions-linux/  
 
-### Overcome challanges
+### Overcome challenges
 I learned some new commands and new options. For example, I didn't know the exact meaning of the numbers and how to read/use them in chmod command.
 
 ### Results

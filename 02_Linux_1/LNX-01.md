@@ -15,7 +15,7 @@ https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_k
 https://macsecurity.org/how-to-use-private-key-to-login-ssh/
 https://stackoverflow.com/questions/34045375/connect-over-ssh-using-a-pem-file
 
-### Overcome challanges
+### Overcome challenges
 - On first attempt, I didn't use the public key, so permission was denied. I had to look up how to use the public key file attached to the email.
 - Use BASH instead of Powershell...
 
