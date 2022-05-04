@@ -23,6 +23,7 @@ It's also possible to add additional logic such as loops, conditionals and varia
 ### Sources
 https://www.w3cschoool.com/set-environment-variable  
 https://www.howtogeek.com/658904/how-to-add-a-directory-to-your-path-in-linux/  
+https://linuxconfig.org/bash-scripting-tutorial
 https://www.tutorialspoint.com/unix/unix-what-is-shell.htm  
 https://phoenixnap.com/kb/how-to-vim-save-quit-exit  
 https://httpd.apache.org/  
@@ -31,6 +32,7 @@ https://linuxconfig.org/generating-random-numbers-in-bash-with-examples
 https://www.tutorialspoint.com/unix/unix-basic-operators.htm  
 https://www.tutorialspoint.com/unix/unix-decision-making.htm  
 https://www.tutorialspoint.com/unix/if-fi-statement.htm  
+
 
 
 ### Overcome challanges
