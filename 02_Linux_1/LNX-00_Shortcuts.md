@@ -7,6 +7,8 @@ mijn top tip is tab! niet tobben met typen, maar tabben!
 - Double Tab (if unable to autocomplete, list all options)
 - `clear` or CTRL+L (Clear terminal screen)
 - `cd -` Go back to previous working directory
+- `cd ~` Go directly to /home directory
+- `cd /` Go directly to /root directory
 - up/down arrows (move through history of commands) (CTRL+P & CTRL+N)
 - `history` list history of commands
 - CTRL+R (search through command history)
