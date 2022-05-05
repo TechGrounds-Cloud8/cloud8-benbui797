@@ -1,5 +1,8 @@
 # Linux Shortcuts
 
+mijn top tip is tab! niet tobben met typen, maar tabben!
+
+### General
 - Tab (autocomplete)
 - Double Tab (if unable to autocomplete, list all options)
 - `clear` or CTRL+L (Clear terminal screen)
