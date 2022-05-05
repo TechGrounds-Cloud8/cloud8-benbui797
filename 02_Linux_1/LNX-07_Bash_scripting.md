@@ -14,6 +14,7 @@ It's also possible to add additional logic such as loops, conditionals and varia
 - `unset NAME`: delete variable from env
 - `PATH`: defines in which folders the shell will look for executables
 - `export PATH=/home/ben/techgrounds/scripts:$PATH`: insert new path in front of PATH var
+- `export PATH=$PATH:/home/ben/techgrounds/scripts`: insert new path behind PATH var
 - make changes in PATH permanent by editting .bashrc file
 - DONT INSERT A NEW PATH WITH A LEADING COLON! == SECURITY RISK because it searches cwd first
 - [Special Linux variables](https://www.tutorialspoint.com/unix/unix-special-variables.htm) (CL arguments for example)
@@ -34,14 +35,12 @@ https://www.tutorialspoint.com/unix/unix-decision-making.htm
 https://www.tutorialspoint.com/unix/if-fi-statement.htm  
 
 
-
 ### Overcome challanges
 - I am familiar with basic coding principles in Python and C, but not in Bash. So I checked out some tutorials to understand the syntax of creating Bash scripts.
 - I forgot a couple of vim commands, so I had to look those up.
 - httpd is a service from Apache, so I checked Apache documentation for a guide on installing it.
 - Apache script required Sudo permissions -> run script with absolute path (it's possible to add path to sudo_path, but it's not secure)
 - I had to figure out how to automatically confirm the prompt whilst installing apache. The answer is to use the -y flag.
-
 
 ### Results
 Adding script directory to PATH var:  
