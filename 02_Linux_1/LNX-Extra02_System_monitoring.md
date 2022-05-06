@@ -15,7 +15,6 @@ There are commands to retrieve the VM's specs, such as `getconf`.
 - `/dev/zero`: Consistent output of NULL
 - `sysbench --test=cpu run`: change cpu to other tests. change run to help for info.
 
-
 ## Exercise
 ### Sources
 - https://linuxhint.com/install-htop-ubuntu/
