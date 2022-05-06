@@ -47,8 +47,8 @@ Metadata that is stored in an Inode:
 - Understanding softlinks, the article explaining the difference linked to this.
 
 ### Results
-The exercise was not very hard, but getting my head around the soft/hard links took a bit of time. This exercise is an example of their difference in practise. A soft/symbolic link points to the exact same data, thus deleting the original file, the softlink fails.  
+The exercise was not very hard, but getting my head around the soft/hard link concepts took a bit of time. This exercise is an example of their difference in practise. A soft/symbolic link points to the exact same data, thus after deleting the original file, the softlink fails.  
 
-A softlink is more like 'forwarding' the request to the original file. A hardlink is creating a new link that points to the same destination. 
+Summary: A softlink is more like 'forwarding' the request to the original file. A hardlink is creating a new link that points to the same destination. 
 
 ![LNX-Extra03 screenshot](../00_includes/LNX-Extra03.png)
