@@ -11,12 +11,17 @@ A hard link creates a new pointer to the original inode.
 - inode table: all inodes on a partition are stored here. Usually at the beginning, for quick acces.
 
 Metadata that is stored in an Inode:
-- Size
-- Permission
-- Owner/Group
-- Location of the hard drive
-- Date/time
-- Other information
+- File type: regular file, directory, pipe etc.
+- Permissions to that file: read, write, execute
+- Link count: The number of hard link relative to an inode
+- User ID: owner of file
+- Group ID: group owner
+- Size of file: or major/minor number in case of some special files
+- Time stamp: access time, modification time and (inode) change time
+- Attributes: immutable' for example
+- Access control list: permissions for special users/groups
+- Link to location of file
+- Other metadata about the file
 
 <br>
 
@@ -39,6 +44,7 @@ Metadata that is stored in an Inode:
 - https://linuxhandbook.com/symbolic-link-linux/
 - https://linuxhandbook.com/hard-link/
 - https://linuxhandbook.com/symbolic-link-linux/
+- https://linoxide.com/linux-inode/
 
 ### Overcome challenges
 - I had never heard of Inodes, so I googled: "Linux Inodes Explained"
