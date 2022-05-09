@@ -15,7 +15,7 @@ The Data Link layer is the protocol layer that transmits data between nodes on a
 The network layer provides the functionality to communicate between different networks. It can have many nodes connected to it by an address (IP) and allows different nodes to sent a message to other nodes by encapsulating a message with an address and let the network find it's way to the destination. If the message is too big for the data link layer on one of the nodes, it may split it into multiple fragments. These fragments will be reassembled at the target node once all fragments have been received. It may also report on delivery errors on these transfers. Functions of this layer include: routing protocols, multicast group management, network-layer information and error, and network-layer address assignment. It is the function of the payload that makes these belong to the network layer, not the protocol that carries them.  
 
 **Layer 4: Transport Layer**  
-The transport layer provides the functional and procedural means of transferring variable-length data sequences from a source host to a destination host from one application to another across a network. Transport protocols may be connection-oriented or connectionless. [TCP](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) is an example protocol (although not officially references in the OSI model).
+The transport layer provides the functional and procedural means of transferring variable-length data sequences from a source host to a destination host from one application to another across a network. Transport protocols may be connection-oriented or connectionless. [TCP](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) is an example protocol (although not officially referenced in the OSI model).
 
 **Layer 5: Session layer**  
 The Session Layer creates the setup, controls the connections, and ends the teardown, between two or more computers, which is called a "session". Since DNS and other Name Resolution Protocols operate in this part of the layer, common functions of the Session Layer include user logon (establishment), name lookup (management), and user logoff (termination) functions. The Session Layer also provides for full-duplex, half-duplex, or simplex operation, and establishes procedures for checkpointing, suspending, restarting, and terminating a session between two related streams of data, such as an audio and a video steam in a web-conferencing application.
@@ -35,15 +35,15 @@ An application can have multiple application-entities.
 An alternative model is **Internet Protocol Suite**, commonly known as the TCP/IP model. The design protocols of the TCP/IP model does not care as much about strict hierarchical encapsulation and layering. The model consist of the **Internet Protocol** as the connectionless layer and the **Transmission Control Protocol** as a reliable connection-oriented service.  
 In the TCP/IP model, there are four abstract layers of functionality:  
 
-**Link Layer**  
-The protocols of the link layer operate within the scope of the local network. The link layer is used to move data between two hosts on the same link.
+**Link/Network Acces Layer**  
+The protocols of the link layer operate within the scope of the local network. The link layer is used to move data between two hosts on the same link. This is related to the physical transmission of data.
 
 **Internet Layer**  
 Internet layer requires sending data from source network to a destination network. This process is called routing and IP-addresses are a protocol to support this functionality.
 
-**Transport Layer**  
+**Transport / Host-to-Host Layer**  
 The transport layer establishes basic data channels that applications use for task-specific data exchange. The layer establishes host-to-host connectivity in the form of end-to-end message transfer services that are independent of the underlying network and independent of the structure of user data and the logistics of exchanging information. Connectivity at the transport layer can be categorized as either connection-oriented, implemented in TCP, or connectionless, implemented in UDP. The protocols in this layer may provide error control, segmentation, flow control, congestion control, and application addressing (port numbers). For the purpose of providing process-specific transmission channels for applications, the layer establishes the concept of the network port.  
-[QUIC](https://en.wikipedia.org/wiki/QUIC) is more recent transfer protocol.
+[QUIC](https://en.wikipedia.org/wiki/QUIC) is a more recent transfer protocol.
 
 **Application Layer**  
 Quite similar to the OSI model. Protocols such as HTTP, SMTP, FTP belong here. At the application layer, the TCP/IP model distinguishes between user protocols and support protocols. Support protocols provide services to a system of network infrastructure. User protocols are used for actual user applications. For example, FTP is a user protocol and DNS is a support protocol.
