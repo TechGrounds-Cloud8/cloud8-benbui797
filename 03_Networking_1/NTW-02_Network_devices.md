@@ -6,7 +6,10 @@ Without devices, you can't connect a network.
 - Hub: `physical` More or less the same as a repeater, but with more ports. Hubs do not filter data, so packets are send to all connected devices.
 - Bridge: `data link` A bridge is a repeater with the added functionality of filtering data based on the MAC addresses of source and destination. It has 2 ports.
 - Switch: `data link` A switch is a multi-port bridge with a buffer. The Switch can perform error checking before forwarding data. Only forwarding correct data to the corresponding port makes it very efficient.
-- Router: `network layer` A router is a device like a switch that forwards data packets based on their IP addresses. A Router connects LAN with WAN and has a dynamically updating routing table (best route to take).
+- Router: `network layer` A router is a device like a switch that forwards data packets based on their IP addresses. A Router connects LAN with WAN and has a dynamically updating routing table (best route to take to get from point A to point B).
+- Gateway: Also called a protocol converter and can operate on any network layer.
+- Brouter: `data link / network layer` Also known as a Bridging Router that combines features from both devices. It can route packets across a network or work as a bridge, it's capable of filtering local network traffic.
+- NIC: `physical / network layer` Network Interface Card, the card in your device that enables a connection to a network (either via cable or WiFi).
 - Access point: `data link` Connects to a Ethernet cable and generates a WiFi signal (Wireless)
 - DHCP: Dynamic Host Configuration Protocol - Dynamically allocated IP addresses for different devices (or assign static ones if you want). It's commonly used by ISP's to be as efficient as possible with IP addresses (even though most devices are permanently connected nowadays as opposed to ISDN/ADSL back in the day)
 - DHCP Mac Binding `data link`: Assigns a MAC (unique ID for a device in a network) to an IP (static). The IP assignment will not expire. (for example printers in a company's network)
