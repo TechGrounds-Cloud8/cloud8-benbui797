@@ -38,17 +38,15 @@ OSI layers protocols:
 - Learning about Wireshark
 - Installed Wireshark on VM, but since the VM doesnt have a monitor, it doesn't work. -> Install WireShark on local machine.
 
-
-
 ### Results
 **Identify several other protocols and their associated OSI layer. Name at least one for each layer.**
-Layer 1 (Physical): Bluetooth, USB, Ethernet
-Layer 2 (Data Link):  802.3 Ethernet, 802.11 Wi-Fi, MAC
-Layer 3 (Network):  IPv4, IPv6
-Layer 4 (Transport): TCP, UDP, QUIC, DCCP, 
-Layer 5 (Session): DNS (Domain Name Service) `or its layer 7`, RTP, SOCKS (lots of layer 5 protocols are obsolete) 
-Layer 6 (Presentation): NCP, NDR
-Layer 7 (Application): HTTP, HTTPS, DHCP, FTP, SMTP, POP, PTP, IRC
+- Layer 1 (Physical): Bluetooth, USB, Ethernet  
+- Layer 2 (Data Link):  802.3 Ethernet, 802.11 Wi-Fi, MAC  
+- Layer 3 (Network):  IPv4, IPv6
+- Layer 4 (Transport): TCP, UDP, QUIC, DCCP, 
+- Layer 5 (Session): DNS (Domain Name Service) `or its layer 7`, RTP, SOCKS (lots of layer 5 protocols are obsolete) 
+- Layer 6 (Presentation): NCP, NDR
+- Layer 7 (Application): HTTP, HTTPS, DHCP, FTP, SMTP, POP, PTP, IRC
 
 **Figure out who determines what protocols we use and what is needed to introduce your own protocol.**  
 Internet Engineering Task Force is an open standards organisation, which develops and promotes voluntary internet standards. In partical technical standards that comprise the Internet Protocol Suite. There are no formal members, all participants are volunteers (although a lot of them are sponsored). You can join the mailinglist for a membership fee and vote in propositions.

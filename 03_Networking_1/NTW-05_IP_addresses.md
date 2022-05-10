@@ -1,5 +1,5 @@
 # NTW-05 IP addresses
-
+The summary in the assignment is very clear.
 
 ## Key terminology
 - IP address: Your address on the internet
@@ -38,9 +38,13 @@ Same as NTW-03... Go into your router and check DHCP routing.  They are not the 
 <img src="../00_includes/NTW/NTW-05_2.png" alt="NTW-05 screenshot 2" width=60%>  
 
 **Verander het privé IP adres van je mobiel naar dat van je laptop. Wat gebeurt er dan?**   
-My modem doesn't allow a duplicate private IP's, even when assigning both statically...  
+My modem doesn't allow a duplicate private IP's, even when assigning both statically...
+
+[I did some online reading to understand the possible consequences of an occurence such as this](https://arstechnica.com/civis/viewtopic.php?t=1368751)  
+  
 <img src="../00_includes/NTW/NTW-05_3.png" alt="NTW-05 screenshot 3" width=60%>  
 
 **Probeer het privé IP adres van je mobiel te veranderen naar een adres buiten je netwerk. Wat gebeurt er dan?**   
 My modem does not allow to change the IP of my phone to a non-private reserved address (I can change it to 192.168.2.xxx and fill in some random number for xxx)  
+  
 <img src="../00_includes/NTW/NTW-05_4.png" alt="NTW-05 screenshot 4" width=60%>    
