@@ -62,3 +62,10 @@ Wireshark is a 'packet sniffer' and can intercept and analyse network data. Norm
 
 Zoom uses port 8801:
 ![NTW-03 Zoom Port](../00_includes/NTW/NTW-03_2.png)  
+
+Furthermore you can examine the data in each frame and extract information on every byte. WireShark is also able to tell you which information is contained in that byte (header info).  In the screenshot below, we have selected the 4 bytes that are supposed to contain the destination IP addess. If we convert the Hex values to Dec, we can see that this is indeed our IP.  
+This also shows why encryption of data is very important! Anyone monitoring your network like this could easily extract sensitive information if it wasn't encrypted!
+
+![NTW-03 package](../00_includes/NTW/NTW-03_3.png)  
+
+
