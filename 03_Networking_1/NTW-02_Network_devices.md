@@ -36,6 +36,7 @@ Other information in my router: Connection about the WIFI, phone (landline) conn
   
 **Waar staat je DHCP server op jouw netwerk? Wat zijn de configuraties hiervan?**   
 In powershell: `ipconfig /all` -> shows the whole IP config. If it says DHCP enabled, your IP address is dynamic. My current IP address will expire tomorrow.  
-The screenshot below is from my local DHCP, which assigns a unique IP to all connected devices.  
+The screenshot below is from my local DHCP, which assigns a unique IP to all connected devices. In the settings, I can set the range of addresses (it currently allows for 200 instead of 255 for some reason). Also I could add reserved (permanent) addresses on this page. 
     
 ![NTW-02 screenshot 2](../00_includes/NTW/NTW-02_2.png)
+![NTW-02 screenshot 3](../00_includes/NTW/NTW-02_3.png)

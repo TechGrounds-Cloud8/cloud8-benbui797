@@ -2,6 +2,10 @@
 The **OSI model** is a conceptual model that describes the different layers of a telecommunication or computing system, without any regard for the specific underlying technology or protocols.  
 The different layers can be visualised as a flowchart, where every layer has class of functionality to the layer above it, whilst it is being served by the layer below. Different functionalities of a layer are provided by entities. The entities only interact and communicate with the layers directly below and provide facilities for the layer above.  
 
+Every layer encapsulates data from the previous layer and adds it's own header, which gives it the functionality of that specific protocol.  
+This is pretty clearly displayed in the following picture:  
+![NTW-01 Encap](../00_includes/NTW/NTW-01_ENCAP_1.png)  
+
 The OSI consists of 7 different layers which can be described as follows:  
 <img src="../00_includes/NTW/NTW-01_OSI_1.png" alt="OSI Model" width=60%>  
 
@@ -68,6 +72,7 @@ Quite similar to the OSI model. Protocols such as HTTP, SMTP, FTP belong here. A
 - UDP: User Datagram Protocol - Less reliable transmission protocol (but useful for video streaming for example, where you'd rather miss a byte than reload all the time)
 - Duplex/Half-Duplex/Simplex - Duplex: two-way simultaneous communication. Half-Duplex: two-way, but not simultaneous communication. Simpex: One-way communcation.
 - QUIC: Quick UDP Internet Connections
+- Encapsulation: Every layer in the model "Encapsulates" the data of the previous model with new data required by that protocol (such as adding a IP address in layer 3 (network) or the request headers in layer 7 (html)). Every time this encapsulation has happened, the transmitted data has a different name (segment, packet, frame).
 
 ### Sources
 - https://en.wikipedia.org/wiki/OSI_model
