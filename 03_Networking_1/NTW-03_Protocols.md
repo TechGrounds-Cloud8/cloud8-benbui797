@@ -44,7 +44,7 @@ OSI layers protocols:
 - Layer 2 (Data Link):  802.3 Ethernet, 802.11 Wi-Fi, MAC  
 - Layer 3 (Network):  IPv4, IPv6
 - Layer 4 (Transport): TCP, UDP, QUIC, DCCP, 
-- Layer 5 (Session): DNS (Domain Name Service) `or its layer 7`, RTP, SOCKS (lots of layer 5 protocols are obsolete) 
+- Layer 5 (Session): RPC, PAP, RTCP, SOCKS, SMPP (lots of layer 5 protocols are obsolete) 
 - Layer 6 (Presentation): NCP, NDR
 - Layer 7 (Application): HTTP, HTTPS, DHCP, FTP, SMTP, POP, PTP, IRC
 

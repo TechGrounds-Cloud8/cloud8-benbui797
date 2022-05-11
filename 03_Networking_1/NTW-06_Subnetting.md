@@ -57,6 +57,7 @@ CIDR notation of subnets (default for Class C is /24 aka 255.255.255.0 (3 x 8 bi
 - https://www.guru99.com/ip-address-classes.html
 - https://www.geeksforgeeks.org/difference-between-vlan-and-subnet/
 - https://portforward.com/networking/subnetting/
+- https://www.geeksforgeeks.org/routing-tables-in-computer-network/
 
 ### Overcome challenges
 - Understanding Subnetting
@@ -64,6 +65,7 @@ CIDR notation of subnets (default for Class C is /24 aka 255.255.255.0 (3 x 8 bi
 - Difference between private and public subnets
 - NAT vs ACL
 - Subnet vs VLAN
+- Understanding the application and position of routing tables (thnx Casper!)
 
 
 ### Results
