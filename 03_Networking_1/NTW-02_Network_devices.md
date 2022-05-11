@@ -18,6 +18,7 @@ Without devices, you can't connect a network.
 ## Exercise
 ### Sources
 - https://www.geeksforgeeks.org/network-devices-hub-repeater-bridge-switch-router-gateways/
+- https://en.wikipedia.org/wiki/Gateway_(telecommunications)  
 - https://nl.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
 - https://www.techbout.com/check-ip-static-dynamic-4135/
 

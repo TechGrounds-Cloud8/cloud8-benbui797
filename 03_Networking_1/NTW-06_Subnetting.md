@@ -4,26 +4,46 @@ An IP address consists of a network- and a host (device) portion. Without Submas
 Every bit that is a 1 in a subnet mask, belongs to the network. So for 255.255.255.0, that means all bits in the first 3 bytes belong to the network. You can layer this with the bits in the IP address and perform bitwise AND and know the values of the network.  
 
 When you perform the bitwise AND, only the bits which are 1 in both sequences will be a 1 in the resulting sequence.  
+  
+Using this, any IP packet that is outside of the scope of a given subnet mask, are sent to the network gateway. So if a private network has a IPv4 address of 192.168.1.1 and a submask of 255.255.255.0, any packets with an address not within 192.168.1 has to the network gateway.
+  
 
 **Why is an address split up in two parts?**
-When one hosts wants to communicate with another, it sends out a Broadcast to identify the receiver. The receiving host will reply with it's details. But every other host in the network will also receive the broadcast. A lot of hosts sending out broadcasts at the same time will clutter the network. Therefore the network is split up into smaller pieces. A Router is a physical border between networks and broadcasts do not cross a router, instead the router intelligently routes the request.   
+When one hosts wants to communicate with another, it sends out a Broadcast to identify the receiver. The receiving host will reply with it's details. But every other host in the network will also receive the broadcast. A lot of hosts sending out broadcasts at the same time will clutter the network. Therefore the network is split up into smaller pieces. A Router is a physical border between networks and broadcasts do not cross a router, instead the router intelligently routes the request.  
+  
+You can see a submask as applying a filter over your network traffic; therefor you can improve efficiency (speed & stability) and security.  
 
 **Submasking**  
 Submasking is done by changing the default subnet mask by borrowing some bits from the host portion of the address.  
   
 Some basic bitwise operation understanding is required. If you move all bits left, you double the value (provided you are not at the end of your byte...). Moving all bits 1 step right, you divide it by 2.  
-By borrowing a bit from the host portion, you double the amount of networks and divide the amount of hosts by 2. If you borrow another bit, it's again *2 and /2. 
+By borrowing a bit from the host portion, you double the amount of networks and divide the amount of hosts by 2. If you borrow another bit, it's again network*2 and hosts/2. 2 hosts/addresses per network are reserved for the gateway and the broadcast.
 
 Default submasks are divided into classes, because you are limited how many subnet you can make based on masking.  
 
-Class A: starts with 1-126.x.x.x - default mask = 255.0.0.0 = +- 16 million host addresses (an ISP might use this)
-Class B: starts with 128-191.x.x.x - default mask = 255.255.0.0 = +- 65K host addresses (a big company might use this)
-Class C: starts with 192-223.x.x.x - default mask = 255.255.255.0 = 256 host addresses (normal connections)
-
-
+Class A: starts with 1-126.x.x.x - default mask = 255.0.0.0 = +- 16 million host addresses (an ISP might use this)  
+Class B: starts with 128-191.x.x.x - default mask = 255.255.0.0 = +- 65K host addresses (a big company might use this)  
+Class C: starts with 192-223.x.x.x - default mask = 255.255.255.0 = 256 host addresses (normal connections)  
+  
+Reserved addresses:  
+- 192.168.1.0 (subnet address)
+- 192.168.1.1 (usually the gateway)
+- 192.168.1.255 (broadcast address)
+    
+<img src="../00_includes/NTW/NTW-06_IP_class.png" alt="IP classes" width=60%>    
+  
+CIDR notation of subnets (default for Class C is /24 aka 255.255.255.0 (3 x 8 bits = 24 bits belong to the network)):  
+<img src="../00_includes/NTW/NTW-06_CIDR.jpg" alt="CIDR" width=50%>    
+  
 ## Key terminology
 - CIDR: Classless Inter-Domain Routing (slash notation). The number after the slash describes the length of the network mask in bits. /24 == 24 bits == 3 bytes == 255.255.255.0
 - Broadcast address: The address on which the broadcast signal is transmitted (and connects the local network to the outside)
+- Public subnet: Communication is allowed between the subnet and the internet in both directions.
+- Private subnet: Not connected to the internet (but can be connected via a NAT gateway)
+- NAT Gateway: allows instances in a private network to connect ot the internet, but no unsolicited inbound traffic.
+- Gateway IP: best practise == first or last usable address = x.x.x.1 or x.x.x.254 (and use the same logic (first or last bit) on every subnet)
+- ACL: Access Control List - predetermined list of 'rules' that can access area's of the network (a bit like file permissions on Linux). Usually applied on routers and switches within networks. Can aid security, but not as secure as a firewall.
+
 
 ## Exercise
 ### Sources
@@ -32,11 +52,18 @@ Class C: starts with 192-223.x.x.x - default mask = 255.255.255.0 = 256 host add
 - https://www.ipxo.com/subnet-cheat-sheet/
 - https://en.wikipedia.org/wiki/Broadcast_address
 - https://cloud.in28minutes.com/aws-certification-public-subnet-vs-private-subnet
+- https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
+- https://www.youtube.com/watch?v=SBYNeGIng6I
+- https://www.guru99.com/ip-address-classes.html
+- https://www.geeksforgeeks.org/difference-between-vlan-and-subnet/
+- https://portforward.com/networking/subnetting/
 
 ### Overcome challenges
 - Understanding Subnetting
 - Understanding Subnet masks
 - Difference between private and public subnets
+- NAT vs ACL
+- Subnet vs VLAN
 
 
 ### Results
@@ -45,6 +72,14 @@ Design a networkarchitecture that meets the following demands:
 - 1 private subnet with atleast 15 hosts. Only accessable within the LAN.
 - 1 private subnet with atleast 30 hosts (excluding NAT gateway). This network should have internet access.
 - 1 public subnet with a internet gateway. This subnet needs to be able to place atleast 5 hosts (excluding the internet gateway)
+
+A network of this size would probably fall under Class C, so the default mask is 255.255.255.0 (/24)  
+We need atleast 3 seperate networks, so that means we need to borrow 2 bits 255.255.255.192 (/26)  
+
+/26 allows for 62 hosts (64 minus 2) on 4 seperate networks, which meets the demands (and room for another network in case of growth).
+
+
+
 
 
 

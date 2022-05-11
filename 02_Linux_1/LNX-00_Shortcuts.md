@@ -6,11 +6,12 @@ mijn top tip is tab! niet tobben met typen, maar tabben!
 - Tab (autocomplete)
 - Double Tab (if unable to autocomplete, list all options)
 - `clear` or CTRL+L (Clear terminal screen)
+- `history` list history of commands
+- `!<num>` type index of command in history
 - `cd -` Go back to previous working directory
 - `cd ~` Go directly to /home directory
 - `cd /` Go directly to /root directory
 - up/down arrows (move through history of commands) (CTRL+P & CTRL+N)
-- `history` list history of commands
 - CTRL+R (search through command history)
 - CTRL+D (exit current shell session)
 - CTRL+C (exit/quit)
