@@ -92,13 +92,13 @@ Design a networkarchitecture that meets the following demands:
 - 1 private subnet with atleast 30 hosts. This network should have internet access through a NAT Gateway. (could be PC's)
 - 1 public subnet with a internet gateway. This subnet needs to be able to place atleast 5 hosts (excluding the internet gateway) (could be netservers)
 
-I would normally ask what kind of growth is expected. For now I have chosen to work with a network IP of 192.168.0.0/24, but 10.0.0.0/16 would make the routing configurations very easy (first host of every network would always be .1)  
+I would normally ask what kind of growth is expected. For now I have chosen to work with a network IP of 192.168.0.0/24, because it fits the requirements and seems to be the default on a lot of networks.  
 
 We need atleast 3 seperate networks, so that means we need to borrow 2 bits -> 192.168.0.0/26  
   
 /26 allows for 62 hosts (64 minus 2) on 4 seperate networks, which meets the demands (and room for another network in case of growth).  
 
-![NTW-06 Diagram](../00_includes/NTW/NTW-06_diagram.png)
+![NTW-06 Diagram](../00_includes/NTW/NTW-06_diagramv2.png)
 
 
 
