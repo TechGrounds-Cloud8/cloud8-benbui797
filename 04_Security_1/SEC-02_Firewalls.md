@@ -1,5 +1,5 @@
 # SEC-02 Firewalls
-A firewall is a security device that monitors network traffic and secures the network by applying a filter on incoming and outgoing traffic. Filters that can be applied are: protocol, portno, source and destination of a packet. More advanced firewalls can even filter based on the content.
+A firewall is a security device that monitors network traffic and secures the network by applying a filter on incoming and outgoing traffic. Filters that can be applied are: protocol, port number, source and destination of a packet. More advanced firewalls can even filter based on the content.
 
 Data is send across the network in the form of packets. A firewall analyses these packets by inspecting the header (protocol information) and payload (actual data). The header contains information such an IP address. Specific IP addresses can be blocked or all adresses can be blocked and only specific addresses are allowed to pass. 
   

@@ -21,6 +21,7 @@ Without devices, you can't connect a network.
 - https://en.wikipedia.org/wiki/Gateway_(telecommunications)  
 - https://nl.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol
 - https://www.techbout.com/check-ip-static-dynamic-4135/
+- https://www.tutorialspoint.com/communication_technologies/communication_technologies_network_devices.htm
 
 ### Overcome challenges
 N/A

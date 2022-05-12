@@ -40,11 +40,22 @@ Same as NTW-03... Go into your router and check DHCP routing.  They are not the 
 **Verander het privé IP adres van je mobiel naar dat van je laptop. Wat gebeurt er dan?**   
 My modem doesn't allow a duplicate private IP's, even when assigning both statically...
 
+Hypothetically if this was allowed by my router; there would be data collisions and a loss of data would occur.
+
 [I did some online reading to understand the possible consequences of an occurence such as this](https://arstechnica.com/civis/viewtopic.php?t=1368751)  
   
 <img src="../00_includes/NTW/NTW-05_3.png" alt="NTW-05 screenshot 3" width=60%>  
 
 **Probeer het privé IP adres van je mobiel te veranderen naar een adres buiten je netwerk. Wat gebeurt er dan?**   
 My modem does not allow to change the IP of my phone to a non-private reserved address (I can change it to 192.168.2.xxx and fill in some random number for xxx)  
+Hypothetically; my phone would lose connection because the traffic addressed to that address would be redirected out of the network.  
   
-<img src="../00_includes/NTW/NTW-05_4.png" alt="NTW-05 screenshot 4" width=60%>    
+<img src="../00_includes/NTW/NTW-05_4.png" alt="NTW-05 screenshot 4" width=60%>  
+
+**Second attempt: changing the IP of my phone in my phone**  
+I did not get the expected result... Both devices kept internet connection and I started a YouTube clip on both, but they both displayed the videos without any problems... There might be some other stuff going on to prevent this problem?  
+      
+<img src="../00_includes/NTW/NTW-05_phone.jpg" alt="NTW-05 phone" height=50%>  
+
+![NTW-05 router info](../00_includes/NTW/NTW-05_5.png)  
+

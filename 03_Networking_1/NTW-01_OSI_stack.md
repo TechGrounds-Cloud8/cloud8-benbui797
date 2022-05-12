@@ -73,6 +73,9 @@ Quite similar to the OSI model. Protocols such as HTTP, SMTP, FTP belong here. A
 - Duplex/Half-Duplex/Simplex - Duplex: two-way simultaneous communication. Half-Duplex: two-way, but not simultaneous communication. Simpex: One-way communcation.
 - QUIC: Quick UDP Internet Connections
 - Encapsulation: Every layer in the model "Encapsulates" the data of the previous model with new data required by that protocol (such as adding a IP address in layer 3 (network) or the request headers in layer 7 (html)). Every time this encapsulation has happened, the transmitted data has a different name (segment, packet, frame).
+- Broadcast: A way of sending a message to all recipients simultaneously (from one computer to all others in a network).
+- Broadcast domain: The area in a LAN where all nodes can reach other by broadcast over the layer 2 (data link). 
+- Collision domain: The area in a network where data transmissions can collide (two devices send data on the same network segment the same time).
 
 ### Sources
 - https://en.wikipedia.org/wiki/OSI_model
@@ -83,3 +86,5 @@ Quite similar to the OSI model. Protocols such as HTTP, SMTP, FTP belong here. A
 - https://en.wikipedia.org/wiki/User_Datagram_Protocol
 - https://en.wikipedia.org/wiki/Internet_protocol_suite
 - https://www.geeksforgeeks.org/tcp-ip-model/
+- https://www.youtube.com/watch?v=HqAYJZQPP2Y
+- https://en.wikipedia.org/wiki/Broadcast_domain
