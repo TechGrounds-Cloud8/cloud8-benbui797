@@ -5,7 +5,7 @@ Every bit that is a 1 in a subnet mask, belongs to the network. So for 255.255.2
 
 When you perform the bitwise AND, only the bits which are 1 in both sequences will be a 1 in the resulting sequence.  
   
-Using this, any IP packet that is outside of the scope of a given subnet mask, are sent to the network gateway. So if a private network has a IPv4 address of 192.168.1.1 and a submask of 255.255.255.0, any packets with an address not within 192.168.1 has to the network gateway.
+Using this, any IP packet that is outside of the scope of a given subnet mask, are sent to the network gateway. So if a private network has a IPv4 address of 192.168.1.1 and a submask of 255.255.255.0, any packets with an address not within 192.168.1 has to go to the network(internet) gateway.
   
 
 **Why is an address split up in two parts?**
