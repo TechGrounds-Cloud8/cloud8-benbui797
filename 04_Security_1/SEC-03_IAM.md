@@ -19,7 +19,8 @@ The factors of authentication:
 - Posession (badge, phone, smart-card)
 - Inheritance (biometrics and behavioral analysis)
   <br>  
-  <br>  
+  
+  
 **Authorization**
 Authorization happens after authentication. Provided the user is who he/she says he/she is, then what is the user allowed to do? Based on the role of a user in a organisation, what does the user have access to? Authorisation is storing this information and checking this when a user does an action. For example: one employee can add invoices to the system, but is not allowed to see all administrative details. Popular techniques are: RBAC, JWT, SAML (SSO), OpenID, OAuth.  
   <br>  

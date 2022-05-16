@@ -30,8 +30,9 @@ In simple terms, good cryptography is not about being perfectly secure, but to m
 - Vigenère cipher: Repeating a key for the for the length of the full message to match both lengths. Then you add both letters together (mod 26) to get the ciphertext. This was used in the 16th century.
 - Rotor Machines: machines that use a rotating disc that turns for every character typed. Therefor the keymap is shuffled and contains less patterns. Hebern machine (single rotor) and the Enigma machine (3-5 rotors) are examples. These were used from 1870 - 1943.
 - DES: Data Encryption Standard (1974). After the enigma machina, digital encryption came into play. DES was a standard requirement (kind of like a protocol). AES (2001) and Salsa20(2008) are other examples.
-- Block cipher: Enciphers input in blocks of plaintext.
 - Stream cipher: Enciphers input by individual character.
+- Block cipher: Enciphers input in blocks of plaintext.
+- Frequency analysis: The analysis of how frequent a letter or group (n-grams) of letters is in a ciphertext. This is then compared to the statistics of a certain language and can predict a key based on the probability.
 
 
 ## Exercise
@@ -41,9 +42,44 @@ In simple terms, good cryptography is not about being perfectly secure, but to m
 - Computerphile Youtube Channel
 - https://en.wikipedia.org/wiki/Cryptography
 - https://www.asciichart.com/
+- https://en.wikipedia.org/wiki/Frequency_analysis
+- https://en.wikipedia.org/wiki/Block_cipher
+- https://www.tutorialspoint.com/cryptography/block_cipher.htm
+- https://en.wikipedia.org/wiki/Stream_cipher
 
 ### Overcome challenges
 - I am interested in cryptography, so I had already looked most of it up. I thought it was a good idea to dive deeper this time and start a cryptography course, but it was pretty much only mathemetical formula's and got me confused about a lot of simple concepts... I think that was an example of diving too deep.
 
 ### Results
-[Describe here the result of the exercise. An image can speak more than a thousand words, include one when this wisdom applies.]
+**Two examples of historic ciphers**
+  <br>  
+Scytale:  
+The scytale was using in ancient Greek, in particular the Spartans. A strip of leather is wound around a rod. The recipient must use a rod of the same diameter, otherwise the letters are completely scrambled.  
+
+<img src="../00_includes/SEC/SEC-04_Skytale.png" alt="scytale" width=50%>
+  <br>  
+  <br>  
+Alberti Cipher:  
+The Italian architect, Leon Battista Alberti, was the first to use a rotating mechanism, back in 1467. This was by far supreme than any previous cipher, because frequency analysis was impossible (the disk keeps rotating for every character, therefor character occurance has a different key).
+  
+<img src="../00_includes/SEC/SEC-04_Alberti.png" alt="scytale" width=50%>
+  
+  <br>
+
+**Two examples of digital ciphers that are being used today**  
+AES (Advanced Encryption Standard): also known as Rijndael. Was invented by two Belgian cryptographers and selected by the NIST as a standard. It is a block cipher that works with blocks of 128 bits and has three different key lengths (128, 192 and 256 bits).
+  
+SHA (Secure Hash Algorithm): SHA has been developed by the NSA. There have been multple versions, SHA-0 was flawed and quickly retracted. The most recent version is SHA-3 This is an example of a cryptographic hash function. The difference between this and stream- or block ciphers, is that hash algoritms are uninvertable. That means once data is hashed, it's not possible to retrieve the original data. These kinds of functions are used to verify the authenticity of data/documents. 
+  <br>  
+  <br>
+
+**Sending a encrypted message to a teammate using a public key cipher**
+Encrypting a message is not hard using a website such as: https://cryptii.com/  
+The hard part was coming up with a key that I could share in a public room, without other people being able to know it.  
+For this exercise, I teamed up with Killian and in NTW-03, I spotted his gaming username when he was trying to see if he could recognize Discord with WireShark. I used this as a key, since the probability of anyone else in the group knowing this information is small, therefor I could publicly tell him the reference to that. I could have chosen his sport, or which team he has played for, but he has mentioned this information in his introductions, so the chance is pretty high that there is someone else that also remembers this.  
+His screen was only shared within our team and I believe my teammates were working on another assignment, so that lowers the chance that they were looking at the screenshare.  Also, spotting his username was pretty random, so even if they were watching, the probability that they spotted it as well, is even lower.  
+  
+The challening part with symmetric encryption is sharing the key. If anyone else knows his username (or are able to find out), they can then also decrypt the message. 
+  
+Interestingly, the key I chose, is based on the probability that anyone else also knows it. So that logic is the same as the encryption basics: a lower probability is related to a higher security.
+
