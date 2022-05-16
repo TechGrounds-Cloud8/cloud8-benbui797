@@ -83,3 +83,7 @@ The challening part with symmetric encryption is sharing the key. If anyone else
   
 Interestingly, the key I chose, is based on the probability that anyone else also knows it. So that logic is the same as the encryption basics: a lower probability is related to a higher security.
 
+**update**
+I have removed my previous message, because Casper said I have to share the actual key in the group channel. He gave a hint that we could do exercise SEC-05 first, which I am going to do now. After that, we will use asymmetric encryption to share the key of our symmetric encrypted message, so the public key itself is actually encrypted.
+
+Instead of a Vigenère, I used a block cipher to encrypt the message. For complete implementation, check [SEC-05](./SEC-05_Asymmetric_Encryption.md)

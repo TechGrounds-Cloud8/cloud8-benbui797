@@ -27,6 +27,7 @@ Authorization happens after authentication. Provided the user is who he/she says
 <img src="../00_includes/SEC/SEC-03_Authentication-vs-Authorization.jpg" alt="authentication vs authorization" width=70%>
   <br>  
   <br>  
+
 **Least Privilege Principle**
 A commonly used authorisation concept is called the "Least priviledge principle". It is one of the core concepts of the zero-trust model. Basically, you consider everyone a treat, both inside and outside the network. Therefor, you very strictly control who has access to what. An user who requires more access rights to do their work, is therefor a bigger threat (which you could secure with more authorisation). In general, users only have access to the parts of the network that is required for them to do their work (comparable to a need-to-know distribution of information in an army. A general will know everything, but a foot-soldier will only receive orders from those higher in command.)
   <br>
@@ -45,8 +46,8 @@ Combining this with a proper authentication system
 - Pre-shared keys: a key that is shared between users (for example, a wifi password)
 - Behavioral authenticion: Using AI's, it's is possible to verify a users identity based on their common behavior, such as keystroke dynamics and mouse-use characteristics. If this falls outside the norm of a user, the AI can then shut the system down. 
 - Biometrics: Authentication based on a users bio-data. For example: fingerprints, iris-scans, faces, voice recognition and even DNA sampling.
-- One-time Passwords: Passwords that are communicated to the user by a previously authorised channel. They are only valid for a single transaction or session. (Google Authenticator on your phone).
-- Authentication apps: A system could generate a security code that can be accessed through a third party app. (DigiD and your bank app)
+- One-time Passwords: Passwords that are communicated to the user by a previously authorised channel. They are only valid for a single transaction or session. (Sending an SMS with a code to log in).
+- Authentication apps: A system could generate a security code that can be accessed through a third party app. (DigiD, bank app or a authenticator app on your phone)
 - Access: The ability for a user to view, create or modify a file.
 - RBAC: Role-based access management. 
 - JWT: JSON Web token: This is used for the secure transmission of data. The parties have been authorised using a private key pair.
