@@ -23,9 +23,10 @@ Browsers such as Internet Explorer, Firefox, Opera, Safari and Chrome come with 
 - https://en.wikipedia.org/wiki/Public_key_infrastructure
 - https://en.wikipedia.org/wiki/X.509
 - https://en.wikipedia.org/wiki/Certificate_signing_request
+- https://devopscube.com/create-self-signed-certificates-openssl/
 
 ### Overcome challenges
 [Give a short description of your challanges you encountered, and how you solved them.]
 
 ### Results
-[Describe here the result of the exercise. An image can speak more than a thousand words, include one when this wisdom applies.]
+
