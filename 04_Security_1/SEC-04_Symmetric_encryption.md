@@ -79,7 +79,7 @@ The hard part was coming up with a key that I could share in a public room, with
 For this exercise, I teamed up with Killian and in NTW-03, I spotted his gaming username when he was trying to see if he could recognize Discord with WireShark. I used this as a key, since the probability of anyone else in the group knowing this information is small, therefor I could publicly tell him the reference to that. I could have chosen his sport, or which team he has played for, but he has mentioned this information in his introductions, so the chance is pretty high that there is someone else that also remembers this.  
 His screen was only shared within our team and I believe my teammates were working on another assignment, so that lowers the chance that they were looking at the screenshare.  Also, spotting his username was pretty random, so even if they were watching, the probability that they spotted it as well, is even lower.  
   
-The challening part with symmetric encryption is sharing the key. If anyone else knows his username (or are able to find out), they can then also decrypt the message. 
+The challening part with symmetric encryption is sharing the key. If anyone else knows his username (or are able to find out), they can then also decrypt the message. That is also a vurnerability here, it's not impossible for someone else to find out his username. 
   
 Interestingly, the key I chose, is based on the probability that anyone else also knows it. So that logic is the same as the encryption basics: a lower probability is related to a higher security.
 
