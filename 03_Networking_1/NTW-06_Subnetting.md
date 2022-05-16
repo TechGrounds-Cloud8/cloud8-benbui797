@@ -97,7 +97,9 @@ I would normally ask what kind of growth is expected. For now I have chosen to w
 We need atleast 3 seperate networks, so that means we need to borrow 2 bits -> 192.168.0.0/26  
   
 /26 allows for 62 hosts (64 minus 2) on 4 seperate networks, which meets the demands (and room for another network in case of growth).  
-
+  
+[Link to our presentation explaining this problem](./NTW-06%20presentation.pdf)  
+  
 ![NTW-06 Diagram](../00_includes/NTW/NTW-06_diagramv2.png)
 
 
