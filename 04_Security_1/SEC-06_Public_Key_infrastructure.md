@@ -1,5 +1,10 @@
 # SEC-06 Public Key Infrastructure
-A public key infrastructure (PKI) is a system for the creation, storage, and distribution of digital certificates which are used to verify that a particular public key belongs to a certain entity. The PKI creates digital certificates which map public keys to entities, securely stores these certificates in a central repository and revokes them if needed.
+A public key infrastructure (PKI) is a system for the creation, storage, and distribution of digital certificates which are used to verify that a particular public key belongs to a certain entity. The PKI creates digital certificates which map public keys to entities, securely stores these certificates in a central repository and revokes them if needed.  
+
+PKI consists of three entities also known as CIA:
+- **Confidentiality:** Assurance that no entity can maliciously or unwittingly view a payload in clear text. If they do it appears as gibberish (ciphertext). TLS (Transport Layer Security) is a protocol used to achieve this goal.
+- **Integrity:** Assurance that if the data transmitted has been tampered with, it would be obvious as it's integrity would have been compromised. Usually it's not of utmost importance to be prevent data from being compromised (tamper-proof), but it is of utmost importance that if integrity has been compromised, there is clear evidence of it (tamper evident).
+- **Authenticity:** Assurance that you have certainty of what you are connecting to, or evidencing your legitimacy when connecting to a protected service. The former is termed server-side authentication (authenticating to a web server using a password). The latter is termed client-side authentication.
   
 X.509 is the standard which defines the process in which a PKI should function. There are many ways of implementing a PKI, not all of them comply with the X.509 standard.  
 
@@ -13,20 +18,62 @@ Browsers such as Internet Explorer, Firefox, Opera, Safari and Chrome come with 
 
 
 ## Key terminology
-- CA: Certificate Authority - Stores, issues and signs the digital certificates
+- CA: Certificate Authority - Stores, issues and signs the digital certificates. A CA can issue other certificates. 
 - TTP: Trusted third part (another name for CA's)
 - RA: Registration Authority - Verifies the identity of entities requesting their digital certificates to be stored at the CA
 - CSR:  Certificate Signing Request - in PKI's a CSR is a message from an applicant to a registration authority to apply for a digital identity certificate.
+- OCSP: Online Certificate Status Protocol - A protocol used to obtaining the revocation status of a X509 certificate. It is an alternative to CRL (Certificate Revocation List).
+- Self-Signed Certificate - Here we act as our own CA, signing our own CSR. Because we are not recognized as an official CA, this would give security warnings in browsers (as browsers have a list of official CA's).
+- Root Certificate - a Self-signed certificate signed by a CA (there is not authority higher in the hierarchy, so they have to self-sign it). It is used to sign other certificates.
+- Intermediate Certificate - This certificate is used to sign other certificates, but it is not self-signed. IC's are signed by a Root Certificate.
+- End-Entity / Leaf Certificate - The final user's certificate. It is usually signed by a Intermediate Certificate (and therefor recognised as those have been signed by a Root). These certificates can not sign any other certificates (hence the leave name, they cannot grow any branches).
 
 ## Exercise
 ### Sources
 - https://en.wikipedia.org/wiki/Public_key_infrastructure
 - https://en.wikipedia.org/wiki/X.509
 - https://en.wikipedia.org/wiki/Certificate_signing_request
+- https://en.wikipedia.org/wiki/Online_Certificate_Status_Protocol
+- https://www.kinamo.nl/nl/support/faq/wat-zijn-root-en-intermediate-ssl-certificaten
+- https://en.wikipedia.org/wiki/Public_key_certificate#Intermediate_certificate
 - https://devopscube.com/create-self-signed-certificates-openssl/
+- https://websiteforstudents.com/how-to-create-self-signed-certificates-on-ubuntu-linux/
 
 ### Overcome challenges
-[Give a short description of your challanges you encountered, and how you solved them.]
+Understanding and learning a lot about PKI and X509.  
+I did not understand why we would want to make a self-signed certificate, because they seem unsafe and not very user friendly (they are not installed in browsers by default so every user would have to do that manually)... The second to last link in my sources explained this part (although the actual tutorial on creating a self-signed certificate was confusing, so I used the last link... Thnx Killian).
+
+Benefits:  
+- You don’t need to rely on a third party to sign your certificate.
+- You can create and use your own certificate authority.
+- You don’t have to pay for a certificate from a CA.
+- You have more control over your certificates.
+
+Drawbacks:  
+- Your users will need to install the certificate in their browsers or applications.
+- Your users will need to trust your certificate authority manually.
+- They unsafe for public facing applications.
+- None of the browsers or operating systems trust the self-signed certificates unless the user installs them.
+- Prone to man-in-the-middle attacks.
+
+In general, self-signed certificates are a good option for applications in which you need to prove your own identity. They’re also a good option for development and testing environments. However, they shouldn’t be used for production applications.
+
 
 ### Results
+**Create a self-signed certificate on your VM**  
+For this we can use the openSSL program that is installed on our VM by default. It can be used for many different cryptographic applications, but in this case, we'll use it to generate an RSA key and a X509 CSR.
+
+![Self-Signed Certificate](../00_includes/SEC/SEC-07_5.png)  
+
+
+**Analyse some certification paths of well known websites (techgrounds, google, ing)**  
+You can see the paths how these certificates have been signed. TG has been signed by CloudFlare with 2 intermediaries. ING by entrust.net  
+Also many other details can be found in the certificate details.  
+![Techgrounds](../00_includes/SEC/SEC-06_1.png)  
+![Google](../00_includes/SEC/SEC-06_2.png)  
+![ING](../00_includes/SEC/SEC-06_3.png)  
+  <br>  
+  
+**Find the list of trusted certificate roots on your system (bonus points if you also find it in your VM)**  
+![Trusted Certificates](../00_includes/SEC/SEC-07_6.png)
 

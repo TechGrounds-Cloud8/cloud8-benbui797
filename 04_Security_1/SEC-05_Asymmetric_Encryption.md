@@ -40,4 +40,4 @@ The website in the exercise did not allow to edit the public key, so we could no
   
 ![SEC-05 killians sec-04 decryption](../00_includes/SEC/SEC-05_6.png)  
 
-
+I believe what we have done now, is called Bootstrapping and is how TLS/SSL communications work. First a secure channel is opened using an Asymmetrical key, after which the actual communication is done with symmetric encryption (because it is much faster).
