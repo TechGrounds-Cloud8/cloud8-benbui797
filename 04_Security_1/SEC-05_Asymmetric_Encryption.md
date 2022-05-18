@@ -1,5 +1,5 @@
 # SEC-05 Asymmetric Encryption
-The main difference between symmetric and asymmetric encryption is that asymmetric encryption consists of 2 keys; a public and a private key. A significant disadvantage of symmetric encryption is key management. Every 2 users need a shared key and they might even have a different key for every message, therefor the amount of required keys can increase very quickly.  
+The main difference between symmetric and asymmetric encryption is that asymmetric encryption consists of 2 keys; a public and a private key. A significant disadvantage of symmetric encryption is key management. Every 2 users need a shared key and they might even have a different key for every message, therefore the amount of required keys can increase very quickly.  
 
 Asymmetric encryption is based on a mathematical relation between two primes (public and private key). If you encrypt your message based on your private key and the receivers public key, they are able to encrypt the message with their private key and your public key. Anyone else who doesn't know the private keys can not decrypt it (the mathematical equation is considered a very hard computational problem).
   

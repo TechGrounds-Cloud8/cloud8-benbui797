@@ -29,7 +29,7 @@ Authorization happens after authentication. Provided the user is who he/she says
   <br>  
 
 **Least Privilege Principle**
-A commonly used authorisation concept is called the "Least priviledge principle". It is one of the core concepts of the zero-trust model. Basically, you consider everyone a treat, both inside and outside the network. Therefor, you very strictly control who has access to what. An user who requires more access rights to do their work, is therefor a bigger threat (which you could secure with more authorisation). In general, users only have access to the parts of the network that is required for them to do their work (comparable to a need-to-know distribution of information in an army. A general will know everything, but a foot-soldier will only receive orders from those higher in command.)
+A commonly used authorisation concept is called the "Least priviledge principle". It is one of the core concepts of the zero-trust model. Basically, you consider everyone a treat, both inside and outside the network. Therefore, you very strictly control who has access to what. An user who requires more access rights to do their work, is therefore a bigger threat (which you could secure with more authorisation). In general, users only have access to the parts of the network that is required for them to do their work (comparable to a need-to-know distribution of information in an army. A general will know everything, but a foot-soldier will only receive orders from those higher in command.)
   <br>
   <br>  
 <img src="../00_includes/SEC/SEC-04_least_privilege.png" alt="least privilege" width=70%>

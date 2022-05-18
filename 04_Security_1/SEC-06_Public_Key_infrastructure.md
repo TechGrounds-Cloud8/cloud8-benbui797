@@ -26,7 +26,7 @@ Browsers such as Internet Explorer, Firefox, Opera, Safari and Chrome come with 
 - Self-Signed Certificate - Here we act as our own CA, signing our own CSR. Because we are not recognized as an official CA, this would give security warnings in browsers (as browsers have a list of official CA's).
 - Root Certificate - a Self-signed certificate signed by a CA (there is not authority higher in the hierarchy, so they have to self-sign it). It is used to sign other certificates.
 - Intermediate Certificate - This certificate is used to sign other certificates, but it is not self-signed. IC's are signed by a Root Certificate.
-- End-Entity / Leaf Certificate - The final user's certificate. It is usually signed by a Intermediate Certificate (and therefor recognised as those have been signed by a Root). These certificates can not sign any other certificates (hence the leaf name, they cannot grow any branches).
+- End-Entity / Leaf Certificate - The final user's certificate. It is usually signed by a Intermediate Certificate (and therefore recognised as those have been signed by a Root). These certificates can not sign any other certificates (hence the leaf name, they cannot grow any branches).
 
 ## Exercise
 ### Sources

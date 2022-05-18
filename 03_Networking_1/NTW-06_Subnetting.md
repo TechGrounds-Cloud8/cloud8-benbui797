@@ -11,7 +11,7 @@ Using this, any IP packet that is outside of the scope of a given subnet mask, a
 **Why is an address split up in two parts?**
 When one hosts wants to communicate with another, it sends out a Broadcast to identify the receiver. The receiving host will reply with it's details. But every other host in the network will also receive the broadcast. A lot of hosts sending out broadcasts at the same time will clutter the network. Therefore the network is split up into smaller pieces. A Router is a physical border between networks and broadcasts do not cross a router, instead the router intelligently routes the request.  
   
-You can see a submask as applying a filter over your network traffic; therefor you can improve efficiency (speed & stability) and security.  
+You can see a submask as applying a filter over your network traffic; therefore you can improve efficiency (speed & stability) and security.  
 
 **Submasking**  
 Submasking is done by changing the default subnet mask by borrowing some bits from the host portion of the address.  

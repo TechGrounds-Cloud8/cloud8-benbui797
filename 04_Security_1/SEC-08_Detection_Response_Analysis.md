@@ -3,14 +3,19 @@ So far, we’ve mostly looked at the prevention of attacks. While you want to pr
 
 When getting hit with an attack, there are usually three steps to follow: Detection, response, and analysis.
 
-Detecting an (attempted) attack is the first step to stopping it and to preventing future attempts. Tools like Wireshark can help analyse a network to detect anomalies. Intrusion detection systems (IDS) and intrusion prevention systems (IPS) are also used for this purpose.
-
+Detecting an (attempted) attack is the first step to stopping it and to preventing future attempts. Tools like Wireshark can help analyse a network to detect anomalies. Intrusion detection systems (IDS) and intrusion prevention systems (IPS) are also used for this purpose.  
+  
 **Intrusion Detection System**  
 These systems analyse and monitor the traffic on a network for signs that indicate attackers are using a known cyberthreat to infiltrate or steal data from your network. IDS systems compare the current network activity to a known threat database to detect several kinds of behaviors like security policy violations, malware, and port scanners.  
   
 **Intrusion Prevention System**  
-
-
+Thse are located in the same area of the network as a firewall, between the outside world and the internal network. IPS proactively deny network traffic based on a security profile if that packet represents a known security threat.  
+  
+Modern security systems often combine these with firewalls (Unified Threat Management (UTM) technology) into a single unit.  
+  
+<img src="../00_includes/SEC/SEC-08_ids_ips.png" alt="IDS vs IPS" width=80%>  
+  <br>  
+  <br>  
 The first thing to do in response to a detected attack is trying to contain the damage. Depending on the kind of attack, the way you do this might differ. After the attack is contained, you can try to figure out the root cause of the attack, so that you can stop it. Finally, you enter the recovery phase, where you try to get all systems back online and you take stock of the damage done.
 
 It is vitally important to have a plan in place for how to respond when an attack happens.
@@ -21,8 +26,8 @@ For these strategies it is always important to keep track of the following metri
 
 
 ## Key terminology
-- IDS: 
-- IPS: 
+- IDS: Intrusion Detection System - See above
+- IPS: Intrustion Prevention System - See above
 -
 
 ## Exercise

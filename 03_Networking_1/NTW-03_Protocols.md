@@ -1,6 +1,6 @@
 # NTW-03 Protocols
 Every layer of the OSI stack has different protocols. Two examples of Layer 4 protocols are TCP and UDP.
-UDP utilises a 'fire-and-forget' strategy, TCP on the other hand, a 'three-way handshake'. TCP is therefor more reliable (TCP ensures every package is correctly received), but UDP is significantly faster.
+UDP utilises a 'fire-and-forget' strategy, TCP on the other hand, a 'three-way handshake'. TCP is therefore more reliable (TCP ensures every package is correctly received), but UDP is significantly faster.
 UDP is used in, for example, video streaming. 
 
 The most commonly used protocols have their default ports (port 80 for http, port 443 for https etc etc)  

@@ -5,7 +5,7 @@ Symmetric Encryption: Encryption using a single key that has to be shared betwee
   
 There are systems that use a key only once (email will generate a new key for every email you sent) and systems that use a key multiple times (file encryption).  
 
-Caesar cipher: shifting the letters of the alfabet by x amount. All letters are shifted by the same amount (it's therefor technically not a cipher).  
+Caesar cipher: shifting the letters of the alfabet by x amount. All letters are shifted by the same amount (it's therefore technically not a cipher).  
 Substitution cipher: for every letter in the alfabet, there is a key-map where the replacement value for every input value is noted.  
 
 **How to crack weak ciphers?**  
@@ -14,10 +14,10 @@ Furthermore, we can search the ciphertext for digrams (common combination of two
 In computers, we can convert alfabetical letters to numerical values by using the ASCII encoding (how letters are stored in a byte) to perform these operations easier.  
   
 
-Modern encryption using computers works a little bit different; the computer performs an XOR operation on the bits to encrypt or decrypt the message. A cipher has perfect secrecy (the ciphertext doesn't reveal anything about the plaintext) if for any given cipher text, there exists only 1 key. The "One Time Pad" is such a method, but the downside of OTP is that the key needs to be atleast as long as the text, therefor it's not efficient.  
+Modern encryption using computers works a little bit different; the computer performs an XOR operation on the bits to encrypt or decrypt the message. A cipher has perfect secrecy (the ciphertext doesn't reveal anything about the plaintext) if for any given cipher text, there exists only 1 key. The "One Time Pad" is such a method, but the downside of OTP is that the key needs to be atleast as long as the text, therefore it's not efficient.  
   
 
-In simple terms, good cryptography is not about being perfectly secure, but to make it as hard as possible to crack, whilst still being efficient to encrypt/decrypt. There are a couple of mathemetical problems, that take an incredible amount of processing power, such as prime factorisation and discrete logarithms problems. By using a key with a long enough length, it's not impossible to crack a key, but with today's processing powers, it would take 1000's of years to do so (and therefor it is considered safe).
+In simple terms, good cryptography is not about being perfectly secure, but to make it as hard as possible to crack, whilst still being efficient to encrypt/decrypt. There are a couple of mathemetical problems, that take an incredible amount of processing power, such as prime factorisation and discrete logarithms problems. By using a key with a long enough length, it's not impossible to crack a key, but with today's processing powers, it would take 1000's of years to do so (and therefore it is considered safe).
 
 ## Key terminology
 - Plaintext: original/input text
@@ -28,7 +28,7 @@ In simple terms, good cryptography is not about being perfectly secure, but to m
 - keyspace: all possible valid and distict variations in a specific cryptosystem. This is also the amount of attempts required by a brute-force attack to crack a cipher.
 - Caesar cipher: shifting all letters in the alfabet by the same amount.
 - Vigenère cipher: Repeating a key for the for the length of the full message to match both lengths. Then you add both letters together (mod 26) to get the ciphertext. This was used in the 16th century.
-- Rotor Machines: machines that use a rotating disc that turns for every character typed. Therefor the keymap is shuffled and contains less patterns. Hebern machine (single rotor) and the Enigma machine (3-5 rotors) are examples. These were used from 1870 - 1943.
+- Rotor Machines: machines that use a rotating disc that turns for every character typed. Therefore the keymap is shuffled and contains less patterns. Hebern machine (single rotor) and the Enigma machine (3-5 rotors) are examples. These were used from 1870 - 1943.
 - DES: Data Encryption Standard (1974). After the enigma machina, digital encryption came into play. DES was a standard requirement (kind of like a protocol). AES (2001) and Salsa20(2008) are other examples.
 - Stream cipher: Enciphers input by individual character.
 - Block cipher: Enciphers input in blocks of plaintext.
@@ -60,7 +60,7 @@ The scytale was using in ancient Greek, in particular the Spartans. A strip of l
   <br>  
   <br>  
 Alberti Cipher:  
-The Italian architect, Leon Battista Alberti, was the first to use a rotating mechanism, back in 1467. This was by far supreme than any previous cipher, because frequency analysis was impossible (the disk keeps rotating for every character, therefor character occurance has a different key).
+The Italian architect, Leon Battista Alberti, was the first to use a rotating mechanism, back in 1467. This was by far supreme than any previous cipher, because frequency analysis was impossible (the disk keeps rotating for every character, therefore character occurance has a different key).
   
 <img src="../00_includes/SEC/SEC-04_Alberti.png" alt="scytale" width=50%>
   
@@ -76,7 +76,7 @@ SHA (Secure Hash Algorithm): SHA has been developed by the NSA. There have been 
 **Sending a encrypted message to a teammate using a public key cipher**
 Encrypting a message is not hard using a website such as: https://cryptii.com/  
 The hard part was coming up with a key that I could share in a public room, without other people being able to know it.  
-For this exercise, I teamed up with Killian and in NTW-03, I spotted his gaming username when he was trying to see if he could recognize Discord with WireShark. I used this as a key, since the probability of anyone else in the group knowing this information is small, therefor I could publicly tell him the reference to that. I could have chosen his sport, or which team he has played for, but he has mentioned this information in his introductions, so the chance is pretty high that there is someone else that also remembers this.  
+For this exercise, I teamed up with Killian and in NTW-03, I spotted his gaming username when he was trying to see if he could recognize Discord with WireShark. I used this as a key, since the probability of anyone else in the group knowing this information is small, therefore I could publicly tell him the reference to that. I could have chosen his sport, or which team he has played for, but he has mentioned this information in his introductions, so the chance is pretty high that there is someone else that also remembers this.  
 His screen was only shared within our team and I believe my teammates were working on another assignment, so that lowers the chance that they were looking at the screenshare.  Also, spotting his username was pretty random, so even if they were watching, the probability that they spotted it as well, is even lower.  
   
 The challening part with symmetric encryption is sharing the key. If anyone else knows his username (or are able to find out), they can then also decrypt the message. That is also a vurnerability here, it's not impossible for someone else to find out his username. 

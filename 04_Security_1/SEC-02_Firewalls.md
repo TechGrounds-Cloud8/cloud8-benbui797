@@ -5,12 +5,12 @@ Data is send across the network in the form of packets. A firewall analyses thes
   
   
 **Software Firewalls**  
-A software firewall is installed on the host device (therefor also known as a host firewall). As it is host specific, it will use some resources from the host to operate (CPU and RAM). Also it needs to be installed on every device and if different devices have different systems, you might need to configure them independently.  
+A software firewall is installed on the host device (therefore also known as a host firewall). As it is host specific, it will use some resources from the host to operate (CPU and RAM). Also it needs to be installed on every device and if different devices have different systems, you might need to configure them independently.  
 An advantage of software firewalls is that they can distinquish between different programs while filtering traffic, thus they can allow one program and deny another.  
   
 
 **Hardware Firewalls**  
-Hardware firewalls (Appliance Firewalls) represent a seperate piece of hardware that is placed in between the local and external network (internet). These firewalls have their own resources and therefor do not consume any resources from hosts. Medium to large organisations might employ these, as it is more practical to install a single hardware firewall than install and configure a firewall for each host device. Setting up and configuring them is hard and takes skill.  
+Hardware firewalls (Appliance Firewalls) represent a seperate piece of hardware that is placed in between the local and external network (internet). These firewalls have their own resources and therefore do not consume any resources from hosts. Medium to large organisations might employ these, as it is more practical to install a single hardware firewall than install and configure a firewall for each host device. Setting up and configuring them is hard and takes skill.  
   
 
 **Packet-Filtering Firewalls**  
@@ -26,7 +26,7 @@ Circuit-level gateways operate at the session layer of the OSI model, observing 
 A stateful inspection firewall keeps track of the state of a connection by monitoring the TCP 3-way handshake. This allows it to keep track of the entire connection – from start to end – permitting only expected return traffic inbound.  
 When starting a connection and requesting data, the stateful inspection builds a database (state table) and stores the connection information. In the state table, it notes the source IP, source port, destination IP, and destination port for each connection. Using the stateful inspection method, it dynamically creates firewall rules to allow anticipated traffic.  
 If a active connection is trusted, then not all packets in this session will be scanned. A TCP session is defined by the information in the handshake.  
-UDP is a connectionless protocol (it does not have unique connection identifiers), therefor it will be removed from the trusted table after the configured timeout. A technique that uses this 'entry' is called [UDP hole punching](https://en.wikipedia.org/wiki/UDP_hole_punching), where empty packets are send to keep the connection established.  
+UDP is a connectionless protocol (it does not have unique connection identifiers), therefore it will be removed from the trusted table after the configured timeout. A technique that uses this 'entry' is called [UDP hole punching](https://en.wikipedia.org/wiki/UDP_hole_punching), where empty packets are send to keep the connection established.  
 This type of firewall is used as additional security. It enforces more checks and is safer compared to stateless filters. However, unlike stateless/packet filtering, stateful firewalls inspect the actual data transmitted across multiple packets instead of just the headers. Because of this, they also require more system resources.  
   
   

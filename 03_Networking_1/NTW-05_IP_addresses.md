@@ -5,13 +5,13 @@ The summary in the assignment is very clear.
 - IP address: Your address on the internet
 - IPv4 = 32 bits == 4 bytes (4,3 E^9 possible combinations)
 - IPv6 = 128 bits == 16 bytes (1,7 E^38 possible combinations) **that is 38 zero's!**
-- Public vs Private IP: We ran out of IPv4 addresses, therefor we have only 1 public IP (our address to communicate with the world). In our local network, every device also has its own IP address (not accessable to the outside world, therefor it's called a private IP). Your public IP address is provided by your ISP.
+- Public vs Private IP: We ran out of IPv4 addresses, therefore we have only 1 public IP (our address to communicate with the world). In our local network, every device also has its own IP address (not accessable to the outside world, therefore it's called a private IP). Your public IP address is provided by your ISP.
 - IP address looking like 192.128.x.x / 172.16.x.x / 10.x.x.x are almost always private IP addresses (local)
 - NAT table: Network Address Translation - Your local network has only 1 public IP, but multiple devices can access the internet. This is done via NAT, which usually resides in the router or firewall. It converts a public IP to a private IP address and vice versa. It also masks the port number (so in the case of 2 requests on the same port (2 devices watching YouTube at the same time), it knows which reply is addressed to which host).
 - Static NAT: directly (and statically) links a private IP to a public IP (very costly!! usually only used for web hosting (maybe google's 8.8.8.8?)) 
 - Dynamic NAT: dynamically links a private IP address to a public IP, from a pool of available addresses. If there is no address available, the package is dropped. This is also very costly!
 - PAT: aka NAT overload. Many private IP's can be translated to a single public IP. This is the most frequently used type, because it is very cost efficient. You can connect thousands of private addresses online through a single public IP address.
-- Static / Dynamic: Because there are a finite number of addresses, they are usually not given out permanently, but on a lease basis. These addresses can therefor change (aka dynamic). It's possible to have static addresses too (useful for printers in a local network for example)
+- Static / Dynamic: Because there are a finite number of addresses, they are usually not given out permanently, but on a lease basis. These addresses can therefore change (aka dynamic). It's possible to have static addresses too (useful for printers in a local network for example)
 
 ## Exercise
 ### Sources
