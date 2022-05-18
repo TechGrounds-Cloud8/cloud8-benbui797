@@ -36,6 +36,7 @@ Browsers such as Internet Explorer, Firefox, Opera, Safari and Chrome come with 
 - https://en.wikipedia.org/wiki/Online_Certificate_Status_Protocol
 - https://www.kinamo.nl/nl/support/faq/wat-zijn-root-en-intermediate-ssl-certificaten
 - https://en.wikipedia.org/wiki/Public_key_certificate#Intermediate_certificate
+- https://www.ibm.com/support/pages/openssl-commands-check-and-verify-your-ssl-certificate-key-and-csr (lots of extra commands)
 - https://devopscube.com/create-self-signed-certificates-openssl/
 - https://websiteforstudents.com/how-to-create-self-signed-certificates-on-ubuntu-linux/
 
