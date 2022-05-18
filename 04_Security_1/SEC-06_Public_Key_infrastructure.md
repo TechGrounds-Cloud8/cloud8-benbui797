@@ -19,14 +19,14 @@ Browsers such as Internet Explorer, Firefox, Opera, Safari and Chrome come with 
 
 ## Key terminology
 - CA: Certificate Authority - Stores, issues and signs the digital certificates. A CA can issue other certificates. 
-- TTP: Trusted third part (another name for CA's)
+- TTP: Trusted third party (another name for CA's)
 - RA: Registration Authority - Verifies the identity of entities requesting their digital certificates to be stored at the CA
 - CSR:  Certificate Signing Request - in PKI's a CSR is a message from an applicant to a registration authority to apply for a digital identity certificate.
 - OCSP: Online Certificate Status Protocol - A protocol used to obtaining the revocation status of a X509 certificate. It is an alternative to CRL (Certificate Revocation List).
 - Self-Signed Certificate - Here we act as our own CA, signing our own CSR. Because we are not recognized as an official CA, this would give security warnings in browsers (as browsers have a list of official CA's).
 - Root Certificate - a Self-signed certificate signed by a CA (there is not authority higher in the hierarchy, so they have to self-sign it). It is used to sign other certificates.
 - Intermediate Certificate - This certificate is used to sign other certificates, but it is not self-signed. IC's are signed by a Root Certificate.
-- End-Entity / Leaf Certificate - The final user's certificate. It is usually signed by a Intermediate Certificate (and therefor recognised as those have been signed by a Root). These certificates can not sign any other certificates (hence the leave name, they cannot grow any branches).
+- End-Entity / Leaf Certificate - The final user's certificate. It is usually signed by a Intermediate Certificate (and therefor recognised as those have been signed by a Root). These certificates can not sign any other certificates (hence the leaf name, they cannot grow any branches).
 
 ## Exercise
 ### Sources
