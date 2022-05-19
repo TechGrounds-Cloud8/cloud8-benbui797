@@ -15,10 +15,8 @@ Modern security systems often combine these with firewalls (Unified Threat Manag
   
 <img src="../00_includes/SEC/SEC-08_ids_ips.png" alt="IDS vs IPS" width=80%>  
   <br>  
-  <br>  
 The first thing to do in response to a detected attack is trying to contain the damage. Depending on the kind of attack, the way you do this might differ. After the attack is contained, you can try to figure out the root cause of the attack, so that you can stop it. Finally, you enter the recovery phase, where you try to get all systems back online and you take stock of the damage done.  
 It is vitally important to have a plan in place for how to respond when an attack happens.  
-  <br>  
   <br>  
 
 **Hack Response Strategies**
@@ -80,7 +78,6 @@ More examples of what you can do:
 - Minimise injection attack surfaces (on the front-end level)
 
   <br>  
-  <br>  
 
 **Other factors of security:**  
   
@@ -90,8 +87,8 @@ More examples of what you can do:
 4. **Segmentation and Egress Filtering:** If malware or an attacker is able to enter you system at some level, you should prevent them from being able to access everything. Also prevent them from being to exit the system with valuable data should be prevented. Network segmentation and correct usage and setup of firewalls is very effective in this regard. Proxy servers can also be implemented. Another example is making your database only accessable via a designated application.
 5. **Robust Detection Control Infrastructure:** History tells us that betting all your money on prevention is a bad idea. We should be prepared for when an attacker is able to penetrate the system and have systems in place that minimize the time until detection and remediation. A good SIEM/SOAPA/SOAR infrastructure should be part of the security architecture that is receiving logs from the whole network. 
 6. **Multi-factor / Multi-step Authentication:** The majority of breaches involve the use of cracked, intercepted or otherwise disclosed authentication credentials at some point.  Use strong, multi-factor authentication methods by default wherever possible.  Combined with the ability to detect and alert on failed login attempts, this practice can provide clues to users that may be the focus of targeted attacks.  
-  <br>  
-  <br>  
+  <br>
+
 **Disaster Recovery Plan**  
 A disaster recovery plan (DRP), disaster recovery implementation plan, or IT disaster recovery plan is a recorded policy and/or process that is designed to assist an organization in executing recovery processes in response to a disaster to protect business IT infrastructure and more generally promote recovery. The purpose of a disaster recovery plan is to comprehensively explain the consistent actions that must be taken before, during, and after a natural or man-made disaster so that the entire team can take those actions. A disaster recovery plan should address both man-made disasters that are intentional, such as fallout from terrorism or hacking, or accidental, such as an equipment failure.  
   
@@ -135,7 +132,7 @@ There are multiple options to be prepared, but the service offered in the cloud 
 ### Overcome challenges
 - WORMHOLEEEEEEESS! xD
 - Looking for hack response strategies and only finding tips for hardening a system.
-- Learned a new word: remediation. It comes from remedy and can be used similarly to improving. Although it's about improving something thats undesirable.
+- Learned a new word: remediation. It comes from remedy and can be used similarly to improving. Although it's about improving something that's undesirable.
 
 ### Results
 **A Company makes daily backups of their database. The database is automatically recovered when a failure happens using the most recent available backup. The recovery happens on a different physical machine than the original database, and the entire process takes about 15 minutes. What is the RPO of the database?**
