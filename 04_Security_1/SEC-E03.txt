@@ -1,4 +1,0 @@
-You have a VM / container
-
-Make your VM/container run as a VPN server
-

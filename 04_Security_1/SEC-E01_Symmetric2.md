@@ -7,8 +7,8 @@ Then I heard that this was not allowed and I'm supposed to sent the actual key a
   
 So in order to solve the mystery, I'll dive deeper into both RSA and Diffie-Hellman methods and their differences.
   
-**Diffie-Hellmann**  
-These two mathematicians first identified the problem now commonly referred to as the Diffie Hellman problem. It is a relation between two real prime numbers that share a common value (or actually the result of a function between the two). This common value is also known as the `shared secret`. Both parties can let the other know they have knowledge of this secret without sharing their own keys.  
+**Diffie-Hellmann-Merkle Key Exchange**  
+These two mathematicians first identified the problem now commonly referred to as the Diffie Hellman problem. Ralph Merkle enhanced and did most of the work for the key exchange part. It is a relation between two real prime numbers that share a common value (or actually the result of a function between the two). This common value is also known as the `shared secret`. Both parties can let the other know they have knowledge of this secret without sharing their own keys.  
 
 As a typical example with Alice and Bob:  
   
@@ -23,7 +23,7 @@ As a typical example with Alice and Bob:
   <br>  
 
 **RSA**
-RSA is based on the same mathmatical problem, but instead, both users have 2 keys; a public and private one. A uses his own private key in combination with Alice's public key to encrypt the message. Basically the algorithm calculates the shared secret. Alice can the decrypt the message by using her own private and Bob's public key. The relation across these four primes stay constant.
+RSA is based on a similar mathmatical problem, but instead, both users have 2 keys; a public and private one. A uses his own private key in combination with Alice's public key to encrypt the message. Basically the algorithm calculates the shared secret. Alice can the decrypt the message by using her own private and Bob's public key. The relation across these four primes stay constant.
   
 ![RSA](../00_includes/SEC/SEC-E01_RSA.png)  
   <br>  
@@ -33,7 +33,7 @@ Prime factorisation means breaking up a number until all factors are primes. One
   
 For example: 330 = 2 × 3 × 5 × 11  
   
-This is the only way you can get to 330 by using primes. In fact, this rule is so important, it is called the **Fundamental Theorem of Arithmetic**.  
+This is the only prime factorisation of 330. In fact, this rule is so important, it is called the **Fundamental Theorem of Arithmetic**.  
   
 Prime factorization on large numbers is very challenging, even for modern computers. That is why encryption algorithms often use primes with a length of 1024 bits or more! That is 2^1023 aka 8.98E^307 aka 307 0's.  
 
@@ -53,9 +53,13 @@ Prime factorization on large numbers is very challenging, even for modern comput
 - https://www.encryptionconsulting.com/diffie-hellman-key-exchange-vs-rsa/
 - https://www.mathsisfun.com/prime-factorization.html
 - https://www.mathsisfun.com/numbers/prime-numbers-to-10k.html
+- https://crypto.stackexchange.com/questions/95993/is-diffie-hellman-key-exchange-an-asymmetric-or-symmetric-algorithm
+- https://en.wikipedia.org/wiki/Primitive_root_modulo_n
 
 ### Overcome challenges
-WORMHOLE 2.0 !! Luckily it's a bonus assignment lol
+- WORMHOLE 2.0 !! Luckily it's a bonus assignment lol
+- Confusion regarding if DHKE is symmetric or asymmetric. Symmetric is when both users share the same secret, which is not the case. Both uses have their own private key, which is used to calculate a shared secret. Because both private keys are unique, it is considered asymmetric. 
+
 
 ### Results
 After Casper gave the answer, I found out we did find one of the correct ways. Both methods described above are possible, but I have to look deeper into the math to understand which key is being used when.

@@ -10,7 +10,10 @@ Instead of using an online tool, in this exercise we're going to use the GPG pro
 - `gpg --fingerprint` display user-id (user-id is usually the registered email)
 - `gpg --send-key key-id` upload pgp key on keyserver [Ubuntu Default Server](https://keyserver.ubuntu.com/)
 - `gpg --search user-id` find keys/users on the keyserver
-- 
+- `gpg --delete-key key-id` delete key
+- `gpg --output revocation.rev --gen-revoke key-id` revocate the key (if your private key is compromised). Default dir: `~/.gnupg/openpgp-revocs.d/`
+- `gpg --import revocation.rev` import the revocation
+- `gpg --send-key key-id` send the revoced key to the server
 
 ## Exercise
 ### Sources
