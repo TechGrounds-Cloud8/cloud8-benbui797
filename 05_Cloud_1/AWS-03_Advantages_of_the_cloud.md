@@ -1,4 +1,4 @@
-# [Subject]
+# AWS-03 Advantages of the Cloud
 [Give a short summary of the subject matter.]
 
 ## Key terminology

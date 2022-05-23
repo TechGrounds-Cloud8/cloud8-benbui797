@@ -14,8 +14,8 @@ For example, IAM is a global service, so you get no control over where its infor
 - **AWS AZ**: An AWS Availability Zone consists of one or more discrete data centers. 
 - **AWS Local Zones**: AWS Local Zones place compute, storage, database, and other select AWS services closer to end-users.
 - **High Availability**: Not being dependent on a single data center. This enables easy failovers, reduces latency and ensures there is always a data center available. 
-- **AWS Cloudfront**: An AWS Service that stores your data in AWS partner's data centers around the world, reducing latency by routing traffic to the nearest Edge.
-- **Edge Location**: A data center of an AWS Partner that is used for the AWS backbone network (and AWS Cloudfront).
+- **AWS Cloudfront**: An AWS Service that stores your data in AWS data centers around the world, reducing latency by routing traffic to the nearest Edge.
+- **Edge Location**: A AWS data center that is located very close to the clients in order to reduce latency. You can not run AWS workloads directly on these, instead the services themselves make use of them through other services such as Cloudfront or Route 53.
 
 ## Exercise
 ### Sources
@@ -23,19 +23,20 @@ For example, IAM is a global service, so you get no control over where its infor
 - https://aws.amazon.com/cloudfront/features/?p=ugi&l=emea&whats-new-cloudfront.sort-by=item.additionalFields.postDateTime&whats-new-cloudfront.sort-order=desc
 - https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html
 - https://bytequest.net/choosing-aws-region/
+- https://www.lastweekinaws.com/blog/what-is-an-edge-location-in-aws-a-simple-explanation/
 
 ### Overcome challenges
 N/A
 
 ### Results
 **What is a Region?**  
-AWS has the concept of a Region, which is a physical location around the world where Data Centers are clustered. Each group of logical data centers is called and Availability Zone (AZ). Each AWS Region consists of multiple, isolated and physically seperate AZ's within a geopgrahic area. Other Cloud Providers often define a region by a single data center. Since AWS Regions are split into multiple AZ's, every AZ has it's own power, cooling and physical security. This ensures high availability.  
+AWS has the concept of a Region, which is a physical location around the world where Data Centers are clustered. Each group of logical data centers is called an Availability Zone (AZ). Each AWS Region consists of multiple, isolated and physically seperate AZ's within a geopgrahic area. Other Cloud Providers often define a region by a single data center. Since AWS Regions are split into multiple AZ's, every AZ has it's own power, cooling and physical security. This ensures high availability.  
   
 **What is an AWS Availability Zone?**  
 An Availability Zone (AZ) is one or more discrete data centers with redundant power, networking, and connectivity in an AWS Region. AZs give customers the ability to operate production applications and databases that are more highly available, fault tolerant, and scalable than would be possible from a single data center. All AZs in an AWS Region are interconnected with high-bandwidth, low-latency networking, over fully redundant, dedicated metro fiber providing high-throughput, low-latency networking between AZs. All traffic between AZs is encrypted. The network performance is sufficient to accomplish synchronous replication between AZs. AZs make partitioning applications for high availability easy. If an application is partitioned across AZs, companies are better isolated and protected from issues such as power outages, lightning strikes, tornadoes, earthquakes, and more. AZs are physically separated by a meaningful distance, many kilometers, from any other AZ, although all are within 100 km (60 miles) of each other.
     
 **What is an Edge Location?**  
-Amazon CloudFront is a web service that speeds up distribution of your static and dynamic web content, such as .html, .css, .js, and image files, to your users. CloudFront delivers your content through a worldwide network of data centers called edge locations. When a user requests content that you're serving with CloudFront, the request is routed to the edge location that provides the lowest latency (time delay), so that content is delivered with the best possible performance.
+Amazon CloudFront is a web service that speeds up distribution of your static and dynamic web content, such as .html, .css, .js, and image files, to your users. CloudFront delivers your content through a worldwide network of data centers called edge locations. When a user requests content that you're serving with CloudFront, the request is routed to the edge location that provides the lowest latency (time delay), so that content is delivered with the best possible performance. See key-terms for more info.
   
 **Why would you choose one region over another? (e.g. eu-central-1 (Frankfurt) over us-west-2 (Oregon)).**  
 If most of your clients are from a specific geographic location (say NL), it makes sense to choose the nearest region. This reduces latency for the clients. This is not the only factor to keep in mind though;
