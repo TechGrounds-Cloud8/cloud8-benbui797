@@ -26,7 +26,7 @@ The Total Cost of Ownership (TCO) is used to measure how much an infrastructure 
 - https://www.investopedia.com/ask/answers/112814/whats-difference-between-capital-expenditures-capex-and-operational-expenditures-opex.asp
 
 ### Overcome challenges
-[Give a short description of your challanges you encountered, and how you solved them.]
+N/A
 
 ### Results
   <br>  
