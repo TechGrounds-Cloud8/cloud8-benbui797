@@ -2,14 +2,7 @@
   
 AWS S3 is a storage service. The name stands for "Simple Storage Service". Data that is stored on it is called an object. Objects are stored in buckets
 
-There are 4 storage classes:  
-- S3 Standard
-- S3 Standard-IA
-- S3 One-zone IA
-- S3 Glacier
-  
-There’s also S3 Glacier Deep archive, a subclass of S3 Glacier. And Intelligent Tiering which is more a cost optimization tool than a class on its own.  
-Storage classes differ in availability, durability, retrieval time, and cost.  
+There are different storage classes that differ in availability, durability, retrieval time, and cost.  
   
 In S3, you pay for:  
 - GBs storage per month
