@@ -1,13 +1,7 @@
 # AWS-05 S3
   
-AWS offers object based storage in the form of S3. S3 makes use of buckets as a container for objects. A single object in S3 has a maximum size of 5TB. However, the total size of a bucket is virtually unlimited.  
-  
-Bucket names must be globally unique. That is, even other AWS accounts in different regions cannot share the same bucket name. Buckets, and objects within buckets, can be accessed using a URL.  
-  
-The bucket policy acts as an access control list. Data can be encrypted for even further protection.  
-  
-Objects are automatically replicated within a region, so that there’s always at least three copies available. This redundancy greatly increases the availability and durability of objects stored in S3.  
-  
+AWS S3 is a storage service. The name stands for "Simple Storage Service". Data that is stored on it is called an object. Objects are stored in buckets
+
 There are 4 storage classes:  
 - S3 Standard
 - S3 Standard-IA
@@ -25,12 +19,8 @@ In S3, you pay for:
 You don’t pay for:  
 - Transfer IN to Amazon S3
 - Transfer OUT from S3 to CloudFront or EC2 in the same region
-  
-Besides storing data for all kinds of purposes (big data, storing videos, archiving, etc.), S3 has another use case: hosting static websites.  
-  
-S3 use cases:
-- Data Lake ()
 
+  
 ## Key terminology
 - **Object-Level Storage**: Object-Level Storage contains objects. 
 - **Objects**: Objects are made of: Data (any file type), Metadata (information about data) and a Key (unique identifier). They can be 5TB in size.
@@ -43,15 +33,32 @@ S3 use cases:
 - **S3 Glacier Flexible Retrieval** S3 Glacier is recommended for archiving data. It can retrieve objects within a few minutes. S3 Glacier is a cheaper and slower class.
 - **S3 Glacier Deep Archive** S3 Glacier Deep Archive has the lowest cost. Compared to S3 Glacier, S3 Glacier Deep Archive can retrieve objects within 12 hours.
 - **S3 Intelligent-Tiering** S3 Intelligent-Tiering requires automation and monitoring. It is recommended for data with unknown or frequently changing access. It moves the object to the S3 Standard-IA class if it is not accessed for 30 days. It moves objects to S3 Standard if accessed in S3 Standard-IA or S3 One Zone-IA classes. **not really a class**
+- **ARN** Amazon Resource Name. [Check this link for a more detailed syntax guide](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 
 ## Exercise
 ### Sources
 - https://www.w3schools.com/aws/aws_cloudessentials_amazonsimplestorageservice.php
 - https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3
 - https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
+- https://www.youtube.com/watch?v=_I14_sXHO8U
+- https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html
+- https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+- https://docs.aws.amazon.com/AmazonS3/latest/userguide/HostingWebsiteOnS3Setup.html
 
 ### Overcome challenges
-[Give a short description of your challanges you encountered, and how you solved them.]
+- Understanding AWS terms such as Buckets and Objects.
+- Bucket policy's, where to find them, how to read them and the specific syntax.
 
 ### Results
-[Describe here the result of the exercise. An image can speak more than a thousand words, include one when this wisdom applies.]
+  
+**Exercise 1:**  
+Uploading a Cat picture and making it publicly accessable:  
+<img src="../00_includes/CLOUD01/AWS-05_1.png" alt="AWS-05 CAT1" width=75%>
+
+![AWS-05 CAT2](../00_includes/CLOUD01/AWS-05_2.png)
+
+  
+  
+**Exercise 2:**  
+Hosting a static website on AWS S3:  
+<img src="../00_includes/CLOUD01/AWS-05_3.png" alt="AWS-05 static" width=75%>
