@@ -40,5 +40,5 @@ Another synonymed version:
 2. Sharing resources with other customers means lower prices for everyone.
 3. No hardware means you don't need to plan your resource requirements. You can scale them as you go.
 4. No hardware means you can launch different machines and services whenever you need, they are online within minutes
-5. The hardware is maintained by AWS, therefor you don't have any operations to worry about.
-6. AWS is global, therefor it's easier to be well accessable from anywhere in the world. 
+5. The hardware is maintained by AWS, therefore you don't have any operations to worry about.
+6. AWS is global, therefore it's easier to be well accessable from anywhere in the world. 

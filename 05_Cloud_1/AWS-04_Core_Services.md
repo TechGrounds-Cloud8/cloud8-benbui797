@@ -26,12 +26,19 @@ Check below and above.
 ## Exercise
 ### Sources
 - https://d1.awsstatic.com/training-and-certification/docs-cloud-practitioner/AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf
+- https://explore.skillbuilder.aws/learn/course/internal/view/elearning/134/aws-cloud-practitioner-essentials 
 
 ### Overcome challenges
 N/A
 
 ### Results 
 I have read the exam guide.
+
+The exam for AWS Cloud Practitioner is split up in four domains. Each are weighted differently in the result.
+- Cloud Concepts (26%)
+- Security & Compliance (25%)
+- Technology (33%)
+- Billing and pricing (16%)
   
 The exam validates a candidate’s ability to complete the following tasks:
 - Explain the value of the AWS Cloud

@@ -97,7 +97,7 @@ Operating expenses (OPEX) are the day-to-day expenses a company incurs to keep i
   
 Traditionally, a company would have to invest in hardware (servers, connections, devices) and also have to maintain it. By using the cloud, there is no investment required up-front. So a lot of CAPEX is moved to OPEX (you pay for what you use).  
   
-OPEX can be deducted from the profit (and therefor save on taxes). The goal of any company is to maximize output relative to OPEX. In this way, OPEX represents a core measurement of a company's efficiency over time.  
+OPEX can be deducted from the profit (and therefore saved on taxes). The goal of any company is to maximize output relative to OPEX. In this way, OPEX represents a core measurement of a company's efficiency over time.  
 
 
   
