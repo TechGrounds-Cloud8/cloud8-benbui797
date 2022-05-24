@@ -1,6 +1,6 @@
 # AWS-05 S3
   
-AWS S3 is a storage service. The name stands for "Simple Storage Service". Data that is stored on it is called an object. Objects are stored in buckets
+AWS S3 is a storage service. The name stands for "Simple Storage Service". Data that is stored on it is called an object. Objects are stored in buckets. You can store any type of file on it.
 
 There are different storage classes that differ in availability, durability, retrieval time, and cost.  
   

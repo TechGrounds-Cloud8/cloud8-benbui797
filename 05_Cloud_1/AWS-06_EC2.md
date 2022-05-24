@@ -10,14 +10,18 @@ There are 4 different types of instances:
 
 
 ## Key terminology
-[Write a list of key terminology with a short description. To prevent duplication you can reference to previous excersizes.]
+- **AMI** Amazon Machine Image. This functions similar to a blueprint for a VM.
 
 ## Exercise
 ### Sources
-[List your sources you used for solving the exercise]
+- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html
+- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html
+- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY
 
 ### Overcome challenges
-[Give a short description of your challanges you encountered, and how you solved them.]
-
+- The username is not the name associated to the key or IAM, it's a generic user name that is specific for every AMI
+- I forgot to add the 'user data' when setting up the instance and by default it only runs that script on initial launch. I did find a guide on how to make it run the script on every reboot, but in the end it was easier to create a new instance with the correct 'user data'
+  
 ### Results
-[Describe here the result of the exercise. An image can speak more than a thousand words, include one when this wisdom applies.]
+My instance in AWS console, accessed by my browser and also logged into it through an SSH connection:
+![AWS-06 screenshot](../00_includes/CLOUD01/AWS-06_1.png)
