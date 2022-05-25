@@ -1,4 +1,4 @@
-# AWS-05 EC2
+# AWS-06 EC2
 EC2 stands for Elastic Cloud Compute. It is an AWS service to create VM's. It makes scaling up and down very easy.  
   
 There are 4 different types of instances:
@@ -19,6 +19,7 @@ There are 4 different types of instances:
 - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY
 
 ### Overcome challenges
+- If you stop and restart an instance, the IP is changed.
 - The username is not the name associated to the key or IAM, it's a generic user name that is specific for every AMI
 - I forgot to add the 'user data' when setting up the instance and by default it only runs that script on initial launch. I did find a guide on how to make it run the script on every reboot, but in the end it was easier to create a new instance with the correct 'user data'
   
