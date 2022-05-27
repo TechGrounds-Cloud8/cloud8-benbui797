@@ -30,6 +30,12 @@ N/A
 
 ### Results
   <br>  
+
+AWS base their prices on three main pillars:  
+- Compute (CPU/RAM usage and duration)
+- Storage (Size of data stored or allocated)
+- Outbound data transfer (data leaving an AWS region (within is usually free))  
+  s
 AWS lists four advantages of their pricing model:  
   
 **Pay-as-you-go**  
