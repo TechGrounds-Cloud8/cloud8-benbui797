@@ -1,4 +1,4 @@
-# [Subject]
+# AWS-11 Elastic Load Balancing (ELB) and Auto Scaling
 [Give a short summary of the subject matter.]
 
 ## Key terminology

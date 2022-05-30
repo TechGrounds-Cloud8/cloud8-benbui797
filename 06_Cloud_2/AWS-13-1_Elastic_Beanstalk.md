@@ -1,4 +1,4 @@
-# [Subject]
+# AWS-13-1 Elastic Beanstalk
 [Give a short summary of the subject matter.]
 
 ## Key terminology
