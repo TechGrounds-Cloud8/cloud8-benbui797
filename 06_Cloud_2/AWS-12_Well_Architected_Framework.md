@@ -24,7 +24,7 @@ There are 5 design principles for Operational Excellence:
 ## Security Pillar  
 The security pillar focuses on protecting information and systems. Key topics include confidentiality and integrity of data, managing user permissions, and establishing controls to detect security events.  
   
-There are 6 design principles for Security:  
+There are 7 design principles for Security:  
 1. **Implement a strong identity foundation:** Implement the principle of least privilege and enforce the appropriate authorization for every interaction with AWS resources. Centralize Identity Management and avoid long-term static credentials.
 2. **Enable traceability:** Monitor, alert and audit actions and changes to your environment in real time. Integrate log and metric collection with systems to automatically investigate and take action.
 3. **Apply security at all layers:** Apply a defense in depth approach with multiple security controls. Apply to all layers (for example, edge of network, VPC, load balancing, every instance and compute service, operating system, application, and code).
