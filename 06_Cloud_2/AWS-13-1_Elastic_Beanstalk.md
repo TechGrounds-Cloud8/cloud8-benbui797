@@ -21,10 +21,11 @@ That is one advantage that Beanstalk offers over Heroku, it is a tool that manag
 - https://medium.com/analytics-vidhya/deploying-a-flask-app-to-aws-elastic-beanstalk-f320033fda3c
 
 ### Overcome challenges
-[Give a short description of your challanges you encountered, and how you solved them.]
+- Python stopped working (it was removed from the PATH variables somehow...)
+- I uploaded the code to Beanstalk, but it did not work.
 
 ### Results
-In a different course, I have made a simple webapp and uploaded it to Heroku, which similar functionality to Elastic Beanstalk. So as a practical assignment, I wanted to see if I could upload it in AWS and get it to work.
+In a different course, I have made a simple webapp and uploaded it to Heroku, which has similar functionality to Elastic Beanstalk. So as a practical assignment, I wanted to see if I could upload it in AWS and get it to work.
   
 [The App on Heroku](https://bb-todo-test.herokuapp.com/)  
   

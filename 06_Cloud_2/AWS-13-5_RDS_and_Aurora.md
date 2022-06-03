@@ -23,15 +23,27 @@ Aurora also automates and standardizes database clustering and replication, whic
 - **DB Instance** A DB instance is an isolated database environment in the AWS Cloud. The basic building block of Amazon RDS is the DB instance.
 - **DB engines** A DB engine is the specific relational database software that runs on your DB instance. Amazon RDS currently supports the following engines: MySQL, MariaDB, PostgreSQL, Oracle and Microsoft SQL Server.
 - **Aurora DB cluster** An Amazon Aurora DB cluster consists of one or more DB instances and a cluster volume that manages the data for those DB instances. An Aurora cluster volume is a virtual database storage volume that spans multiple Availability Zones, with each Availability Zone having a copy of the DB cluster data.
+- **Burstable Performance** Instances with burstable performance have a baseline level, from this you can calculate your CPU Credits per hour. If an instance does not use its CPU Credits, it can use these at a later time when more processing power is required. This was you can have performance available when you need it, without selecting an overly large instance type.
   
 
 ## Exercise
 ### Sources
 - https://aws.amazon.com/rds/?nc=sn&loc=3&dn=1
 - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html
+- https://aws.amazon.com/rds/aurora/
+- https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
+- https://aws.amazon.com/rds/instance-types/
 
 ### Overcome challenges
-- Aurora's exact definition and function is a bit unclear.
+- Aurora's exact definition is a bit unclear. As of now, it seems its a DB Engine that is designed by AWS, but is fully compatible with the existing solutions.
+- My patience. Creating a DB instance takes a loooooong time.
 
 ### Results
-[Describe here the result of the exercise. An image can speak more than a thousand words, include one when this wisdom applies.]
+For the practical exercise, I wanted to create a DB instance and be able to log into it from my own laptop. In order to do this has to be public and with the right ports opened.  
+I also gave the DNS address to Killian, who was also able to log into my instance (as well as me being able to log into his).
+  
+In the second screenshot you can see me spamming database entries and the IOPS monitor rising on the AWS console.  
+  
+![AWS-13-5 DB](../00_includes/CLOUD02/AWS-13-5-1.png)  
+  
+![AWS-13-5 DB and Workbench](../00_includes/CLOUD02/AWS-13-5-2.png)  
