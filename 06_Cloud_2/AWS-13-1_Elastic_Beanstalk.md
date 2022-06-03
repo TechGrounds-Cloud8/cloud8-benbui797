@@ -30,3 +30,7 @@ In a different course, I have made a simple webapp and uploaded it to Heroku, wh
 [The App on Heroku](https://bb-todo-test.herokuapp.com/)  
   
 Until now.. NO :) To be continued.....
+  
+The default test app did work:
+![AWS-13-1 Beanstalk Setup](../00_includes/CLOUD02/AWS-13-1_Beanstalk1.png)  
+![AWS-13-1 Beanstalk Online](../00_includes/CLOUD02/AWS-13-1_Beanstalk2.png)  
