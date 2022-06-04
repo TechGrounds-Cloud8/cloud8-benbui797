@@ -1,4 +1,4 @@
-# [Subject]
+# AWS-23 SNS, SQS and Event Bridge
 [Give a short summary of the subject matter.]
 
 ## Key terminology

@@ -1,4 +1,4 @@
-# [Subject]
+# AWS-14 Elastic Container Service (ECS)
 [Give a short summary of the subject matter.]
 
 ## Key terminology
@@ -6,7 +6,7 @@
 
 ## Exercise
 ### Sources
-[List your sources you used for solving the exercise]
+- https://aws.amazon.com/ecs/
 
 ### Overcome challenges
 [Give a short description of your challanges you encountered, and how you solved them.]

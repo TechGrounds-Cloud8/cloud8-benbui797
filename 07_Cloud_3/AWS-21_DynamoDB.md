@@ -1,4 +1,4 @@
-# [Subject]
+# AWS-21 DynamoDB
 [Give a short summary of the subject matter.]
 
 ## Key terminology

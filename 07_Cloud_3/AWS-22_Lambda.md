@@ -1,4 +1,4 @@
-# [Subject]
+# AWS-22 Lambda
 [Give a short summary of the subject matter.]
 
 ## Key terminology
