@@ -14,6 +14,9 @@ Elastic IPs are also available from the VPC menu. EIPs are public IP addresses t
 ## Key terminology
 - **Tenancy** By default, the setting is "Shared Tenancy", which means you share AWS's hardware resources with other clients. Your network is only virtually/logically seperated. If, for example for compliance reasons, you need to be completely seperate from other clients, you can also choose "Dedicated Tenancy". Your instances will run on isolated hardware. This is not cost effective, so AWS will charge you much more for it. 
 - **VPC endpoints** These endpoints can be used to route traffic inside the VPC. You can use AWS PrivateLink to connect the resources in your VPC to services using private IP addresses, as if those services were hosted directly in your VPC.
+- **VPC Peering** Used to route traffic between two seperate VPCs using private IP addresses.
+- **AWS VPN** Used to create an (encrypted) connection between on-premises sites and AWS via the public internet. The public internet can have fluctuations in speed, so it may not always be optimal.
+- **AWS Direct Connect** Connect your on-premises sites to AWS via Direct Connect locations, avoiding the public internet. This is expensive, but in some situations where reliability and consistency is required, this may be the best option.
 
 ## Exercise
 ### Sources
