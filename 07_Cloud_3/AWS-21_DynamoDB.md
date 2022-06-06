@@ -31,9 +31,10 @@ There is also in IA (infrequent access) class for tables.
   
 You can add a secondary index to a table, but this is more like creating a second table and linking it to the first. It is stored and scales independently.
   
-You can either scan or query the data in a DynamoDB table. Querying requires you to supply a key, so the returned result will only ever be 1 item. This is efficient and cheap, but you can't run a query like (age > 20). To run a search like that, you need to use scan.
+You can either scan or query the data in a DynamoDB table. Querying requires you to supply a key, so the returned result will only ever be 1 item. This is efficient and cheap, but you can't run a query like (age > 20). To run a search like that, you need to use scan. To return a scan result, DynamoDB needs to iterate over every item in your table, so if you need to run a lot of scan operations, you might want to use a relational database (because you pay for every iteration).  
+The maximum size both operations can return is 1MB and you have to keep in mind filters are applied AFTER the data has been extracted from the table.
   
-To integrate DynamoDB with your applications, you need to use the API. You pay for the API calls (WCU/RCU) and don't have an instance up and running. DynamoDB is also an example of a serverless service.
+To integrate DynamoDB with your applications, you need to use the API. You pay for the API calls (WCU/RCU) and don't have an instance up and running (DynamoDB is serverless).
 
   
 ## Key terminology
