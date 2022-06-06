@@ -19,6 +19,7 @@ In general, it is not possible to run your applications on Edge Servers, but Clo
 - **Amazon CloudFront Origin Shield** CloudFront Origin Shield is an additional layer in the CloudFront caching infrastructure that helps to minimize your origin’s load, improve its availability, and reduce its operating costs. It can help generate a *better cache hit ratio*.
 - **Cache Hit Ratio** The ratio between requests that get send to the Origin Server or a Cache.
 - **AWS Origin Shield** This is an additional layer in the caching infrastructure that helps minimize the Origin's load. CloudFront can retrieve each object using a single origin request from Origin Shield, and all other layers of the CloudFront cache (edge locations and regional edge caches) can retrieve the object from Origin Shield.
+- **Regional Edge Cache** This is a cache on a regional level (between the origin and the Edge Locations). It has a larger edge cache and can therefore store more data. It will store cached content for longer than Edge Locations (Edge Locations will remove less popular data in order to clear up storage space).
 
 ## Exercise
 ### Sources
