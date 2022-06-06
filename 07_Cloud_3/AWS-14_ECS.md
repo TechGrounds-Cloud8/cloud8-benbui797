@@ -49,6 +49,7 @@ The EC2 launch type is suitable for the following workloads:
 - https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html
 - https://www.slant.co/versus/8614/8615/~container_vs_type-2-hypervisor
 - https://developer.ibm.com/articles/why-should-we-use-microservices-and-containers/
+- https://azure.microsoft.com/en-us/topic/kubernetes-vs-docker/
 
 ### Overcome challenges
 N/A
