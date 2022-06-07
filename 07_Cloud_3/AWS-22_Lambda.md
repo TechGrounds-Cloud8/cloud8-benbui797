@@ -19,7 +19,7 @@ AWS Lambda executes in response to events. Events can be changes to an S3 bucket
 AWS Lambda natively supports Java, Go, PowerShell, Node.js, C#, Python, and Ruby code, and provides a Runtime API which allows you to use any additional programming languages to author your functions. 
   
 In AWS-14 (Elastic Container Service) we briefly spoke about Monolithic and Microservices architectures, serverless is the latest type of architecture. Here you divide your complete application in specific functions instead of services.  
-Developers can focus on writing code and have to worry about the infrastructure even less, which greatly improves development time.
+Developers can focus on writing code and have even fewer worries about how to set up the infrastructure, which is good for development time.
   
 ![AWS-22 mono vs micro vs serverless](../00_includes/CLOUD03/AWS-22_micro_vs_serverless.png)  
   
