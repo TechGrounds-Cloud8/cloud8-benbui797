@@ -1,20 +1,72 @@
 # Exam Prep
-CodeCommit / CodeDeploy / CodePipeline  
+
+## CodeCommit / CodeDeploy / CodePipeline  
+- **CodeCommit** AWS version of GitHub (fully managed version control system)
+- **CodeDeploy** Tool to automate deploy updates to applications
+- **CodePipeline** Tool to help automatically deploy updates to applications (CI/CD)
   
-Macie / Detective / GuardDuty
+## Security Hub
+- Provides a comprehensive view of security alerts and security posture across AWS accounts.
+- Aggregates, organizes and prioritizes security alerts, or findings from multiple AWS services.
+- Continously monitors your environment using automated security checks.
+- Configure security standards to validate against
   
-System Manager
+**AWS Security Bulletins** News and notifications about  security & privacy events (such as a DDOS attack)
+  
+**AWS Trust & Safety Team**
+Support team for: Spam, Port Scanning, DDOS, Intrustion attempts or hosting of objectionable or copyrighted content. Or distributing malware. abuse@amazonaws.com  
+  
+## Macie / Detective / GuardDuty
+- **AWS Macie** Machine Learning/AI that analyses your S3 for sensitive data (personal information, credit card numbers etc)
+- **AWS Detective** Analyze, investigate and identify the root cause of potentional security issues or suspicious activities.
+- **GuardDuty** Intelligent treath detection service. It can detect account compromise, instance compromise, and malicious activity
 
-Cost Management / Budgets 
+## AWS Batch
+Useful for when you need to run a large, resource intensive workload. You can upload your code, make a job definition and AWS will take care of the rest (it is a managed service).
+  
+## System Manager
+Manages many AWS resources including EC2, S3 and RDS.
+You can create documents (rules) and pass them to various components that will then perform some task.
+Components are:
+- **Automation** (i.e. make a snapshot of an RDS instance)
+- **Run Command** (i.e. check EC2 instance for missing updates)
+- **Inventory** (all kinds of data about the services, such as OS, installed applications, server roles)
+- **Patch Manager** (deploy OS and software patches automatically across large groups of EC2 or on-premise instances)
+- **Session Manager** (Secure remote management of your instances at scale without logging into your server (no SSH or PowerShell, so you don't need to open those ports))
+- **Parameter Store** (provides secure, hierarchical storage for configuration data management and secrets management)
 
-Dedicated Host vs Dedicated Instances (LICENSE)
+## Cost Management / Budgets 
 
+## Dedicated Host vs Dedicated Instances (LICENSE)
+Physically seperated instance/server. You can use your own software licenses on Dedicated Hosts.
 
-## Key terminology
+## Databases
+- **AWS Redshift** Data Warehouse
+- **AWS EMR** Big Data Analytics based on Hadoop or Spark.
+- **AWS Athena** Athena enables querying a Data Lake (S3) using SQL queries. Stores information and schema's about the databases & tables in AWS Glue.
+- **AWS Glue** Metadata Catalog that you can use with Athena, S3 and Apache (Hive). It's a fully managed ETL service.
+- **AWS ElastiCache** In-memory storage for ultra low latency (think of this as virtual RAM)
+- **AWS Kinesis** Data Streams: For streaming data. Data Analytics: Provides real-time SQL processing before storing it. Data Firehose: Loads data straight into destinations.
+- **AWS Data Pipeline** processes and moves data between different AWS resources.
+- **AWS Quicksight** BI service. Enables you to create dashboards.
+- **AWS Neptune** Fully managed Graph database.
+- **AWS QLDB** Quantum Ledger Database aka AWS equavalent to blockchain. (immutable ledger db, cryptographically verifiable)
+- **AWS Managed Blockchain** Fully Managed Service for joining public and private networks using Hyperledger Fabric and Ethereum.
+
+# Key terminology
+- **Data Stream** Constant stream of information (stock prices, IoT data, geospatial data (uber), game data (statistics and results))
 - **AWS Artifact** Library with AWS Compliance and Security documents.
-- **ElastiCache** In-memory storage for ultra low latency (think of this as virtual RAM)
+- **Amazon Connect** Contact center for support etc.
+- **AWS OpsWorks** AWS OpsWorks is a configuration management service that provides managed instances of Chef and Puppet. Chef and Puppet are automation platforms that allow you to use code to automate the configurations of your servers. 
 
-### To-Do
-- https://aws.amazon.com/batch/features/?nc=sn&loc=2
-
+## To-Do
+- Storage Gateway (file, volume, tape)
+- Cloud Directory
+- TCO
+- OpsWorks (Puppet?)
+- add Inspector to security https://aws.amazon.com/inspector/
+- ITSM tools / ITIL processes??? https://aws.amazon.com/managed-services/
+- Amazon VPN https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
+- Personal Health dashboard
+- KSM vs CloudHSM
 
