@@ -8,6 +8,16 @@ There are 4 different types of instances:
 - **Accelerated Optimized Instances** This type uses hardware accelerators, which boost the data processing. These instances are best for graphics applications and streaming.
 - **Storage Optimized Instances** This type is best when you have a large dataset on local storage (Large file systems, data warehouses or online transaction systems). These instances are designed to deliver many inputs as fast as possible.
 
+There are different pricing options:
+- On-demand 
+- Spot (cheaper but can be shut down if AWS needs the resources)
+- Reserved (savings plan, save $ by commiting for a 1 or 3 year period) 
+- Dedicated 
+
+Reserved instance types:
+- Standard RI (biggest discount)
+- Convertible RI (you can change the instance type if you need to scale vertically, as long as new value is same or greater)
+- Scheduled RI (These are only available to launch in a time window that you choose)
 
 ## Key terminology
 - **AMI** Amazon Machine Image. This functions similar to a blueprint for a VM.
