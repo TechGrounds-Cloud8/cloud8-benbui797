@@ -80,4 +80,4 @@ In addition, customers with an Enterprise On-Ramp or Enterprise Support plan hav
 
 Important:
 - difference between Cloud Support Associates and Engineers! (developer = associates)
-- TAM is only available to Enterprise support plan!
+- TAM, concierge support team is only available to Enterprise support plan!
