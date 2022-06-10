@@ -69,6 +69,33 @@ AWS Storage Gateway is a set of hybrid cloud storage services that provide on-pr
 - **AWS QLDB** Quantum Ledger Database aka AWS equavalent to blockchain. (immutable ledger db, cryptographically verifiable)
 - **AWS Managed Blockchain** Fully Managed Service for joining public and private networks using Hyperledger Fabric and Ethereum.
 
+## Migration Services
+- **AWS Snowball** Easily migrate terabytes of data to the cloud without limits in storage capacity or compute power. It is a physical device. 50/80TB. Snowball Edge 100TB. "Petabyte Scale".
+- **AWS Snowcone** Similar to Snowball, but with 8TB of storage space.
+- **AWS Snowmobile** Similar to Snowball, but an actual shipping container with 100PB (petabyte) storage space. Or you can move entire data centers. "Exabyte Scale".
+- **AWS SMS (Server Migration Service)** Migrate servers and virtual machines to AWS EC2.
+- **AWS DMS (Database Migration Service)** Migrate Databases to AWS. Can also be used to migrate from EC2 instance to RDS for example.
+- **AWS AMS (Application Migration Service)** Migrate applications to AWS.
+- **AWS DataSync** Simplify and accelerate secure data migrations, on-premises to cloud, vice-versa or AWS service to AWS service. Can be used with S3 and EFS.
+
+## Machine Learning Services
+- **AWS Rekognition** Image and video analysis
+- **AWS Transcribe** Speech to text
+- **AWS Translate** Translation AI
+- **AWS SageMaker** Tool to train and deploy ML models
+- **AWS Comprehend** NLP service, extract information from unstructured data.
+- **AWS Lex** AI for Chatbots
+- **AWS Polly** Text to Speech AI
+
+## Additional Services
+- **AWS Workspaces** Managed Desktop-as-a-service (DaaS) solution. Provide remote desktops for your employees.
+- **AWS AppStream 2.0** Instead of streaming a desktop, stream a specific application.
+- **AWS Worklink** Secure, one-click access to your internet websites using mobile phone browsers, without the requirement for a VPN or App.
+- **AWS WorkDocs** AWS equivalent of Google Docs.
+- **AWS IoT Core** Connect IoT devices to AWS Cloud. It's a managed service.
+- **AWS Device Farm** Test your mobile or webapps by getting access to thousands of different mobile phones, desktops browers and tablets. Developers can easily test their applications across different platforms (automated). You can also get remote access and manually test things.
+
+
 ## Cost Management / Budgets 
 
 ## Dedicated Host vs Dedicated Instances (LICENSE)
@@ -85,19 +112,21 @@ Physically seperated instance/server. You can use your own software licenses on 
 - **ITIL** Information Technology Infrastructure Library, the popular IT service management framework used by Enterprises. 
 - **ITSM** Information Technology Service Management, 
 - **AWS Health Dashboard** Here you can see information/news about Health issues that might impact your resources. Service Health, you can check if a service is online or not.
-- **AWS Snowball** Easily migrate terabytes of data to the cloud without limits in storage capacity or compute power. It is a physical device.
-- **AWS Snowcone** Similar to Snowball, but with 8TB of storage space.
-- **AWS Snowmobile** Similar to Snowball, but an actual shipping container with 100PB (petabyte) storage space. Or you can move entire data centers.
 - **Amazon QuickSight** Amazon QuickSight is a fast, cloud-powered business intelligence service that makes it easy to deliver insights to everyone in your organization.
 - **AWS Global Accelerator** Routes traffic to application endpoints through the AWS Global Network. It does not cache data (vs CloudFront)
-- **AWS Cognito** https://aws.amazon.com/cognito/?nc2=type_a
+- **AWS Cognito** Amazon Cognito lets you add user sign-up, sign-in, and access control to your web and mobile apps quickly and easily. Amazon Cognito scales to millions of users and supports sign-in with social identity providers, such as Apple, Facebook, Google, and Amazon, and enterprise identity providers via SAML 2.0 and OpenID Connect.  
+- **AWS Directory Services** Integrate or manage MicroSoft Active Directory with AWS Cloud. AD Connector can be used as a SSO (single sign on). There is also Simple AD, powered by Samba 4 that is compatible with MS AD, but offers less features.
+- **AWS STS** AWS STS is an AWS service that allows you to request temporary security credentials for your AWS resources, for IAM authenticated users and users that are authenticated in AWS such as federated users via OpenID or SAML2.0. It works similar to Access Keys, except their lifespan is much shorter (15 minutes to 36 hours typically).
 
+# Synonyms and other terms
+- **Elasticity** ability to scale up AND also down based on demand!
+- **Horizontal Scaling** ability to add more instances/resources to share the workload; adding another harddrive
+- **Vertical Scaling** increasing the capacity of a resource; installing a larger harddrive or faster CPU
+- **High-Availability / Durability / Resilience** Spread out over multiple AZ's to increase reliability
+- **Fault Tolerance** ability for your application to keep working even when a server has an error (for example, having multiple servers)
+- **Provisioned** to provide (someone) with what is needed for a task or activity
+- **Agility**  In a cloud computing environment, new IT resources are only a click away, which means that you reduce the time to make those resources available to your developers from weeks to just minutes. This results in a dramatic increase in agility for the organization, since the cost and time it takes to *experiment and develop* is significantly lower.
+- **S3 access time synonyms** Rarely = Glacier, Infrequent = S3 IA, Non-often = ????? (there are 100+ synonyms, good luck!)
 
 ## To-Do
-
-- ITSM tools / ITIL processes??? https://aws.amazon.com/managed-services/
-
-- KSM vs CloudHSM
-
-- https://aws.amazon.com/rekognition/image-features/
 
