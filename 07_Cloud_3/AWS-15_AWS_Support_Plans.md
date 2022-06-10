@@ -39,3 +39,45 @@ In addition, customers with an Enterprise On-Ramp or Enterprise Support plan hav
 
 ### Sources
 - https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html
+
+## Summary
+**Developer:**  
+- Trusted Advisor: 
+  - 7 core checks  
+- Enhanced Technical Support: 
+  - business hour emails to Cloud Support Associates
+  - unlimited cases / 1 primary account for contact
+- Case Severity / Response Time: 
+  - General Guidance < 24 hours
+  - System Impaired < 12 hours
+  
+**Business:**  
+- Trusted Advisor: 
+  - Full set of checks
+- Enhanced Technical Support:
+  - 24/7 phone, email and chat access to Cloud Support Engineers
+  - unlimited cases / unlimited contacts (IAM accounts supported)
+- Case Severity / Response Time:
+  - General Guidance < 24 hours
+  - System Impaired < 12 hours
+  - Production System impaired < 4 hours
+  - Production System down < 1 hour
+
+**Enterprise:**  
+- Trusted Advisor: 
+  - Full set of checks
+- Enhanced Technical Support:
+  - 24/7 phone, email and chat access to Cloud Support Engineers
+  - unlimited cases / unlimited contacts (IAM accounts supported)
+  - TAM (Technical Account Manager)
+  - Concierge Support Team
+- Case Severity / Response Time:
+  - General Guidance < 24 hours
+  - System Impaired < 12 hours
+  - Production System impaired < 4 hours
+  - Production System down < 1 hour
+  - Business-critical system down < 15 minutes
+
+Important:
+- difference between Cloud Support Associates and Engineers! (developer = associates)
+- TAM is only available to Enterprise support plan!
