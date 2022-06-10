@@ -23,8 +23,8 @@ IAM supports the processing, storage, and transmission of credit card data by a 
 - **SCP** Service Control Policy
 - **IAM Resources** The user, group, role, policy, and identity provider objects that are stored in IAM. As with other AWS services, you can add, edit, and remove resources from IAM.
 - **IAM Identities** The IAM resource objects that are used to identify and group. You can attach a policy to an IAM identity. These include users, groups, and roles.
+- **IAM Principals** A person or application that uses the AWS account root user, an IAM user, or an IAM role to sign in and make requests to AWS. Principals include federated users and assumed roles.
 - **IAM Entities** The IAM resource objects that AWS uses for authentication. These include IAM users and roles.
-- **Principals** A person or application that uses the AWS account root user, an IAM user, or an IAM role to sign in and make requests to AWS. Principals include federated users and assumed roles.
 - **Attribute-based access control (ABAC)** is an authorization strategy that defines permissions based on attributes (tags). For example, for a new project, you just create a tag with the right permissions and assign it to the team, no mather what role they currently have. If the project requires a new resource, you just add it to that tag, instead of having to ammend all team members their permissions.
 - **Role-based access control (RBAC)** an authorisation strategy based on roles. 
 
