@@ -17,6 +17,36 @@ IAM supports the processing, storage, and transmission of credit card data by a 
 - **Integrated with many AWS services** For a list of AWS services that work with IAM, see AWS services that work with IAM.
 - **Eventually Consistent** IAM, like many other AWS services, is eventually consistent. IAM achieves high availability by replicating data across multiple servers within Amazon's data centers around the world. If a request to change some data is successful, the change is committed and safely stored. However, the change must be replicated across IAM, which can take some time. Such changes include creating or updating users, groups, roles, or policies. We recommend that you do not include such IAM changes in the critical, high-availability code paths of your application. Instead, make IAM changes in a separate initialization or setup routine that you run less frequently. Also, be sure to verify that the changes have been propagated before production workflows depend on them. For more information, see Changes that I make are not always immediately visible.
 
+### Authorisation Request Content
+- **Actions** the actions or operations the principal wants to perform
+- **Resources** the AWS resource object on which the actions are performed (target)
+- **Principal** The user, role, federated user or application that sent the request
+- **Environment Data** Information about the IP address, user agent, SSL status or time of day
+- **Resource Data** Data related to the resource that is being requested
+  
+**Identity-based Policies:** Policies that give permissions to a principal (user)  
+**Resource-based Policies:** Policies within a policy, such as read/write permissions in an S3 bucket   
+**IAM permissions boundaries:** Limit the permissions an identity-based policy can grant an IAM entity  
+**Service Control Policies:** Limit the permissions for an organisation or Organisational Unit (OU)  
+**Session Policies:** Used with AssumeRole API Actions
+  
+### Determination Rules
+1. By Default all requests are implicitly denied. 
+2. An explicit allow in an identity- or resource-based policy overrides this default.  
+3. Permission boundary, SCP or session policy (if present) might overrule the allow with a deny
+4. An explicit deny in any policy overrides any allows
+  
+![AWS-19 IAM evaluation logic](../00_includes/CLOUD03/AWS-19_evaluationlogic.png)  
+  
+### IAM Policy Structure  
+An IAM Policy is a JSON document that consists of one or more statements.
+
+- **Effect** The effect can be Allow or Deny
+- **Action** The action element specifies the API action for which you are granting or denying permission.
+- **Resource** The resource element specifies the resource that is targeted by the action (ARN)
+- **Condition** The condition is optional and can be used to control when your policy is in effect (i.e. NotIPAddres, Bool (SecureTransport-SSL/TLS), StringLike (${aws:username}/*) - as a variable)
+- **Principle** *only on resource-based policies* You can define which principles this policy is valid for
+
 
 ## Key terminology
 - **AWS Organisations** This is the management account. You can create or invite other accounts to operate under the organisation. You can organize different groups in Operational Units (OUs), to which you can assign SCPs. You can set it up so that your bills are split up for different divisions, but pay from a single account and can have a general overview of costs. You can programatically create new accounts.
@@ -27,6 +57,7 @@ IAM supports the processing, storage, and transmission of credit card data by a 
 - **IAM Entities** The IAM resource objects that AWS uses for authentication. These include IAM users and roles.
 - **Attribute-based access control (ABAC)** is an authorization strategy that defines permissions based on attributes (tags). For example, for a new project, you just create a tag with the right permissions and assign it to the team, no mather what role they currently have. If the project requires a new resource, you just add it to that tag, instead of having to ammend all team members their permissions.
 - **Role-based access control (RBAC)** an authorisation strategy based on roles. 
+- **Inline Policies** Policies attached directly to a user *strongly discouraged! use customer managed policies instead*
 
 ## Exercise
 ### Sources
