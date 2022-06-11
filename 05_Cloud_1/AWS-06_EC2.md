@@ -19,14 +19,31 @@ Reserved instance types:
 - Convertible RI (you can change the instance type if you need to scale vertically, as long as new value is same or greater)
 - Scheduled RI (These are only available to launch in a time window that you choose)
 
+### EC2 Placement Groups
+There are different options for when you launch multiple EC2 instances.
+- **Cluster** packs instances close together within an AZ. This can be done to achieve *low-latency* network performance, which is neccesary for *tightly-coupled* node-to-node communication that is typical for *HPC applications* (high performance computing applications)
+- **Partition** This spreads your instances across logical partitions so that your instances so that the different partitions (groups of instances) do not share the underlying hardware. This is used by *distributed and replicated workloads* (Hadoop, Cassandra and Kafka). Distributed and Replicated means that multiple instances are sharing a workload and therefor are likely to have copies of the data on them. Partitions can be in multiple AZ's (up to 7 per AZ).
+- **Spead** This spreads your instances across different specific hardware. Used to keep critical instances seperate from each other.
+
+### Network Interfaces (ENI, ENA, EFA)
+EC2 instances have a network adapter attach to them by default, but you can attach multiple to a single instance as long as they are in the same AZ.  
+  
+- **Elastic Network Interface** basic adapter type without any high-performance specs. Can be used with all instance types.
+- **Elastic Network Adapter** Enhanced networking performance (higher bandwidth and lower inter-instance latency). Only works with supported instance types.
+- **Elastic Fabric Adapter** Used for HPC, MPI (message passing interface) and ML use cases. It is for tightly coupled applications (the instance are close to eachother and have a lot of communication between them, low-latency is a requirement). Can be used with all instance types. 
+
 ## Key terminology
 - **AMI** Amazon Machine Image. This functions similar to a blueprint for a VM.
+- **Key pair** you create an Access Key for an IAM user, but in order to log into an EC2 instance, the AWS term is *key pair*!
+- **Bastion Host** An instance in your public subnet that you can connect to in order to connect to other instances in the private subnet. It's like a NAT GW but allows you to open SSH connections whilst keeping the private instances completely seperated. 
+- **NAT Instance** Almost the same as a Bastion Host, but the NAT Instance only allows outgoing traffic to the internet, whilst blocking incoming. This can be useful to allow private instances to collect updates and patches from the internet.
 
 ## Exercise
 ### Sources
 - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html
 - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html
 - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY
+- https://cloudacademy.com/blog/aws-bastion-host-nat-instances-vpc-peering-security/
 
 ### Overcome challenges
 - If you stop and restart an instance, the IP is changed.
