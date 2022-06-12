@@ -30,7 +30,7 @@ EC2 instances have a network adapter attach to them by default, but you can atta
   
 - **Elastic Network Interface** basic adapter type without any high-performance specs. Can be used with all instance types.
 - **Elastic Network Adapter** Enhanced networking performance (higher bandwidth and lower inter-instance latency). Only works with supported instance types.
-- **Elastic Fabric Adapter** Used for HPC, MPI (message passing interface) and ML use cases. It is for tightly coupled applications (the instance are close to eachother and have a lot of communication between them, low-latency is a requirement). Can be used with all instance types. 
+- **Elastic Fabric Adapter** Used for HPC, MPI (message passing interface) and ML use cases. It is for *tightly coupled* applications (the instance are close to eachother and have a lot of communication between them, low-latency is a requirement). Can be used with all instance types. 
 
 ## Key terminology
 - **AMI** Amazon Machine Image. This functions similar to a blueprint for a VM.
