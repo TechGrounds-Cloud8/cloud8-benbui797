@@ -10,7 +10,7 @@ The following are the key concepts for Site-to-Site VPN:
 - **Customer gateway device:** A physical device or software application on your side of the Site-to-Site VPN connection.
 - **Target gateway:** A generic term for the VPN endpoint on the Amazon side of the Site-to-Site VPN connection.
 - **Virtual private gateway:** A virtual private gateway is the VPN endpoint on the Amazon side of your Site-to-Site VPN connection that can be attached to a single VPC.
-- **Transit gateway:** A transit hub that can be used to interconnect multiple VPCs and on-premises networks, and as a VPN endpoint for the Amazon side of the Site-to-Site VPN connection.
+- **Transit gateway:** A transit hub that can be used to interconnect multiple VPCs and on-premises networks, and as a VPN endpoint for the Amazon side of the Site-to-Site VPN connection. This is like a cloud router.
 - **AWS VPN CloudHub:** If you have multiple AWS Site-to-Site VPN connections, you can provide secure communication between sites using the AWS VPN CloudHub. This enables your remote sites to communicate with each other, and not just with the VPC.
 
 ## CodeCommit / CodeDeploy / CodePipeline  
