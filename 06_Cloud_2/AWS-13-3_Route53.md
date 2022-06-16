@@ -27,6 +27,19 @@ You can have multiple options for routing policies such as:
 - IP-based routing policy – Use when you want to route traffic based on the location of your users, and have the IP addresses that the traffic originates from.
 - Multivalue answer routing policy – Use when you want Route 53 to respond to DNS queries with up to eight healthy records selected at random.
 - Weighted routing policy – Use to route traffic to multiple resources in proportions that you specify.
+  
+**CNAME vs Alias Records**  
+*CNAME*  
+- CNAME can point any DNS query to any other DNS record (even non Route53). Never to an IP address. 
+- AWS charges you for CNAME queries
+- A CNAME record can't be at the top node of a DNS namespace (zone apex)
+  
+*Alias Record*  
+- An Alias Record can only point to a CloudFront distribution, Elastic Beanstalk, ELB, S3 bucket (static website) or to another record in the same hosted zone that the alias record is in.
+- You do not get charged for alias queries to AWS Resources.
+- You can create an Alias Record at the zone apex (but you cannot route to a CNAME at the zone apex).
+
+
 
 ## Key terminology
 - **Domain Name System (DNS)** This is the protocol that translates named adresses (for humans) to IP addresses (for computers). 
@@ -35,6 +48,7 @@ You can have multiple options for routing policies such as:
 ### Sources
 - https://aws.amazon.com/route53/
 - https://aws.amazon.com/route53/what-is-dns/
+- https://ns1.com/resources/cname
 
 ### Overcome challenges
 - I knew what DNS was and it's usecase, but I went much deeper on the subject for this assignment. Now I also learned about the inner workings, that it consists of multiple layers and how the traffic is actually routed.
