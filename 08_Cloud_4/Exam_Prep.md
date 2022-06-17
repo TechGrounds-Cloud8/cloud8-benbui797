@@ -51,10 +51,13 @@ Components are:
 
 ## AWS Storage Gateway
 AWS Storage Gateway is a set of hybrid cloud storage services that provide on-premises access to virtually unlimited cloud storage. The data is encrypted in transit and can move via the internet of AWS Direct Connect.  
+You could use it as a (on-premise) cache before it is moved into the cloud (i.e. S3).
   
 - **File Gateway** represents files as objects in S3 using NFS or SMB protocols
-- **Volume Gateway** represents your applications block-storage volumes (EBS) using the iSCSI protocol. It can be used to make snapshots of on-premise volumes and store a backup in the cloud.
-- **Tape Gateway** Tape Gateway presents an iSCSI-based virtual tape library (VTL) of virtual tape drives and a virtual media changer to your on-premises backup application. It is compatible with most leading backup applications, so you can continue using your tape-based backup workflows. 
+- **Volume Gateway** represents your applications block-storage volumes (EBS) using the iSCSI protocol (*Block storage!*). It can be used to make snapshots of on-premise volumes and store a backup in the cloud. There are two methods of using a Volume Gateway:
+  - **Cached Volume Mode** A Cache of the most recently/frequently used data is stored on-premise, the rest of the entire dataset is stored on S3.
+  - **Stored Volume Mode** Entire data set is stored on-premise, but data is backed up in the cloud (as point-in-time snapshots).
+- **Tape Gateway** Tape Gateway presents an iSCSI-based virtual tape library (VTL) of virtual tape drives and a virtual media changer to your on-premises backup application. It is compatible with most leading backup applications, so you can continue using your tape-based backup workflows. Data in transit is encrypted via SSL, data at rest is encrypted via SSE-S3.
 
 ## Databases
 - **AWS Redshift** Data Warehouse
@@ -129,4 +132,8 @@ Physically seperated instance/server. You can use your own software licenses on 
 - **S3 access time synonyms** Rarely = Glacier, Infrequent = S3 IA, Non-often = ????? (there are 100+ synonyms, good luck!)
 
 ## To-Do
+- Makes some tests with Lifecycle Manager to check out the options.
+- https://aws.amazon.com/api-gateway/resources/ check out API GW in console (and check out tutorials to build something)
 
+- RDS Backups (which type of backup, 5 min granularity) 
+- Check different types of Snapshot backups

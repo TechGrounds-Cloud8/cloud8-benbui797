@@ -18,8 +18,33 @@ EFS is designed to provide the throughput, IOPS, and low latency needed for a br
 - Using the default Bursting Throughput mode, throughput scales as your file system grows.
 - Using Provisioned Throughput mode, you can specify the throughput of your file system independent of the amount of data stored. For more information, see Throughput modes.
 
+## AWS FSx
+File System that works with Windows File Server and Lustre (Lustre is for compute-intensive workloads).  
+Both can be connected to your on-premises network via VPN or Direct Connect.
+  
+**Amazon FSx Windows File Server**  
+- Provides a fully managed native Microsoft Windows file system
+- Full support for SMB protocol, Windows NTFS and Microsoft Active Directory (AD) integration
+- Supports Windows-native file system features:
+  - ACLs, shadow copies and user quotas
+  - NTFS file systems that can be accessed from up to thousands of compute instances using the SMB Protocol
+- High availability (replaces data within an AZ)
+- Multi-AZ (optionally): file systems include an active and standby file server in seperate AZs.
+  
+**Amazon FSx for Lustre**  
+- High-performance file system optimised for fast processing of workloads such as:
+  - Machine Learning
+  - High Performance Computing (HPC)
+  - Video processing
+  - Financial modeling
+  - Electronic Design Automation (EDA)
+- *Works natively with S3, letting you transparently access your S3 objects as files*
+- *S3 objects are presented as files in your filesystem and you can write your results back to S3*
+- POSIX-compliant file system interface
+  
+Connecting FSx for Lustre to your on-premises data centre is usually used for Cloud Bursting or data migration.  
+
 ## Key terminology
-- **AWS FSx** EFS does not work with all file systems. If you want to run an EC2 instance as a WindowsServer, you would need to use FSx. FSx supports NetApp ONTAP, OpenZFS, Windows File Server, and Lustre file systems.
 - **AWS DataSync** This is a service that simplifies, automates and accelerates moving data between storage systems and services. It can copy data to and from: NFS servers, SMB servers, HDFS, Object storage systems, S3, EFS, FSx and Snowcone devices.
 - **NFS** Network File System
 - **SMB** Server Message Block
