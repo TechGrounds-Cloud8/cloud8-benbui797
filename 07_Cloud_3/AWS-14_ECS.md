@@ -38,8 +38,8 @@ The EC2 launch type is suitable for the following workloads:
 - **Cluster** A locigal grouping of tasks/services that are being run in ECS.
 - **Container** A container is a standardized unit of software development that holds everything that your software application requires to run. This includes relevant code, runtime, system tools, and system libraries. Containers are created from a read-only template that's called an image.
 - **Task Definition** A task definition describes one or more containers that form your application, it functions as a blueprint for your application. It specifies the various parameters for your application. For example, you can use it to specify parameters for the operating system, which containers to use, which ports to open for your application, and what data volumes to use with the containers in the task.
-- **Task** A task is the instantiation of a task definition within a cluster. After you create a task definition for your application within Amazon ECS, you can specify the number of tasks to run on your cluster.
-- **Services** Services are used to maintain a desired amount of tasks.
+- **Task** A task is the instantiation of a task definition within a cluster. After you create a task definition for your application within Amazon ECS, you can specify the number of tasks to run on your cluster. A single task can be used for tasks that start and finish, such as batch jobs.
+- **Services** Services are used to maintain a desired amount of tasks. A service is ideal for long running stateless services and applications. If any of your service tasks fail or stop, the service scheduler launches another instance of your task definition to replace it. This is good for long running applications like a WebApp.
 - **AWS Fargate** Services that manages the infrastructure for ECS (serverless).
 - **AWS ECR** Elastic Container Registry, kind of like GitHub, but then for container images. You can push/pull images to your repository. For CI/CD pipelines, you would want to integrate this with ECS (so new pushes automatically get deployed as well).
 
