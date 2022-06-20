@@ -67,11 +67,12 @@ You could use it as a (on-premise) cache before it is moved into the cloud (i.e.
 - **AWS ElastiCache** In-memory storage for ultra low latency (think of this as virtual RAM)
 - **AWS Kinesis** Data Streams: For streaming data. Data Analytics: Provides real-time SQL processing before storing it. Data Firehose: Loads data straight into destinations.
 - **AWS Data Pipeline** processes and moves data between different AWS resources.
-- **AWS Quicksight** BI service. Enables you to create dashboards.
+- **AWS Quicksight** Business Intelligence service. Enables you to create dashboards.
 - **AWS Neptune** Fully managed Graph database.
 - **AWS QLDB** Quantum Ledger Database aka AWS equavalent to blockchain. (immutable ledger db, cryptographically verifiable)
 - **AWS Managed Blockchain** Fully Managed Service for joining public and private networks using Hyperledger Fabric and Ethereum.
-
+- **Amazon OpenSearch Service** makes it easy for you to perform interactive log analytics, real-time application monitoring, website search, and more. OpenSearch is an open source, distributed search and analytics suite derived from Elasticsearch. Amazon OpenSearch Service offers the latest versions of OpenSearch, support for 19 versions of Elasticsearch (1.5 to 7.10 versions), and visualization capabilities powered by OpenSearch Dashboards and Kibana (1.5 to 7.10 versions).
+  
 ## Migration Services
 - **AWS Snowball** Easily migrate terabytes of data to the cloud without limits in storage capacity or compute power. It is a physical device. 50/80TB. Snowball Edge 100TB. "Petabyte Scale".
 - **AWS Snowcone** Similar to Snowball, but with 8TB of storage space.
