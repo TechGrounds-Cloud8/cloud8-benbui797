@@ -41,6 +41,21 @@ You can use a ALB in conjunction with Containers. If you run multiple webservers
 - https://aws.amazon.com/premiumsupport/knowledge-center/dynamic-port-mapping-ecs/
 - https://stackoverflow.com/questions/48163354/difference-between-container-port-host-port-and-service-port-in-dcos-json-in-por
 
+
+## EKS 
+Kubernetes is an opensource container management platform. It also supports a hybrid cloud environment and can easily be ported between cloud vendors (because it is not tied to 1 specific vendor).
+  
+- **Pods** are containers collocated with one another and can have shared access to each other
+- EKS can also run on EC2 or on Fargate
+- EKS can run across multiple AZ's
+
+## Network modes
+- **Host Mode** the ports on the containers are directly connected to that of the host (so you can only run 1 container on a port per host). So port 80 on the host gets forwarded to the container listening to port 80.
+- **Bridge Mode** Bridge Mode adds an internal ENI. You can map ports on the host to forward data to container specific ports. So you can run different host ports that all map to port 80 on the containers.
+- **AWSVPC Mode** With this mode, every container receives it's own ENI and it's own private IP address. 
+
+- https://docs.aws.amazon.com/AmazonECS/latest/bestpracticesguide/networking-networkmode.html
+
 # Practical Practise
 I've created a Dockerfile & created the image it using docker build. Then I made a repo on ECR and pushed the image to the repo.  
 ![SA-07 ECR](../../00_includes/SA-01/SA-07_ECR_1.png)  
