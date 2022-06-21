@@ -48,11 +48,11 @@ Write all the deployment options
 **Memcached**
 - Data is not persistent
 - Used for *simple* data types
-- Data is partitioned
+- Data is partitioned (each node is a partition of data)
 - No encryption
 - No high availability (no data replication)
 - Can launch nodes in multiple AZ's, but there is no failover or replication
-- Scaling: Up (node type); Out (add nodes)
+- Scaling: Up (node type - must create a new cluster manually); Out (add nodes)
 - Multithreaded
 - No backups and restoration possible (no snapshots)
   
@@ -75,8 +75,24 @@ Write all the deployment options
 - High availability
 - Auto-failover and read replica's (0-5 per shard)
 - Scaling: Up (node type); Out (add shard)
+  - Online resharding to add or remove shards; vertical scaling to change node type
+  - Offline resharding to add or remove shards, change node type or upgrade engine (more flexible than online)
 - No Multithreading
 - Automatic and manual snapshots
+  
+A **Shard** in Redis mode consists of a primary plus zero to five replica's. A shard can cover multiple AZs (across multiple AZ's).  
+  
+Cluster Mode enabled: Multiple Shards!
+Cluster Mode disabled: Single Shard!  
+
+## DynamoDB
+
+- You can configure Time To Live (TTL) - expiry date for an item in a table
+- No extra cost and does not consume WCU/WCU
+- Helps reduce storage and manage the table size over time
+
+
+  
 
 # Todo
 - Check out how Transactional Logs work

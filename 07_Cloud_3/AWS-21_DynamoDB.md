@@ -24,7 +24,7 @@ There are a couple of options for how you can use DynamoDB:
 - Continuous Backup (makes backups for the preceding 35 days)
 - On-Demand Backup (takes snapshot backups at specified points in time)
 - Global Tables (Replicates data to create multi-region table)
-- DynamoDB Accelerator (DAX) (Reduces latency by using in-memory cache)
+- DynamoDB Accelerator (DAX) (Reduces latency by using in-memory cache - Fully Managed - from millisecond to **microsecond** latency!)
 
 All those options add to the price in addition to the (provisioned) write capacity (WCU) and (provisioned) read capacity (RCU) and storage per GB of data. If you select provisioned mode, you have to select in advance the maximum amount of read/write requests you can do per second.  
 There is also in IA (infrequent access) class for tables.
@@ -36,9 +36,21 @@ The maximum size both operations can return is 1MB and you have to keep in mind 
   
 To integrate DynamoDB with your applications, you need to use the API. You pay for the API calls (WCU/RCU) and don't have an instance up and running (DynamoDB is serverless).
 
+### DynamoDB Streams
+Every time an item is written/update or deleted in a table, a record is written to the DynamoDB Stream. The stream can then trigger a lambda function (which could then process that data or write a log to CloudWatch Logs).  
+  
+- Captures a *time-ordered* sequence of *item-level* modifications in any DynamoDB table and stores this information in a log for up to 24 hours.
+- You can configure the information that is written to the stream:
+  - **KEYS_ONLY** Only the key attributes of the modified item
+  - **NEW_IMAGE** The entire item, as it appears after it was modified
+  - **OLD_IMAGE** The entire item, as it appeared before it was modified
+  - **NEW_AND_OLD_IMAGES** Both the new and old images of the item
   
 ## Key terminology
-Explained a lot of them above.
+- **Transaction options** Strongly consistent or eventually consistent reads, support for ACID transactions
+- **Backup** Point-in-time recovery down to the second in the last 35 days; on-demand backup and restore
+- **Time To Live (TTL)** - expiry date for an item in a table. No extra cost and does not consume WCU/WCU. Helps reduce storage and manage the table size over time.
+- **Global Tables** is a multi-region, multi-active (or multi-master) database. You can read/write to replica tables at the same time, which are then asynchronously synchronized.
 
 ## Exercise
 ### Sources
