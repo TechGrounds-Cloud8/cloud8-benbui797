@@ -41,7 +41,7 @@ There are 5 best practises for Reliability in the cloud:
 2. **Test recovery procedures:** Test how your workload fails so you can validate your recovery procedures. You can use automation to simulate different failures or recreate scenarios that led to failures before. This way you can find and fix weaknesses before a real scenario occurs.
 3. **Scale horizontally to increase aggregate workload availability:** Replace one large resource with multiple small resources to reduce the impact of a single failure on the overall workload. Distribute requests across multiple, smaller resources to ensure that they don’t share a common point of failure.
 4. **Stop guessing capacity:** Monitor demand and workload utilization, and automate the addition or removal of resources to maintain the optimal level to satisfy demand without over- or under-provisioning.
-5. **Manage change in automation:** Changes to your infrastructure should be made using automation. The changes that need to be managed include changes to the automation, which then can be tracked and reviewed.
+5. **Manage change in automation:** Changes to your infrastructure should be made using automation. The changes that need to be managed include changes to the automation, which then can be tracked and reviewed. Config to track configuration changes and logging (CloudWatch/CloudTrail) for auditing logs.
   
 ## Performance Efficiency Pillar
 The performance efficiency pillar focuses on structured and streamlined allocation of IT and computing resources. Key topics include selecting resource types and sizes optimized for workload requirements, monitoring performance, and maintaining efficiency as business needs evolve.  

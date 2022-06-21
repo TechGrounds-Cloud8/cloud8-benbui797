@@ -32,8 +32,12 @@ Support team for: Spam, Port Scanning, DDOS, Intrustion attempts or hosting of o
 ## Macie / Detective / GuardDuty / Inspector
 - **AWS Macie** Machine Learning/AI that analyses your S3 for sensitive data (personal information, credit card numbers etc)
 - **AWS Detective** Analyze, investigate and identify the root cause of potentional security issues or suspicious activities.
-- **GuardDuty** Intelligent treath detection service. It can detect account compromise, instance compromise, and malicious activity
-- **AWS Inspector** Amazon Inspector is a vulnerability management service that continuously scans your AWS workloads for vulnerabilities. Amazon Inspector automatically discovers and scans Amazon EC2 instances and container images residing in Amazon Elastic Container Registry (Amazon ECR) for software vulnerabilities and unintended network exposure.
+- **GuardDuty** Intelligent treath detection service. It can detect account compromise, instance compromise, and malicious activity. Among the services it monitors are:
+  - AWS CloudTrail Management Events
+  - AWS CloudTrail S3 Data Events
+  - AWS VPC Flow Logs
+  - DNS Logs
+- **AWS Inspector** Amazon Inspector is a vulnerability management service that continuously scans your AWS workloads for vulnerabilities. Amazon Inspector automatically discovers and scans Amazon EC2 instances and container images residing in Amazon Elastic Container Registry (Amazon ECR) for software vulnerabilities and unintended network exposure. Inspector uses an agent installed on EC2 instances.
 
 ## AWS Batch
 Useful for when you need to run a large, resource intensive workload. You can upload your code, make a job definition and AWS will take care of the rest (it is a managed service).
@@ -65,7 +69,31 @@ You could use it as a (on-premise) cache before it is moved into the cloud (i.e.
 - **AWS Athena** Athena enables querying a Data Lake (S3) using SQL queries. Stores information and schema's about the databases & tables in AWS Glue.
 - **AWS Glue** Metadata Catalog that you can use with Athena, S3 and Apache (Hive). It's a fully managed ETL service.
 - **AWS ElastiCache** In-memory storage for ultra low latency (think of this as virtual RAM)
-- **AWS Kinesis** Data Streams: For streaming data. Data Analytics: Provides real-time SQL processing before storing it. Data Firehose: Loads data straight into destinations.
+- **AWS Kinesis**
+  - **Data Streams:** Data is ingested into Data Streams (for example from IoT Devices)
+    - *Producers* send data to Kinesis, data is stored in Shards for 24 hours (by default, up to 7 days). Each Shard can support up to 1000 PUT records per second.
+    - *Consumers* take the data and process it - data can then be saved in another AWS service
+    - Real time: ~200ms
+    - *Kineses Client Library (KCL)* helps you consume and process data from a Kinesis Data Stream. KCL enumerates Shards and instantiates a record processor for each shard it manages. a *KCL worker* is a group of multiple record processors (i.e. EC2 instances)
+    - Each Shard is processed by exactly one KCL worker and has one corresponding record processor
+    - One worker can process any number of shards, so it's fine if the number of shards exceeds the number of instances
+    - **Order** is maintained for records *within a Shard (not across Shards)*. This is done by specifying a partition key with the *PutRecord* API call to group data by shard.
+  - **Data Analytics:** Provides real-time SQL processing before storing it. It uses Apache Flink. 
+    - Provides analytics for data coming in from Kinesis Data Streams and Kinesis Data Firehose
+    - Destinations can be Kinesis Data Streams, Kinesis Data Firehose or AWS Lambda.
+  - **Data Firehose:** Loads data straight into destinations. 
+    - Data is optionally processed/transformed by Lambda.
+    - Near real-time delivery (~ 60 seconds latency)
+    - Data Firehose Destinations:
+      - RedShift (via intermediate S3 Bucket)
+      - ElasticSearch
+      - S3
+      - Splunk
+      - Datadog
+      - MongoDB
+      - New Relic
+      - HTTP Endpoint
+  - *Analytics and Firehose both receive data from Streams!*
 - **AWS Data Pipeline** processes and moves data between different AWS resources.
 - **AWS Quicksight** Business Intelligence service. Enables you to create dashboards.
 - **AWS Neptune** Fully managed Graph database.
@@ -90,6 +118,8 @@ You could use it as a (on-premise) cache before it is moved into the cloud (i.e.
 - **AWS Comprehend** NLP service, extract information from unstructured data.
 - **AWS Lex** AI for Chatbots
 - **AWS Polly** Text to Speech AI
+- **AWS Textract** Extract printed text, handwriting and data from any document.
+
 
 ## Additional Services
 - **AWS Workspaces** Managed Desktop-as-a-service (DaaS) solution. Provide remote desktops for your employees.
@@ -100,7 +130,18 @@ You could use it as a (on-premise) cache before it is moved into the cloud (i.e.
 - **AWS Device Farm** Test your mobile or webapps by getting access to thousands of different mobile phones, desktops browers and tablets. Developers can easily test their applications across different platforms (automated). You can also get remote access and manually test things.
 
 
-## Cost Management / Budgets 
+## Cost Management Tools 
+- **AWS Cost Explorer** Dashboard for insights and visualisations on your spendings and usage.
+- **AWS Budgets** Plan and forecast. Set alarms with a treshold. Can automatically terminate SOME resources, but not ALL!
+- **AWS Cost & Usage report** The AWS Cost & Usage Report contains the most comprehensive set of AWS cost and usage data available, including additional metadata about AWS services, pricing, credit, fees, taxes, discounts, cost categories, Reserved Instances, and Savings Plans.
+- **AWS Billing Conductor** Tool for calculating & charging the right price to your customers if you are managing their infrastructure.
+- **AWS Cost Anomaly Detection** Automated cost anomaly detection and root cause analysis. Machine Learning tool that also can make alarms.
+- **AWS Cost Categories** Categorize your bill according to many different dimensions; account, tag, service, charge type, and even other cost categories. These categories work with Cost Explorer, Budgets, Cost & Usage report. Allows you to set up a multi-level hierarchical releationship between cost categories.
+- **AWS Application Cost Profiler** Get a granular insight into AWS resource usages by Software applications.
+- **AWS Purchase Order Management** AWS Purchase Order Management is a service that allows you to easily manage your AWS purchase orders (POs) in a self-service manner. Centralize the management of multiple POs, reduce overhead costs in matching invoices with POs, and increase the accuracy and efficiency in your procure-to-pay process.
+- **AWS Billing Console** The AWS Billing console allows you to easily understand your AWS spending, view and pay invoices, manage billing preferences and tax settings, and access additional Cloud Financial Management services. Quickly evaluate whether your monthly spend is in line with prior periods, forecast, or budget, and investigate and take corrective actions in a timely manner.
+- **Reserved Instance Reporting** Manage and monitor your instance reservations, compare your savings vs on-demand instances.
+- **AWS Customer Carbon Footprint Tool** Track, measure, review, and forecast the carbon emissions generated from your AWS usage
 
 ## Dedicated Host vs Dedicated Instances (LICENSE)
 Physically seperated instance/server. You can use your own software licenses on Dedicated Hosts.  
@@ -121,6 +162,7 @@ Physically seperated instance/server. You can use your own software licenses on 
 - **AWS Cognito** Amazon Cognito lets you add user sign-up, sign-in, and access control to your web and mobile apps quickly and easily. Amazon Cognito scales to millions of users and supports sign-in with social identity providers, such as Apple, Facebook, Google, and Amazon, and enterprise identity providers via SAML 2.0 and OpenID Connect.  
 - **AWS Directory Services** Integrate or manage MicroSoft Active Directory with AWS Cloud. AD Connector can be used as a SSO (single sign on). There is also Simple AD, powered by Samba 4 that is compatible with MS AD, but offers less features.
 - **AWS STS** AWS STS is an AWS service that allows you to request temporary security credentials for your AWS resources, for IAM authenticated users and users that are authenticated in AWS such as federated users via OpenID or SAML2.0. It works similar to Access Keys, except their lifespan is much shorter (15 minutes to 36 hours typically).
+- **AWS SES** Simple Email Service - enables developers to send emails from within any application.
 
 # Synonyms and other terms
 - **Elasticity** ability to scale up AND also down based on demand!
@@ -138,3 +180,10 @@ Physically seperated instance/server. You can use your own software licenses on 
 
 - RDS Backups (which type of backup, 5 min granularity) 
 - Check different types of Snapshot backups
+
+
+- Authenticate AWS API
+- Business Analytics vs Operational Analytics
+- Recheck security stuff Guardduty/WAF etc
+- Support Plans
+- AWS NTP??

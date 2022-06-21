@@ -38,6 +38,12 @@ RDS runs on EC2 instances, you specify the instance when you launch RDS. By sele
   
 Write all the deployment options
 
+### Aurora Storage Engine
+Aurora has its own storage system. Aurora Instances are all connected to a **Cluster volume**, which is seen as a single data volume, but consists of many parts. The storage that can automatically scale in size. It scales in 10 GB increments (logical blocks), also known as *Protection Group*. Within the protection groups, the data is replicated across 6 storage nodes and across 3 AZ's.  
+Aurora Storage can scale up to 64TiB (and for some DB engines, 128TiB)
+
+- https://aws.amazon.com/blogs/database/introducing-the-aurora-storage-engine/
+
 ## ElastiCache
 - Fully managed implementations of *Redis* and *Memcached*
 - its a key/value store
@@ -84,15 +90,86 @@ A **Shard** in Redis mode consists of a primary plus zero to five replica's. A s
   
 Cluster Mode enabled: Multiple Shards!
 Cluster Mode disabled: Single Shard!  
-
-## DynamoDB
-
-- You can configure Time To Live (TTL) - expiry date for an item in a table
-- No extra cost and does not consume WCU/WCU
-- Helps reduce storage and manage the table size over time
-
-
   
+## AWS RedShift
+- Fast, fully managed Data Warehouse
+- Analyse data using SQL or Business Intelligence Tools
+- RedShift is a SQL based data warehouse used for analytics applications
+- RedShift is used for OLAP (Online Analytics Processing)
+- RedShift uses EC2 instances, so you must choose an instance type
+- RedShift always keeps 3 copies of your data
+- RedShift provides continuous/incremental backups
+- RedShift Data Sources:
+  - EC2
+  - AWS Glue
+  - AWS Data Pipeline
+  - AWS S3
+  - AWS EMR
+  - AWS DynamoDB
+  - AWS RDS
+  - On-Premises Server
+
+- **RedShift Spectrum** can run SQL queries on data directly in S3 (Athena can too, but with RedShift you have control over the resources, which can allow for more consistent performance)
+  
+Use Cases:
+- Perform complex queries on huge collections of structured and semi-structured data and get fast performance
+- Frequently accessed data that needs a consistent highly structured format
+- Use *Spectrum* for direct access of S3 Objects in a data lake
+- Managed data warehouse solution with:
+  - Automated provisioning, configuration and patching
+  - Data durability with continuous backup to S3
+  - Scales with simple API calls
+  - Exabyte scale query capability
+
+## Amazon OpenSearch Service
+**Summary:**
+- Distributed search and analytics suite
+- Based on the popular open source Elasticsearch
+- Supports queries using SQL syntax
+- Integrates with open-source tools
+- Scale by adding or removing instances
+- Availability in up to three AZ's
+- Backup using snapshots
+- Encryption at rest & in transit
+  
+**Deployment:**
+- Clusters are created (through console, API or CLI)
+- Clusters are also known as OpenSearch Service domains
+- You specify the number of instances and instance types
+- Storage options include UltraWarm (S3 + sophisticated caching) or Cold storage (S3). standard is called "Hot" and uses Instance Stores (EBS)
+  
+**Ingesting Data into OpenSearch Service domain:**
+- AWS Kinesis Data Firehose
+- Logstash
+- Elasticsearch / OpenSearch API
+  
+Then attach a Kibana Dashboard to search, visualize and analyze data.
+
+**Limitations:**  
+- You can launch a cluster in an VPC, but you can not use IP-based access policies
+- VPN or Proxy required to connect from the internet (public domains are directly accessable)
+- You can't switch from VPC to a public endpoint. The reverse is also true
+- You can't launch your domain within a VPC that uses dedicated tenancy.
+- After you place a domain within a VPC, you can't move it to a different VPC, but you can change the subnets and security group settings.
+  
+**The ELK Stack**
+- ELK = Elasticsearch, Logstash and Kibana
+- Popular combination of projects
+- Aggregate logs from systems and applications, analyze these logs and create visualizations
+- Use cases:
+  - Visualizing application and infrastructure monitoring data
+  - Troubleshooting
+  - Security Analytics
+
+## AWS Athena / AWS Glue
+- Athena optimisation: https://aws.amazon.com/blogs/big-data/top-10-performance-tuning-tips-for-amazon-athena/
+
+# OLTP vs OLAP
+OLTP: RDS / Aurora  
+OLAP: RedShift  
 
 # Todo
 - Check out how Transactional Logs work
+- Check out the Hands-On Lessons
+- Check out Exam Cram
+
