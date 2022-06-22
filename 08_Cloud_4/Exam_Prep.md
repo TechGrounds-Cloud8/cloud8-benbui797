@@ -160,7 +160,6 @@ Physically seperated instance/server. You can use your own software licenses on 
 - **Amazon QuickSight** Amazon QuickSight is a fast, cloud-powered business intelligence service that makes it easy to deliver insights to everyone in your organization.
 - **AWS Global Accelerator** Routes traffic to application endpoints through the AWS Global Network. It does not cache data (vs CloudFront)
 - **AWS Cognito** Amazon Cognito lets you add user sign-up, sign-in, and access control to your web and mobile apps quickly and easily. Amazon Cognito scales to millions of users and supports sign-in with social identity providers, such as Apple, Facebook, Google, and Amazon, and enterprise identity providers via SAML 2.0 and OpenID Connect.  
-- **AWS Directory Services** Integrate or manage MicroSoft Active Directory with AWS Cloud. AD Connector can be used as a SSO (single sign on). There is also Simple AD, powered by Samba 4 that is compatible with MS AD, but offers less features.
 - **AWS STS** AWS STS is an AWS service that allows you to request temporary security credentials for your AWS resources, for IAM authenticated users and users that are authenticated in AWS such as federated users via OpenID or SAML2.0. It works similar to Access Keys, except their lifespan is much shorter (15 minutes to 36 hours typically).
 - **AWS SES** Simple Email Service - enables developers to send emails from within any application.
 
