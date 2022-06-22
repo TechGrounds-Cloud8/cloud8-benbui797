@@ -7,7 +7,49 @@ It is integrated to a lot of services within AWS, for examply, during the assign
   
 You can also set up an alarm that will notify you via SNS (Simple Notification Service).
 
+## Features
+- **CloudWatch Metrics** - services send time-ordered data points to CloudWatch
+  - Metrics are send to CloudWatchs for many AWS services
+  - EC2 Metrics are send every 5 minutes by default (free)
+  - EC2 Detailed monitoring sends every 1 minute (chargeable)
+  - Unified CloudWatch Agent send sytem-level metrics for EC2 and on-premises servers
+  - System-level metrics include memory and disk usage (You need the Unified CloudWatch Agent to receive this data!)
+  - Metrics that get sent by default: CPUUtilization, DiskReadOps, NetworkIn, StatusCheckFailed
+  - Public custom metric via CLI or API: standard resolution (1 minute granularity) (AWS metrics are standard by default); high resolution (1 second granularity)
 
+- **CloudWatch Alarms** - monitor metrics and initiate actions
+  - **Metric Alarm** performs one or more actions based on a single metric
+  - **Composite Alarm** uses a rule expression and takes into account multiple alarms
+  - Metric Alarm States: 
+     - OK (metric within treshold)
+     - ALARM (metric outside treshold)
+     - INSUFFICIENT_DATA (not enough data)
+- **CloudWatch Logs** - centralized collection of system and application logs
+  - Gather application and system logs in CloudWatch
+  - Defined expiration policies and KMS encryption
+  - Send to: 
+    - S3 (export)
+    - Kinesis Data Streams
+    - Kinesis Data Firehose
+  - Unified CloudWatch Agent can send Application Logs and System Logs 
+  - Lambda Functions require permissions to CloudWatch Logs (role)
+- **CloudWatch Events** - stream of system events describing changes to AWS resources and can trigger actions (similar to EventBridge)
+
+## Unified CloudWatch Agent
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/metrics-collected-by-CloudWatch-agent.html  
+  
+- Collect internal system-level metrics from EC2 instances across operating systems
+- Collect system-level metrics from on-premises servers
+- Retrieve custom metrics from your applications or services using the StatsD or collectd protocols
+- Collect logs from EC2 instances and on-premises servers (Windows/Linux)
+- Agent must be installed on the server:
+  - Amazon EC2 instances
+  - on-premises servers
+  - Linux, Windows Server or MacOS
+  
+Logging via the CloudWatch agent is almost realtime, so it's very useful to store logs from instances that get terminated by an ASG, as you won't lose that data.  
+  
+**You can add a "subscriber filter" to a Log Group to connect another service such as Lambda to process the logs.**
 
 ## Key terminology
 - **AWS-X-Ray** Another logging service, but this time specifically about the requests your applications receive and also the requests they send out to other resources. It can be useful to identify bottlenecks that cause performance issues.  

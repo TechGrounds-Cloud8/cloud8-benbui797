@@ -58,6 +58,9 @@ An IAM Policy is a JSON document that consists of one or more statements.
 - **Attribute-based access control (ABAC)** is an authorization strategy that defines permissions based on attributes (tags). For example, for a new project, you just create a tag with the right permissions and assign it to the team, no mather what role they currently have. If the project requires a new resource, you just add it to that tag, instead of having to ammend all team members their permissions.
 - **Role-based access control (RBAC)** an authorisation strategy based on roles. 
 - **Inline Policies** Policies attached directly to a user *strongly discouraged! use customer managed policies instead*
+- **Key pairs** used for encrypting logon information when accessing EC2 instances!
+- **Access keys** used to sign programmatic requests to AWS CLI or AWS API. Long term credentials for IAM user or AWS account root.
+- **Server certificates** SSL/TLS certificates that you can use to authenticate to some resources.
 
 ## Exercise
 ### Sources
