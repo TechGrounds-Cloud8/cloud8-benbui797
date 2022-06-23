@@ -108,4 +108,3 @@ RAM can be used to share:
 - Amazon VPC
   
 https://docs.aws.amazon.com/ram/latest/userguide/shareable.html
-
