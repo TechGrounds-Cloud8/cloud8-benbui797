@@ -37,6 +37,7 @@ EC2 instances have a network adapter attach to them by default, but you can atta
 - **Key pair** you create an Access Key for an IAM user, but in order to log into an EC2 instance, the AWS term is *key pair*!
 - **Bastion Host** An instance in your public subnet that you can connect to in order to connect to other instances in the private subnet. It's like a NAT GW but allows you to open SSH connections whilst keeping the private instances completely seperated. 
 - **NAT Instance** Almost the same as a Bastion Host, but the NAT Instance only allows outgoing traffic to the internet, whilst blocking incoming. This can be useful to allow private instances to collect updates and patches from the internet.
+- **Golden Images** an image that you have customized to your liking with all necessary software/data/configuration information ready to go and then saved as a personal AMI from which you can launch instances.
 
 ## Exercise
 ### Sources

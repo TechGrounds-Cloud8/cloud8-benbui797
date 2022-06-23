@@ -3,5 +3,5 @@
 *.doc
 *.docx
 *.gdoc
-links.txt
-09_Python/
+venv/
+__pycache__/

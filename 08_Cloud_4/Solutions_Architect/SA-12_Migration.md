@@ -35,12 +35,69 @@ To prepare the source for the migration, you can use the **Schema Conversion Too
 - **Database Consolidation** - You can use AWS DMS to consolidate multiple source databases into a single target database. The sources can come from different locations (on-premises, EC2, RDS).
 - **Continuous Data Replication** - AWS DMS can be used to perform continuous data replication. This is useful for: Disaster Recovery instance synchronization, Geopgraphic database distribution (multi-region) and Dev/Test environment synchronization. It works for both homo- and heterogeneous data replication and from one-to-many or many-to-one target/source replications.
 
-
-## AWS Server Migration Service
-Helps migrate servers to EC2 instances
+## AWS Application Migration Service (AWS MGN)
+AWS Application Migration Service minimizes time-intensive, error-prone manual processes by automatically converting your source servers from physical, virtual, and cloud infrastructure to run natively on AWS. It further simplifies your migration by allowing you to use the same automated process for a wide range of applications.  Afterwards you can perform non-disruptive tests. It can perform cutover in a very short time, typically measured in minutes! It allows for very easy *lift-and-shift* migrations.
+ 
+AWS Application Migration Service supports migrations from:
+- physical servers
+- VMware vSphere
+- Microsoft Hyper-V
+- other cloud providers.
+- Migrate Amazon EC2 instances between AWS Regions or between AWS accounts, and to migrate from EC2-Classic to a VPC.
+  
+You install AWS Replication Agent on each source server you want to add to AWS MGN.  
+  
+There is also Server Migration Servers but it's not recommended and will be obsolete in 2023.
+With SMS you have to download and install a Server Migration Connector (SMS Connector).
 
 ## AWS DataSync
-Helps migrate storage systems to S3 of EFS.
+Helps migrate storage systems (NFS or SMB) to S3 of EFS.  
+
+- **NFS** Network File System Protocol. It offers better performance than SMB.
+- **SMB** Server Message Block. 
+  
+The **DataSync Software Agent** connects to the local storage system and transfers the data to S3, FSx or EFS.  
+  
+Data is encrypted in transit with TLS. Encryption at rest can be enabled by configuring it in the selected target storage system.  
+  
+Migration of data is scheduled & automated.  
+  
+You can also use a SnowCone device (which already has the DataSync Agent installed).  
+  
+You can use DataSync to transfer data between different AWS storage services.
 
 ## AWS Migration Hub
 Unified console for all of the above. You can also monitor the used AWS or partner tools.
+
+## AWS Snowball Family
+Secure storage device for physical transportation. You install the *Snowball Client* on a local computer. This identifies, compresses, encrypts and transfers the data. It uses 256-bit encryption (AWS KMS) and tamper-resistant enclosures with TPM (Trusted Platform Module).
+  
+**Snowball Family:**  
+- **AWS Snowball** Easily migrate terabytes of data to the cloud without limits in storage capacity or compute power. It is a physical device. 50/80TB. Snowball Edge 100TB. "Petabyte Scale".
+- **AWS Snowcone** Similar to Snowball, but with 8TB of storage space.
+- **AWS Snowmobile** Similar to Snowball, but an actual shipping container with 100PB (petabyte) storage space. Or you can move entire data centers. "Exabyte Scale".
+
+**Snowball Edge optimizations:**
+- **Snowball Edge Compute Optimized**
+  - Provides block and object storage and optional GPU 
+  - Use for data collection, machine learning and processing, storage in environments with intermittent connectivity (edge use cases)
+  - Processes data on an EC2
+- **Snowball Edge Storage Optimized**
+  - Provides block and S3 compatible object storage
+  - Use for local storage and large-scale data transfer
+  
+Optimizing performance for Snowball transfers:
+- Use the latest Mac or Linux Snowball client
+- Batch small files together
+- Perform multiple copy operations at one time (multiple instances of Snowball Client for small files)
+- Copy from multiple workstations
+- Transfer directories, not files
+  
+Snowball Use Cases:
+- **Cloud Data Migration** - migrate data into the cloud (large size, slow internet, remote locations)
+- **Content Distribution** - you could use snowball to send data to clients or customers
+- **Tactical Edge Computing** - Collect data and compute in some remote environment
+- **Machine Learning** - Run Machine Learning workloads on the device (also Edge computing)
+- **Manufacturing** - data collection and analysis in the factory
+- **Remote locations with simple data** - pre-processing, tagging, compression etc
+
