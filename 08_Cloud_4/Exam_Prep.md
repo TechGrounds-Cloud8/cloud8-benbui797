@@ -42,17 +42,6 @@ Support team for: Spam, Port Scanning, DDOS, Intrustion attempts or hosting of o
 ## AWS Batch
 Useful for when you need to run a large, resource intensive workload. You can upload your code, make a job definition and AWS will take care of the rest (it is a managed service).
   
-## System Manager
-Manages many AWS resources including EC2, S3 and RDS.
-You can create documents (rules) and pass them to various components that will then perform some task.
-Components are:
-- **Automation** (i.e. make a snapshot of an RDS instance)
-- **Run Command** (i.e. check EC2 instance for missing updates)
-- **Inventory** (all kinds of data about the services, such as OS, installed applications, server roles)
-- **Patch Manager** (deploy OS and software patches automatically across large groups of EC2 or on-premise instances)
-- **Session Manager** (Secure remote management of your instances at scale without logging into your server (no SSH or PowerShell, so you don't need to open those ports))
-- **Parameter Store** (provides secure, hierarchical storage for configuration data management and secrets management)
-
 ## AWS Storage Gateway
 AWS Storage Gateway is a set of hybrid cloud storage services that provide on-premises access to virtually unlimited cloud storage. The data is encrypted in transit and can move via the internet of AWS Direct Connect.  
 You could use it as a (on-premise) cache before it is moved into the cloud (i.e. S3).
@@ -101,15 +90,6 @@ You could use it as a (on-premise) cache before it is moved into the cloud (i.e.
 - **AWS Managed Blockchain** Fully Managed Service for joining public and private networks using Hyperledger Fabric and Ethereum.
 - **Amazon OpenSearch Service** makes it easy for you to perform interactive log analytics, real-time application monitoring, website search, and more. OpenSearch is an open source, distributed search and analytics suite derived from Elasticsearch. Amazon OpenSearch Service offers the latest versions of OpenSearch, support for 19 versions of Elasticsearch (1.5 to 7.10 versions), and visualization capabilities powered by OpenSearch Dashboards and Kibana (1.5 to 7.10 versions).
   
-## Migration Services
-- **AWS Snowball** Easily migrate terabytes of data to the cloud without limits in storage capacity or compute power. It is a physical device. 50/80TB. Snowball Edge 100TB. "Petabyte Scale".
-- **AWS Snowcone** Similar to Snowball, but with 8TB of storage space.
-- **AWS Snowmobile** Similar to Snowball, but an actual shipping container with 100PB (petabyte) storage space. Or you can move entire data centers. "Exabyte Scale".
-- **AWS SMS (Server Migration Service)** Migrate servers and virtual machines to AWS EC2.
-- **AWS DMS (Database Migration Service)** Migrate Databases to AWS. Can also be used to migrate from EC2 instance to RDS for example.
-- **AWS AMS (Application Migration Service)** Migrate applications to AWS.
-- **AWS DataSync** Simplify and accelerate secure data migrations, on-premises to cloud, vice-versa or AWS service to AWS service. Can be used with S3 and EFS.
-
 ## Machine Learning Services
 - **AWS Rekognition** Image and video analysis
 - **AWS Transcribe** Speech to text
@@ -162,6 +142,7 @@ Physically seperated instance/server. You can use your own software licenses on 
 - **AWS Cognito** Amazon Cognito lets you add user sign-up, sign-in, and access control to your web and mobile apps quickly and easily. Amazon Cognito scales to millions of users and supports sign-in with social identity providers, such as Apple, Facebook, Google, and Amazon, and enterprise identity providers via SAML 2.0 and OpenID Connect.  
 - **AWS STS** AWS STS is an AWS service that allows you to request temporary security credentials for your AWS resources, for IAM authenticated users and users that are authenticated in AWS such as federated users via OpenID or SAML2.0. It works similar to Access Keys, except their lifespan is much shorter (15 minutes to 36 hours typically).
 - **AWS SES** Simple Email Service - enables developers to send emails from within any application.
+- **AWS NTP** Time Sync Service that works over the Network Time Protocol (NTP).
 
 # Synonyms and other terms
 - **Elasticity** ability to scale up AND also down based on demand!
@@ -175,14 +156,7 @@ Physically seperated instance/server. You can use your own software licenses on 
 
 ## To-Do
 - Makes some tests with Lifecycle Manager to check out the options.
+
 - https://aws.amazon.com/api-gateway/resources/ check out API GW in console (and check out tutorials to build something)
 
-- RDS Backups (which type of backup, 5 min granularity) 
-- Check different types of Snapshot backups
-
-
-- Authenticate AWS API
-- Business Analytics vs Operational Analytics
-- Recheck security stuff Guardduty/WAF etc
 - Support Plans
-- AWS NTP??

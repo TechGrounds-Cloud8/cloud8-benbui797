@@ -9,8 +9,9 @@ from random import randint
 X = "X"
 O = "O"
 EMPTY = None
+DEPTH_LIMIT = 50
 
-scale = 4
+scale = 3
 
 def initial_state():
     """
@@ -25,10 +26,6 @@ def initial_state():
         board.append(row)
     
     return board
-
-    # return [[EMPTY, EMPTY, EMPTY],
-    #         [EMPTY, EMPTY, EMPTY],
-    #         [EMPTY, EMPTY, EMPTY]]
 
 
 def player(board):
@@ -168,7 +165,6 @@ def minimax(board):
             return (2, 2)
         elif random == 5:
             return (1, 1)
-        print(random)
   
     move = None
 
@@ -178,12 +174,10 @@ def minimax(board):
 
         # loop through actions and store highest possible v value
         for action in actions(board):
-            action_v = min_value(result(board, action))
-            # print(f"{action_v=} {action=}") 
+            action_v = min_value(result(board, action), -1, 0)
             if action_v > v:
                 v = action_v
                 move = action
-                # print(f"{v=} {move=}")
             
     # else player = O -> optimum = -1 -> max_v as small as possible
     else:
@@ -191,18 +185,16 @@ def minimax(board):
 
         # loop through actions and store minimum possible v value
         for action in actions(board):            
-            action_v = max_value(result(board, action))  
-            # print(f"{action_v=} {action=}")      
+            action_v = max_value(result(board, action), 1, 0)     
             if action_v < v:
                 v = action_v
                 move = action
-                # print(f"{v=} {move=}")
     
     # return best move                
     return move
 
  
-def max_value(board):
+def max_value(board, prune, depth):
     """
     Returns max v value for an action
     """
@@ -213,16 +205,28 @@ def max_value(board):
     
     # initialise v to negative infinity so any move will have higher v value.
     # then check v value against min value (recursive) and store highest value in v.
-    v = -math.inf
+    # v = -math.inf
+    v = prune
+
 
     for action in actions(board):
         # print(f"max_{action=}")
-        v = max(v, min_value(result(board, action)))
+
+        # Check depth vs depth limit
+        depth += 1
+        if depth == DEPTH_LIMIT:
+            return v
+
+        v = max(v, min_value(result(board, action), prune, depth))
+
+        # # Alpha-beta pruning
+        # if v < prune:
+        #     return v
 
     return v
     
 
-def min_value(board):
+def min_value(board, prune, depth):
     """
     Returns min v value for an action
     """
@@ -233,11 +237,21 @@ def min_value(board):
     
     # initialise v to infinity so any move will have lower v value.
     # check v against max_value (recursively) and store lowest v value.
-    v = math.inf
-
+    # v = math.inf
+    v = prune
+    
     for action in actions(board):
-        # print(f"min_{action=}")
-        v = min(v, max_value(result(board, action)))
+        
+        # Check depth vs depth limit
+        depth += 1
+        if depth == DEPTH_LIMIT:
+            return v
+
+        v = min(v, max_value(result(board, action), prune, depth))
+
+        # # Alpha-beta pruning
+        # if v > prune:
+        #     return v
 
     return v
 
@@ -248,9 +262,9 @@ def check_horizontal(board):
     """
 
     for i in range(scale):
-        if board[i].count(X) == 3:
+        if board[i].count(X) == scale:
             return X
-        elif board[i].count(O) == 3:
+        elif board[i].count(O) == scale:
             return O
 
     return None        
