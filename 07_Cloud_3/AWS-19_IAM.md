@@ -60,7 +60,7 @@ An IAM Policy is a JSON document that consists of one or more statements.
 - **Inline Policies** Policies attached directly to a user *strongly discouraged! use customer managed policies instead*
 - **Key pairs** used for encrypting logon information when accessing EC2 instances!
 - **Access keys** used to sign programmatic requests to AWS CLI or AWS API. Long term credentials for IAM user or AWS account root.
-- **Server certificates** SSL/TLS certificates that you can use to authenticate to some resources.
+- **Server certificates** SSL/TLS certificates that you can use to authenticate to some resources (via HTTPS, not API!!).
 
 ## Exercise
 ### Sources

@@ -46,7 +46,7 @@ Useful for when you need to run a large, resource intensive workload. You can up
 AWS Storage Gateway is a set of hybrid cloud storage services that provide on-premises access to virtually unlimited cloud storage. The data is encrypted in transit and can move via the internet of AWS Direct Connect.  
 You could use it as a (on-premise) cache before it is moved into the cloud (i.e. S3).
   
-- **File Gateway** represents files as objects in S3 using NFS or SMB protocols
+- **File Gateway** represents files as objects in S3 using NFS or SMB protocols (file storage like EFS)
 - **Volume Gateway** represents your applications block-storage volumes (EBS) using the iSCSI protocol (*Block storage!*). It can be used to make snapshots of on-premise volumes and store a backup in the cloud. There are two methods of using a Volume Gateway:
   - **Cached Volume Mode** A Cache of the most recently/frequently used data is stored on-premise, the rest of the entire dataset is stored on S3.
   - **Stored Volume Mode** Entire data set is stored on-premise, but data is backed up in the cloud (as point-in-time snapshots).

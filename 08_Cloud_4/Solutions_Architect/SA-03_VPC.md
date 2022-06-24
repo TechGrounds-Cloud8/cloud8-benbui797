@@ -3,6 +3,11 @@
 ## VPC Endpoints
 Endpoints are used to connect to public AWS services with private IP addresses.
 
+**Types of VPC Endpoints:**
+- **Interface** An Interface Endpoint sends traffic to the endpoint services that uses a Network Load Balancer to distribute traffic. Traffic destined for the endpoint service is resolved using DNS.
+- **GatewayLoadBalancer** A GatewayLoadBalancer sends traffic to a fleet of virtual appliances using private IP addresses. You route traffic from your VPC to your GWLB endpoint using route tables. The GWLB distributes traffic to the virtual appliances and can scale with demand.
+- **Gateway** A Gateway Endpoint sends traffic to AWS S3 or DynomoDB using private IP addresses. You route the traffic from your VPC to the Gateway Endpoint using route tables. Gateway Endpoints do not enable AWS PrivateLink.
+
 ## VPN
 ### Client VPN
 Add a VPN Endpoint to your VPC. You can connect your subnets to this endpoint.  
