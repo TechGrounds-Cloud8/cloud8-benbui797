@@ -11,7 +11,7 @@ O = "O"
 EMPTY = None
 DEPTH_LIMIT = 50
 
-scale = 3
+scale = 5
 
 def initial_state():
     """
@@ -258,7 +258,7 @@ def min_value(board, prune, depth):
 
 def check_horizontal(board):
     """
-    Check horizontal axis for 3 in a row.
+    Check horizontal axis for scale in a row.
     """
 
     for i in range(scale):
@@ -272,25 +272,41 @@ def check_horizontal(board):
 
 def check_vertical(board):
     """
-    Check vertical axis for 3 in a row.
+    Check vertical axis for scale in a row.
     """
 
     for i in range(scale):
-        if board[0][i] is not EMPTY:
-            if board[0][i] == board[1][i] == board[2][i]:
-                return board[0][i]
+        buffer = []
+
+        for j in range(scale):
+            if board[j][i] is not EMPTY:
+                buffer.append(board[j][i])
+        
+        if buffer.count(X) == scale:
+            return X
+        if buffer.count(O) == scale:
+            return O        
 
     return None
 
 
 def check_diagonal(board):
     """
-    Check diagonal axis for 3 in a row.
+    Check diagonal axis for scale in a row.
     """
-    if board[0][0] == board[1][1] == board[2][2]:
-        return board[1][1]
-    elif board[0][2] == board[1][1] == board[2][0]:
-        return board[1][1]
-    else:
-        return None
+
+    buffer1 = []
+    buffer2 = []
+
+    for i in range(scale):
+        buffer1.append(board[i][scale - 1 - i])
+        
+        for j in range(scale):
+            buffer2.append(board[i][j])
     
+    if buffer1.count(X) == scale or buffer2.count(X) == scale:
+        return X
+    if buffer1.count(O) == scale or buffer2.count(O) == scale:
+        return O
+
+    return None

@@ -17,6 +17,8 @@ mijn top tip is tab! niet tobben met typen, maar tabben!
 - CTRL+C (exit/quit)
 - `<command> --help` get help for command
 - `man <command>` manual for command, but can be in nicer format than help
+- `..` parent directory (i.e. `cd ..`)
+- `.` current directory (i.e. `rm ./somedir/somefile`) 
 
 ### Moving cursor
 - CTRL+A (move to beginning of line (Home))
