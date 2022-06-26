@@ -10,3 +10,11 @@ I've [Implemented depth-limited Alpha-Beta Pruning](https://en.wikipedia.org/wik
 The AI works well, but with slightly bigger board sizes (lets take 5x5 from now on), the depth becomes a problem. For example, whilst deciding a move in the early game, the AI already has 127 million moves to consider. In the early game, the strategy and depth is not as important as in the later stages of the game (where it is useful to 'predict' the opponents moves).
   
 To optimize this problem, I have implemented a depth limit function that scales based on the size of the available moves pool. The minimum depth is 2. For larger boards, the AI doesn't really have a strategy until the endgame, but it will block you from making the winning move. To try and give the AI a bit more strategy, I tried to change the scaling in steps, so the depth is increased once there are fewer steps left.
+
+## How To Play
+1. download files
+2. `python -m venv venv`
+3. `. venv/Scripts/activate`
+4. `pip install -r requirements.txt`
+5. `python runner.py`
+6. (optionally) Change scale in the tictactoe.py file 
