@@ -5,7 +5,7 @@ import time
 import tictactoe as ttt
 
 pygame.init()
-size = width, height = 1200, 800
+size = width, height = 1000, 700
 
 scale = 3
 

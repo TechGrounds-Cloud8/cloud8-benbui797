@@ -1,0 +1,2 @@
+- Add alpha beta pruning (depth limited)
+- https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning#:~:text=Alpha%E2%80%93beta%20pruning%20is%20a,Connect%204%2C%20etc.)
