@@ -10,8 +10,9 @@ X = "X"
 O = "O"
 EMPTY = None
 
-scale = 3
-depthlimit = 20
+scale = 5
+depthlimit = 5
+
 
 def initial_state():
     """
@@ -110,21 +111,11 @@ def terminal(board):
     Else check if no EMPTY cells on board.
     """
 
-    if winner(board) != None:
-        return True
-    
-    counter = 0
-
-    for i in range(scale):
-        for j in range(scale):
-            if board[i][j] == EMPTY:
-                counter += 1
-    
-    if counter == 0:
+    if winner(board) or not actions(board):
         return True
     else:
         return False
-
+    
 
 def utility(board):
     """
@@ -139,6 +130,41 @@ def utility(board):
         return 0
 
 
+def alpha_beta_pruning(board, depth, alpha, beta, max_player):
+    """
+    Minimax function with Alpha-Beta pruning and depth limit to optimize the AI.
+    """
+
+    if depth == 0 or terminal(board):
+        return utility(board)
+    
+    if max_player == True:
+        v = -math.inf
+
+        for action in actions(board):
+            v = max(v, alpha_beta_pruning(result(board, action), depth - 1, alpha, beta, False))
+
+            if v >= beta:
+                break
+
+            alpha = max(alpha, v)
+
+        return v
+
+    else: 
+        v = math.inf
+
+        for action in actions(board):
+            v = min(v, alpha_beta_pruning(result(board, action), depth - 1, alpha, beta, True))
+
+            if v <= alpha:
+                break
+
+            beta = min(beta, v)
+
+        return v
+
+
 def minimax(board):
     """
     Returns the optimal action for the current player on the board.
@@ -151,48 +177,90 @@ def minimax(board):
     
     This also speeds up the first move a lot!
     """  
-    
-    # check if board is empty (first move)
-    if board == initial_state():
-        random = randint(1, 5)
-        if random == 1:
-            return (0, 0)
-        elif random == 2:
-            return (0, 2)
-        elif random == 3:
-            return (2, 0)
-        elif random == 4:
-            return (2, 2)
-        elif random == 5:
-            return (1, 1)
-  
+
     move = None
 
+    if terminal(board):
+        return None
+
     # if player = X -> Optimum = 1 -> Pick highest minimum v
-    if player(board) == X:
+    if player(board) == X:    
         v = -math.inf
 
-        # loop through actions and store highest possible v value
         for action in actions(board):
-            action_v = min_value(result(board, action))
+            action_v = alpha_beta_pruning(
+                result(board, action),
+                depthlimit,
+                -math.inf,
+                math.inf,
+                False
+            )
 
             if action_v > v:
                 v = action_v
                 move = action
-            
+
     # else player = O -> optimum = -1 -> max_v as small as possible
     else:
         v = math.inf
 
-        # loop through actions and store minimum possible v value
-        for action in actions(board):            
-            action_v = max_value(result(board, action))     
+        for action in actions(board):
+            action_v = alpha_beta_pruning(
+                result(board, action),
+                depthlimit,
+                -math.inf,
+                math.inf,
+                True
+            )
+
             if action_v < v:
                 v = action_v
                 move = action
     
-    # return best move                
     return move
+
+
+    # # check if board is empty (first move)
+    # if board == initial_state():
+    #     random = randint(1, 5)
+    #     if random == 1:
+    #         return (0, 0)
+    #     elif random == 2:
+    #         return (0, 2)
+    #     elif random == 3:
+    #         return (2, 0)
+    #     elif random == 4:
+    #         return (2, 2)
+    #     elif random == 5:
+    #         return (1, 1)
+  
+    # move = None
+
+    # # if player = X -> Optimum = 1 -> Pick highest minimum v
+    # if player(board) == X:
+    #     v = -math.inf
+
+    #     # loop through actions and store highest possible v value
+    #     for action in actions(board):
+    #         action_v = min_value(result(board, action))
+
+    #         if action_v > v:
+    #             v = action_v
+    #             move = action
+            
+    # # else player = O -> optimum = -1 -> max_v as small as possible
+    # else:
+    #     v = math.inf
+
+    #     # loop through actions and store minimum possible v value
+    #     for action in actions(board):            
+    #         action_v = max_value(result(board, action))     
+    #         if action_v < v:
+    #             v = action_v
+    #             move = action
+    
+    # # return best move                
+    # return move
 
  
 def max_value(board):
