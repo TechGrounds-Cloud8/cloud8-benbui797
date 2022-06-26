@@ -5,15 +5,16 @@ import time
 import tictactoe as ttt
 
 pygame.init()
-size = width, height = 1000, 700
+size = width, height = 600, 400
 
-scale = 5
+# adjust scale in other file
+scale = ttt.scale
 
 # Colors
 black = (0, 0, 0)
 white = (255, 255, 255)
 
-screen = pygame.display.set_mode(size)
+screen = pygame.display.set_mode(size, pygame.RESIZABLE)
 
 mediumFont = pygame.font.Font("OpenSans-Regular.ttf", 28)
 largeFont = pygame.font.Font("OpenSans-Regular.ttf", 40)

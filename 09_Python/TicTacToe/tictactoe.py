@@ -4,14 +4,33 @@ Tic Tac Toe Player
 
 import copy
 import math
-from random import randint
+import random
 
 X = "X"
 O = "O"
 EMPTY = None
 
-scale = 5
-depthlimit = 5
+scale = 3
+
+def depth_limit(actions):
+    """
+    Increase depth limit based on the amount of actions available vs the size of the board.
+    """
+    action_pool = len(actions)
+
+    action_ratio = action_pool / 9
+
+    # Return depth-limit in steps based on ratio vs 9 actions (AI is quick at that level and can go unlimited depth)
+    if action_ratio == 1:
+        return math.inf
+    elif action_ratio <= 2:
+        return 5
+    elif action_ratio <= 3:
+        return 4
+    elif action_ratio <= 3.5:
+        return 3
+    else:
+        return 2
 
 
 def initial_state():
@@ -177,8 +196,11 @@ def minimax(board):
     
     This also speeds up the first move a lot!
     """  
-
     move = None
+
+    # check if board is empty (first move)
+    if board == initial_state():
+        return first_move()
 
     if terminal(board):
         return None
@@ -190,7 +212,7 @@ def minimax(board):
         for action in actions(board):
             action_v = alpha_beta_pruning(
                 result(board, action),
-                depthlimit,
+                depth_limit(actions(board)),
                 -math.inf,
                 math.inf,
                 False
@@ -207,7 +229,7 @@ def minimax(board):
         for action in actions(board):
             action_v = alpha_beta_pruning(
                 result(board, action),
-                depthlimit,
+                depth_limit(actions(board)),
                 -math.inf,
                 math.inf,
                 True
@@ -219,87 +241,28 @@ def minimax(board):
     
     return move
 
+def first_move():
+    """
+    Generate first moves, make random choice from set.
 
-    # # check if board is empty (first move)
-    # if board == initial_state():
-    #     random = randint(1, 5)
-    #     if random == 1:
-    #         return (0, 0)
-    #     elif random == 2:
-    #         return (0, 2)
-    #     elif random == 3:
-    #         return (2, 0)
-    #     elif random == 4:
-    #         return (2, 2)
-    #     elif random == 5:
-    #         return (1, 1)
-  
-    # move = None
+    1. Add all corners
+    2. If scale is odd, add middle
+    """
+    endpoint = scale - 1
 
-    # # if player = X -> Optimum = 1 -> Pick highest minimum v
-    # if player(board) == X:
-    #     v = -math.inf
-
-    #     # loop through actions and store highest possible v value
-    #     for action in actions(board):
-    #         action_v = min_value(result(board, action))
-
-    #         if action_v > v:
-    #             v = action_v
-    #             move = action
-            
-    # # else player = O -> optimum = -1 -> max_v as small as possible
-    # else:
-    #     v = math.inf
-
-    #     # loop through actions and store minimum possible v value
-    #     for action in actions(board):            
-    #         action_v = max_value(result(board, action))     
-    #         if action_v < v:
-    #             v = action_v
-    #             move = action
+    moves = [
+        (0,0),
+        (0, endpoint),
+        (endpoint, 0),
+        (endpoint, endpoint)
+    ]
     
-    # # return best move                
-    # return move
+    if scale % 2 != 0:
+        mid = scale // 2
+        moves.append((mid, mid))
 
+    return random.choice(moves)
  
-def max_value(board):
-    """
-    Returns max v value for an action
-    """
-
-    # if board is full, return utility value(1, 0 or -1)
-    if terminal(board):
-        return utility(board)
-    
-    # initialise v to negative infinity so any move will have higher v value.
-    # then check v value against min value (recursive) and store highest value in v.    
-    v = -math.inf
-
-    for action in actions(board):
-        v = max(v, min_value(result(board, action)))
-
-    return v
-    
-
-def min_value(board):
-    """
-    Returns min v value for an action
-    """
-    
-    # if board is full, return utility value(1, 0 or -1)
-    if terminal(board):
-        return utility(board)
-    
-    # initialise v to infinity so any move will have lower v value.
-    # check v against max_value (recursively) and store lowest v value.
-    v = math.inf
-    
-    for action in actions(board):
-        v = min(v, max_value(result(board, action)))
-
-    return v
-
 
 def check_horizontal(board):
     """
