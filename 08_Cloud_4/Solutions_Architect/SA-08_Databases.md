@@ -109,7 +109,7 @@ Cluster Mode disabled: Single Shard!
   - AWS RDS
   - On-Premises Server
 
-- **RedShift Spectrum** can run SQL queries on data directly in S3 (Athena can too, but with RedShift you have control over the resources, which can allow for more consistent performance)
+- **RedShift Spectrum** can run SQL queries on data directly in S3 (Athena can too, but with RedShift you have control over the resources (Instances), which can allow for more consistent performance)
   
 Use Cases:
 - Perform complex queries on huge collections of structured and semi-structured data and get fast performance
