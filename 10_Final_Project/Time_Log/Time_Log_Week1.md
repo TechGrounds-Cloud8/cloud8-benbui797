@@ -12,3 +12,27 @@ I finished the CDK Workshop tutorial.
 ## Learnings
 - Basic CDK knowlegde
 ---
+# Log 28-6-2022
+ 
+## Daily Report
+- I finished reading the Project documentation completely. Made a list of design requirements, which already brought up some ideas about the architecture.
+## Challenges
+- Understanding the Scrum structure correctly.
+- Some confusion about the project requirements.
+## Solutions
+- Ask LC's and look on internet for more info about scrum terms such as User Story.
+- Ask Casper what my boundaries are for the project (in making suggestions/changes)
+## Learnings
+- I have a lot of freedom to make changes, as long as I also have a good reason for them :)
+---
+# Log 29-6-2022
+ 
+## Daily Report
+- spent the whole day following the AWS EMEA Summit
+## Challenges
+- staying hydrated
+## Solutions
+- drinking water
+## Learnings
+- Databases and Serverless/Event Driven presentations were very nice!
+---
