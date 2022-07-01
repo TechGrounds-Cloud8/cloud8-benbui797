@@ -36,3 +36,28 @@ I finished the CDK Workshop tutorial.
 ## Learnings
 - Databases and Serverless/Event Driven presentations were very nice!
 ---
+# Log 30-06-2022
+ 
+## Daily Report
+- Spend the day reading the CDK Documentation and helping teammates
+## Challenges
+- Staying concentrated reading the documentation takes a lot of energy.
+## Solutions
+- Do some coding, I wrote the code that launches 2 VPCs according to the specs.
+## Learnings
+- Understanding some concepts of CDK better (Constructs, App, Stack)
+---
+# Log 01-07-2022
+ 
+## Daily Report
+- Trying to get VPC peering to work
+## Challenges
+- Looking in the wrong direction (CF templates and L2 examples)
+- Overlooking the VPC_id attribute of the class
+## Solutions
+- Use L1 construct
+- Ask Shikha
+## Learnings
+- Sometimes you just need to ask :)
+---
+

@@ -19,16 +19,16 @@
 - WebServer must make a daily backup
 - Backup must be stored for 7 days (lifecycle management)
 - AWS Backup: Backup plan?
+- S3 bucket that contains the bash scripts for launch.
 
 ## Assumptions:
 - Requirements don't say that the WebServer needs to be accessable from the internet. In the diagram, it is in the public subnet, which means it has a public IP.
 - IAM policy? EC2 Keys?
 - Automated Security Responses? (AWS Solutions library)
-- Check Security Hub (Security Score) after network is up
 - Can I export Stack to Diagram.io for drawing?
 
 ## Suggestions
-- 
+- Check Security Hub (Security Score) after network is up? Add security tips to documentation/recommendations?
 
 ## Unknowns:
 - Which regions?
@@ -46,3 +46,4 @@
 - [CDK Documentation](https://docs.aws.amazon.com/cdk/v2/guide/home.html)
 - [CDK API Documentation](https://docs.aws.amazon.com/cdk/api/v2/)
 - [Create a custom VPC with AWS CDK](https://levelup.gitconnected.com/creating-a-custom-vpc-with-aws-cdk-52f8788cb2d5)
+- [EC2 Instance Connect (BASTION HOST SSH ALTERNATIVE)](https://aws.amazon.com/de/blogs/compute/new-using-amazon-ec2-instance-connect-for-ssh-access-to-your-ec2-instances/)
