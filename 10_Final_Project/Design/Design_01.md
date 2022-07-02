@@ -47,3 +47,5 @@
 - [CDK API Documentation](https://docs.aws.amazon.com/cdk/api/v2/)
 - [Create a custom VPC with AWS CDK](https://levelup.gitconnected.com/creating-a-custom-vpc-with-aws-cdk-52f8788cb2d5)
 - [EC2 Instance Connect (BASTION HOST SSH ALTERNATIVE)](https://aws.amazon.com/de/blogs/compute/new-using-amazon-ec2-instance-connect-for-ssh-access-to-your-ec2-instances/)
+
+- https://dev.to/aws-builders/ping-me-part-1-vpc-peering-using-cdk-2kpd
