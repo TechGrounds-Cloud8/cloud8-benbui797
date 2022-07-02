@@ -49,3 +49,5 @@
 - [EC2 Instance Connect (BASTION HOST SSH ALTERNATIVE)](https://aws.amazon.com/de/blogs/compute/new-using-amazon-ec2-instance-connect-for-ssh-access-to-your-ec2-instances/)
 
 - https://dev.to/aws-builders/ping-me-part-1-vpc-peering-using-cdk-2kpd
+- https://bobbyhadz.com/blog/aws-cdk-ec2-instance-example
+- Add NACL rules when using LoadBalancer: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-nacl
