@@ -104,18 +104,49 @@ class VPCStack(Stack):
         #     # ))]
         #     )
 
+        ####################
+        ### Admin Server ###
+        ####################
         
+        # AdminServerSG
+        admin_server_sg = ec2.SecurityGroup(
+            self, 'admin_server_sg',
+            vpc=vpc_admin,
+            allow_all_outbound=True
+        )
+        
+        admin_server_sg.add_ingress_rule(
+            # ec2.Peer.ipv4(f'{my_ip}/32'),
+            ec2.Peer.any_ipv4(),
+            ec2.Port.tcp(22),
+            'Allow SSH access from trusted IP'
+        )
+
+        admin_server = ec2.Instance(
+            self, 'adminserver',
+            vpc=vpc_admin,
+            vpc_subnets=ec2.SubnetType.PUBLIC,
+            security_group=admin_server_sg,
+            instance_type=ec2.InstanceType('t2.micro'),
+            machine_image=ec2.MachineImage.latest_amazon_linux(),
+            key_name='ec2-key-pair',
+        )
+        
+        ##################
+        ### Web Server ###
+        ##################
+
         # WebServerSG
         web_server_sg = ec2.SecurityGroup(
             self, 'web_server_sg',
             vpc=vpc_web,
             allow_all_outbound=True
         )
-        web_server_sg.add_ingress_rule(
-            ec2.Peer.any_ipv4(),
-            ec2.Port.tcp(22),
-            'Allow SSH access from anywhere'
-        )
+        # web_server_sg.add_ingress_rule(
+        #     admin_server_sg,
+        #     ec2.Port.tcp(22),
+        #     'Allow SSH access from anywhere'
+        # )
         web_server_sg.add_ingress_rule(
             ec2.Peer.any_ipv4(),
             ec2.Port.tcp(80),
@@ -123,7 +154,13 @@ class VPCStack(Stack):
         )
         web_server_sg.add_ingress_rule(
             ec2.Peer.any_ipv4(),
-            ec2.Port.tcp(443)
+            ec2.Port.tcp(443),
+            'Allow HTTPS traffic from anywhere'
+        )
+        web_server_sg.connections.allow_from(
+            admin_server_sg,
+            ec2.Port.tcp(22),
+            'Allow SSH traffic from Admin Server SG'
         )
 
         #WebServer Role
@@ -156,31 +193,4 @@ class VPCStack(Stack):
             echo '<html><h1>Hello From The Web Server!</h1></html>' > /var/www/html/index.html
             """
         )
-
-        ####################
-        ### Admin Server ###
-        ####################
-        
-        # AdminServerSG
-        admin_server_sg = ec2.SecurityGroup(
-            self, 'admin_server_sg',
-            vpc=vpc_admin,
-            allow_all_outbound=True
-        )
-        
-        admin_server_sg.add_ingress_rule(
-            ec2.Peer.ipv4(f'{my_ip}/32'),
-            ec2.Port.tcp(22),
-            'Allow SSH access from trusted IP'
-        )
-
-        admin_server = ec2.Instance(
-            self, 'adminserver',
-            vpc=vpc_admin,
-            vpc_subnets=ec2.SubnetType.PUBLIC,
-            security_group=admin_server_sg,
-            instance_type=ec2.InstanceType('t2.micro'),
-            machine_image=ec2.MachineImage.latest_amazon_linux(),
-            key_name='ec2-key-pair',
-        )
-        
+               

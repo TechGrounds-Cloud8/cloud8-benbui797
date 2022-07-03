@@ -58,6 +58,7 @@ class NACLStack(Construct):
             cidr=ec2.AclCidr.ipv4(vpc_admin.vpc_cidr_block),
             rule_number=120,
             traffic=ec2.AclTraffic.tcp_port(22),
+            # traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
             direction=ec2.TrafficDirection.INGRESS,
             rule_action=ec2.Action.ALLOW
         )
@@ -65,7 +66,8 @@ class NACLStack(Construct):
             'SSH outbound allow',
             cidr=ec2.AclCidr.ipv4(vpc_admin.vpc_cidr_block),
             rule_number=120,
-            traffic=ec2.AclTraffic.tcp_port(22),
+            traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
+            # traffic=ec2.AclTraffic.tcp_port(22),
             direction=ec2.TrafficDirection.EGRESS,
             rule_action=ec2.Action.ALLOW
         )
@@ -84,6 +86,7 @@ class NACLStack(Construct):
         vpc_admin_nacl.add_entry(
             'SSH inbound allow AdminIP',
             cidr=ec2.AclCidr.ipv4(f'{my_ip}/32'),
+            # cidr=ec2.AclCidr.any_ipv4(),
             rule_number=100,
             traffic=ec2.AclTraffic.tcp_port(22),
             direction=ec2.TrafficDirection.INGRESS,
@@ -93,8 +96,9 @@ class NACLStack(Construct):
         vpc_admin_nacl.add_entry(
             'SSH outbound allow AdminIP',
             cidr=ec2.AclCidr.ipv4(f'{my_ip}/32'),
+            # cidr=ec2.AclCidr.any_ipv4(),
             rule_number=100,
-            traffic=ec2.AclTraffic.tcp_port(22),
+            traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
             direction=ec2.TrafficDirection.EGRESS,
             rule_action=ec2.Action.ALLOW
 
@@ -103,7 +107,7 @@ class NACLStack(Construct):
             'SSH inbound allow Subnet',
             cidr=ec2.AclCidr.ipv4(vpc_web.vpc_cidr_block),
             rule_number=110,
-            traffic=ec2.AclTraffic.tcp_port(22),
+            traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
             direction=ec2.TrafficDirection.INGRESS,
             rule_action=ec2.Action.ALLOW
         )
