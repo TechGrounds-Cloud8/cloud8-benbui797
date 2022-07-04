@@ -23,8 +23,8 @@ Max runtime is 15 minutes (900 seconds)!
 - There is a succesful-event destination and a failed-event destination (or alternatively a Dead-letter queue, where failed events are stored for further processing)
   
 **Event source mapping (stream):** 
-- An event source mapping is a Lambda resource that reads from an event source and invokes a Lambda function. You can use event source mappings to process items from a stream or queue in services that don't invoke Lambda functions directly. 
-- SQS, Kinesis Data Streams, DynamoDB Streams, Amazon MQ, Amazon MSK, Apache Kafka
+- An event source mapping is a Lambda resource that reads from an event source and invokes a Lambda function. You can use event source mappings to process items from a stream or queue in services that don't invoke Lambda functions directly. If it's not a stream-based service, the event source is mapped on the service (i.e. API GW)
+- SQS, Kinesis Data Streams, DynamoDB Streams, Amazon MQ, Amazon MSK, Apache Kafka (The event source mapping for these services can be specified on the Lambda side!)
 - Lambda does the polling (polls the source)
 - Records are processed in order (except for SQS standard)
 
