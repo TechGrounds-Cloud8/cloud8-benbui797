@@ -6,6 +6,7 @@ from aws_cdk import (
 from constructs import Construct
 
 from code.nacl_construct import NACLStack
+from code.s3_construct import S3_Stack
 
 import requests
 
@@ -79,30 +80,6 @@ class VPCStack(Stack):
             vpc_web=vpc_web,
             vpc_admin=vpc_admin,
             my_ip=my_ip)
-
-        # # WebServer
-        # web_server = ec2.Instance(
-        #     self, "WebServer",
-        #     instance_type=ec2.InstanceType('t2.micro'),
-        #     machine_image=ec2.MachineImage.latest_amazon_linux(),
-        #     vpc=vpc_web,
-        #     vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PUBLIC)
-        # )
-
-        # web_server.connections.allow_from(bastion_host, ec2.Port.tcp(22))
-        # web_server.connections.allow_from_any_ipv4(ec2.Port.tcp(80))
-        # web_server.connections.allow_from_any_ipv4(ec2.Port.tcp(443))
-        
-        # # Bastion Host as Admin Server
-        # bastion_host = ec2.BastionHostLinux(
-        #     self, "BastionHost",
-        #     vpc=vpc_admin,
-        #     # block_devices=[ec2.BlockDevice(
-        #     # device_name="EBSBastionHost",
-        #     # volume=ec2.BlockDeviceVolume.ebs(10,
-        #     # encrypted=True
-        #     # ))]
-        #     )
 
         ####################
         ### Admin Server ###
@@ -193,4 +170,10 @@ class VPCStack(Stack):
             echo '<html><h1>Hello From The Web Server!</h1></html>' > /var/www/html/index.html
             """
         )
-               
+
+        #################
+        ### S3 Bucket ###
+        #################
+
+        s3_bucket = S3_Stack(self, 'S3_Bucket', resource_access=[web_server, admin_server])
+        
