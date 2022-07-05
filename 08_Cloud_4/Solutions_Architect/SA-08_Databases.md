@@ -88,6 +88,8 @@ Aurora Storage can scale up to 64TiB (and for some DB engines, 128TiB)
   
 A **Shard** in Redis mode consists of a primary plus zero to five replica's. A shard can cover multiple AZs (across multiple AZ's).  
   
+Sharding means adding more partitions (so storing some keys/hashes on one shard and other keys on another), this improves performance. It spreads out the data over multiple shards.
+  
 Cluster Mode enabled: Multiple Shards!
 Cluster Mode disabled: Single Shard!  
   
