@@ -63,12 +63,23 @@ class NACLStack(Construct):
             rule_action=ec2.Action.ALLOW
         )
         vpc_web_nacl.add_entry(
-            'SSH outbound allow',
-            cidr=ec2.AclCidr.ipv4(vpc_admin.vpc_cidr_block),
+            'Ephemeral SSH outbound allow',
+            # cidr=ec2.AclCidr.ipv4(vpc_admin.vpc_cidr_block),
+            cidr=ec2.AclCidr.any_ipv4(),
             rule_number=120,
             traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
             # traffic=ec2.AclTraffic.tcp_port(22),
             direction=ec2.TrafficDirection.EGRESS,
+            rule_action=ec2.Action.ALLOW
+        )
+        vpc_web_nacl.add_entry(
+            'Ephemeral inbound allow',
+            # cidr=ec2.AclCidr.ipv4(vpc_admin.vpc_cidr_block),
+            cidr=ec2.AclCidr.any_ipv4(),
+            rule_number=130,
+            traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
+            # traffic=ec2.AclTraffic.tcp_port(22),
+            direction=ec2.TrafficDirection.INGRESS,
             rule_action=ec2.Action.ALLOW
         )
 

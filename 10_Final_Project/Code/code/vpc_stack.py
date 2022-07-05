@@ -10,6 +10,9 @@ from code.s3_construct import S3_Stack
 
 import requests
 
+# Test means deleting S3 bucket and objects when deleting stack
+test = True
+
 class VPCStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
@@ -156,24 +159,22 @@ class VPCStack(Stack):
             role=web_server_role,
             security_group=web_server_sg,
             instance_type=ec2.InstanceType('t2.micro'),
-            machine_image=ec2.MachineImage.latest_amazon_linux(),
+            machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2022),
             key_name='ec2-key-pair',
         )
         
-        web_server.add_user_data(
-            """
-            #!/bin/bash
-            sudo yum update -y
-            sudo yum install httpd -y
-            sudo systemctl enable httpd
-            sudo systemctl start httpd
-            echo '<html><h1>Hello From The Web Server!</h1></html>' > /var/www/html/index.html
-            """
-        )
-
         #################
         ### S3 Bucket ###
         #################
 
-        s3_bucket = S3_Stack(self, 'S3_Bucket', resource_access=[web_server, admin_server])
-        
+        s3_bucket = S3_Stack(self, 'S3_Bucket', resource_access=[web_server, admin_server], test=test)
+
+        ##########################
+        ### WebServer UserData ###
+        ##########################
+
+        local_path = web_server.user_data.add_s3_download_command(
+            bucket=s3_bucket.script_bucket,
+            bucket_key='launch-web-server.sh',
+        )
+        web_server.user_data.add_execute_file_command(file_path=local_path)
