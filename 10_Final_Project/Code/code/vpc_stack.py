@@ -10,7 +10,7 @@ from code.s3_construct import S3_Stack
 
 import requests
 
-# Test means deleting S3 bucket and objects when deleting stack
+# Test means deleting S3 bucket, objects and EBS volumes when deleting stack
 test = True
 
 class VPCStack(Stack):
@@ -110,6 +110,12 @@ class VPCStack(Stack):
             instance_type=ec2.InstanceType('t2.micro'),
             machine_image=ec2.MachineImage.latest_amazon_linux(),
             key_name='ec2-key-pair',
+            block_devices=[ec2.BlockDevice(
+                device_name='/dev/xvda',
+                volume=ec2.BlockDeviceVolume.ebs(
+                    volume_size=8,
+                    encrypted=True,                    
+            ))],
         )
         
         ##################
@@ -159,8 +165,16 @@ class VPCStack(Stack):
             role=web_server_role,
             security_group=web_server_sg,
             instance_type=ec2.InstanceType('t2.micro'),
-            machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2022),
+            machine_image=ec2.AmazonLinuxImage(
+            generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2
+            ),
             key_name='ec2-key-pair',
+            block_devices=[ec2.BlockDevice(
+                device_name='/dev/xvda',
+                volume=ec2.BlockDeviceVolume.ebs(
+                    volume_size=8,
+                    encrypted=True,                    
+            ))],
         )
         
         #################

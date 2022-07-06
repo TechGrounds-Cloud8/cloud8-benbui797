@@ -1,4 +1,5 @@
 from aws_cdk import (
+    Duration,
     RemovalPolicy,
     aws_s3 as s3,
     aws_s3_deployment as s3deploy,
@@ -24,9 +25,15 @@ class S3_Stack(Construct):
             self, 'Script Bucket',
             encryption=s3.BucketEncryption.S3_MANAGED,
             versioned=True,
+            enforce_ssl=True,
+            intelligent_tiering_configurations=[s3.IntelligentTieringConfiguration(
+                name='Intelligent-Tiering',
+                archive_access_tier_time=Duration.days(90),
+                deep_archive_access_tier_time=Duration.days(180),
+            )],
             removal_policy=auto_removal,
             auto_delete_objects=test,
-        )          
+        )
 
         self.deployment = s3deploy.BucketDeployment(
             self, 'Bucket Deployment',
@@ -43,5 +50,4 @@ class S3_Stack(Construct):
         )
 
         # for principal in resource_access:
-        #     self.script_bucket.add_to_resource_policy(principal)
         #     self.script_bucket.grant_read(principal)
