@@ -7,6 +7,7 @@ from constructs import Construct
 
 from code.nacl_construct import NACLStack
 from code.s3_construct import S3_Stack
+from code.backup_construct import Backup_Construct
 
 import requests
 
@@ -192,3 +193,12 @@ class VPCStack(Stack):
             bucket_key='launch-web-server.sh',
         )
         web_server.user_data.add_execute_file_command(file_path=local_path)
+
+        ###################
+        ### Backup Plan ###
+        ###################
+        backup_plan = Backup_Construct(
+            self, 'Backup-Plan',
+            instances=[web_server],
+            test=test
+        )

@@ -11,3 +11,6 @@ For the EBS storage, I have simply kept it at the default size of 8gb.
 
 ## Admin IP
 The admin IP address (trusted IP) isn't specified. For testing, I have written a few lines of code that retrieves the IP address of the person that launched the stack. The stack will use this IP to grant SSH access to the admin server.
+
+## Key pair
+In the console, in your default region, create a new EC2 key pair called 'ec2-key-pair'. Both instances in the Stack will look for this key and use it to authenticate incoming SSH connections.
