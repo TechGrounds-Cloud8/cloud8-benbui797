@@ -12,16 +12,22 @@ class Backup_Construct(Construct):
     def __init__(self, scope: Construct, construct_id: str, instances: list, test: bool, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
         
-        # Create backup plan
-        self.backup_plan = backup.BackupPlan(self, 'Backup-Plan')
+        # Create backup vault
+        self.backup_vault = backup.BackupVault(
+            self, 'Backup-Vault',
+            backup_vault_name='Backup-Vault',
+            # access_policy=,
+            )
 
-        # # Create new backup vault and auto remove if project is in test state 
+        # Create backup plan
+        self.backup_plan = backup.BackupPlan(
+            self, 'Backup-Plan',
+            backup_vault=self.backup_vault
+            )
+
+        # auto remove if project is in test state 
         if test:
-        #     self.backup_plan.backup_vault.apply_removal_policy(RemovalPolicy.DESTROY)
-            # self.vault = backup.BackupVault.from_backup_vault_arn(
-            #     self, 'Backup-Vault-ID',
-            #     # backup_vault_arn=self.backup_plan.backup_vault.backup_vault_arn
-            # )
+            self.backup_vault.apply_removal_policy(RemovalPolicy.DESTROY)
             self.backup_plan.apply_removal_policy(RemovalPolicy.DESTROY)
 
         # Add instances to the backup plan resources
@@ -34,13 +40,10 @@ class Backup_Construct(Construct):
         
         # Add backup rules
         self.backup_plan.add_rule(backup.BackupPlanRule(
-            # enable_continuous_backup=True,
+            enable_continuous_backup=True,
             delete_after=Duration.days(7),
             schedule_expression=events.Schedule.cron(
-                hour="17",
-                minute="5",
-                ),
-        ))
-
-        
-        
+                hour="5",
+                minute="0",
+                ))
+            )

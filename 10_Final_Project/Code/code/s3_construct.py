@@ -48,6 +48,3 @@ class S3_Stack(Construct):
                 actions=['s3:GetObject'],
                 resources=[f'{self.script_bucket.bucket_arn}/*'])
         )
-
-        # for principal in resource_access:
-        #     self.script_bucket.grant_read(principal)

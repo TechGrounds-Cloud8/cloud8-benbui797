@@ -7,10 +7,17 @@ The region in which the servers should be launched are not specified, so for tes
 
 ## Instance Types and specifications
 The instance types have not been defined in the requirements. Since it's only a single server, we assume the load isn't huge. Therefor we choose to work with the T3.micro from the free tier.
-For the EBS storage, I have simply kept it at the default size of 8gb.
+For the EBS storage, I have simply kept it at the default size of 8gb. 
+We've picked Linux for the OS.
 
 ## Admin IP
 The admin IP address (trusted IP) isn't specified. For testing, I have written a few lines of code that retrieves the IP address of the person that launched the stack. The stack will use this IP to grant SSH access to the admin server.
 
 ## Key pair
 In the console, in your default region, create a new EC2 key pair called 'ec2-key-pair'. Both instances in the Stack will look for this key and use it to authenticate incoming SSH connections.
+
+## Backup Schedule
+Daily at 5am UTC time (the recommended time by AWS) for backups.
+
+## Test Boolean
+When this variable is set to True, the services that will be retained by default (S3 Buckets, Backup Vault & Plan, EBS volumes) will be destroyed.

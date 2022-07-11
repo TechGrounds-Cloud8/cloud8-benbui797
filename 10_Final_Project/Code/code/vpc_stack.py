@@ -111,12 +111,15 @@ class VPCStack(Stack):
             instance_type=ec2.InstanceType('t2.micro'),
             machine_image=ec2.MachineImage.latest_amazon_linux(),
             key_name='ec2-key-pair',
-            block_devices=[ec2.BlockDevice(
-                device_name='/dev/xvda',
-                volume=ec2.BlockDeviceVolume.ebs(
-                    volume_size=8,
-                    encrypted=True,                    
-            ))],
+            block_devices=[
+                ec2.BlockDevice(
+                    device_name='/dev/xvda',
+                    volume=ec2.BlockDeviceVolume.ebs(
+                        volume_size=8,
+                        encrypted=True,
+                        delete_on_termination=test
+                )),
+            ],
         )
         
         ##################
@@ -170,12 +173,22 @@ class VPCStack(Stack):
             generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2
             ),
             key_name='ec2-key-pair',
-            block_devices=[ec2.BlockDevice(
-                device_name='/dev/xvda',
-                volume=ec2.BlockDeviceVolume.ebs(
-                    volume_size=8,
-                    encrypted=True,                    
-            ))],
+            block_devices=[
+                ec2.BlockDevice(
+                    device_name='/dev/xvda',
+                    volume=ec2.BlockDeviceVolume.ebs(
+                        volume_size=8,
+                        encrypted=True,
+                        delete_on_termination=test,
+                    )),
+                ec2.BlockDevice(
+                    device_name='/dev/xvdf',
+                    volume=ec2.BlockDeviceVolume.ebs(
+                        volume_size=4,
+                        encrypted=True,
+                        delete_on_termination=test,
+                    )),
+            ],
         )
         
         #################
