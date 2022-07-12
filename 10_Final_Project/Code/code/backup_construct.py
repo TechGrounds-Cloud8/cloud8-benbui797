@@ -7,16 +7,17 @@ from aws_cdk import (
 
 from constructs import Construct
 
+from code._config import TEST_ENV
+
 class Backup_Construct(Construct):
 
-    def __init__(self, scope: Construct, construct_id: str, instances: list, test: bool, **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, instances: list, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
         
         # Create backup vault
         self.backup_vault = backup.BackupVault(
             self, 'Backup-Vault',
             backup_vault_name='Backup-Vault',
-            # access_policy=,
             )
 
         # Create backup plan
@@ -26,7 +27,7 @@ class Backup_Construct(Construct):
             )
 
         # auto remove if project is in test state 
-        if test:
+        if TEST_ENV:
             self.backup_vault.apply_removal_policy(RemovalPolicy.DESTROY)
             self.backup_plan.apply_removal_policy(RemovalPolicy.DESTROY)
 

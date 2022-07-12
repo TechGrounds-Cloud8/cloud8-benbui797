@@ -1,7 +1,12 @@
 # Databases
 
 # RDS
-RDS runs on EC2 instances, you specify the instance when you launch RDS. By selecting a more powerful instance, you can vertically scale your database.
+RDS runs on EC2 instances, you specify the instance when you launch RDS. By selecting a more powerful instance, you can vertically scale your database.  
+  
+RDS Multi-AZ deployment (one standby) == Synchronous replication (failover backup instance for disaster recovery)  
+  
+RDS Multi-AZ deployment (read-replica's) == Asynchronous replication 
+
 
 ## Backups & Maintenance
 **Automated Backups**

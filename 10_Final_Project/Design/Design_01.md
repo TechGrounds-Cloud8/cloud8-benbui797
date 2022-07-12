@@ -47,7 +47,14 @@
 - [CDK API Documentation](https://docs.aws.amazon.com/cdk/api/v2/)
 - [Create a custom VPC with AWS CDK](https://levelup.gitconnected.com/creating-a-custom-vpc-with-aws-cdk-52f8788cb2d5)
 - [EC2 Instance Connect (BASTION HOST SSH ALTERNATIVE)](https://aws.amazon.com/de/blogs/compute/new-using-amazon-ec2-instance-connect-for-ssh-access-to-your-ec2-instances/)
+- [info about linux /dev/null (using exitcode in bash scripts)](https://linuxhint.com/what_is_dev_null/)
 
 - https://dev.to/aws-builders/ping-me-part-1-vpc-peering-using-cdk-2kpd
 - https://bobbyhadz.com/blog/aws-cdk-ec2-instance-example
 - Add NACL rules when using LoadBalancer: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-nacl
+- https://aws.amazon.com/blogs/storage/automate-data-recovery-validation-with-aws-backup/
+
+
+- https://stackoverflow.com/questions/26873289/how-to-check-a-disk-for-partitions-for-use-in-a-script-in-linux
+- https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs
+- https://linuxhint.com/what_is_dev_null/

@@ -6,17 +6,18 @@ from aws_cdk import (
     aws_iam as iam,
 )
 from constructs import Construct
+from code._config import TEST_ENV
 
 import os
 
 path = os.getcwd()
 
-class S3_Stack(Construct):
+class S3_Construct(Construct):
 
-    def __init__(self, scope: Construct, construct_id: str, resource_access, test: bool, **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, resource_access, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        if test:
+        if TEST_ENV:
             auto_removal = RemovalPolicy.DESTROY
         else:
             auto_removal = RemovalPolicy.RETAIN
@@ -32,15 +33,17 @@ class S3_Stack(Construct):
                 deep_archive_access_tier_time=Duration.days(180),
             )],
             removal_policy=auto_removal,
-            auto_delete_objects=test,
+            auto_delete_objects=TEST_ENV,
         )
 
+        # Upload files in 'assets' folder to the bucket
         self.deployment = s3deploy.BucketDeployment(
             self, 'Bucket Deployment',
             destination_bucket=self.script_bucket,
             sources=[s3deploy.Source.asset(os.path.join(path, "assets"))]
             )
         
+        # Allow EC2 instances to get files from the bucket
         self.script_bucket.add_to_resource_policy(
             iam.PolicyStatement(
                 effect=iam.Effect.ALLOW,

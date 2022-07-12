@@ -6,21 +6,16 @@ from aws_cdk import (
 from constructs import Construct
 
 from code.nacl_construct import NACLStack
-from code.s3_construct import S3_Stack
+from code.s3_construct import S3_Construct
 from code.backup_construct import Backup_Construct
+from code.sg_construct import SG_Construct
 
-import requests
-
-# Test means deleting S3 bucket, objects and EBS volumes when deleting stack
-test = True
+from code._config import TEST_ENV, TRUSTED_IP
 
 class VPCStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
-
-        my_ip = requests.get('https://api.ipify.org').text
-        print(f'IP that will be used as trusted IP: {my_ip}')
 
         # Create 2 VPC's and VPC peering connection
         vpc_web = ec2.Vpc(
@@ -62,7 +57,6 @@ class VPCStack(Stack):
         ) 
 
         # Update Route Tables for Peering Connection
-
         for subnet in vpc_web.public_subnets:
             route_table_entry = ec2.CfnRoute(
                 self, 'VPC-1 Peer Route',
@@ -83,7 +77,7 @@ class VPCStack(Stack):
             self, 'NACL',
             vpc_web=vpc_web,
             vpc_admin=vpc_admin,
-            my_ip=my_ip)
+        )
 
         ####################
         ### Admin Server ###
@@ -117,9 +111,8 @@ class VPCStack(Stack):
                     volume=ec2.BlockDeviceVolume.ebs(
                         volume_size=8,
                         encrypted=True,
-                        delete_on_termination=test
-                )),
-            ],
+                        delete_on_termination=TEST_ENV
+                )),],
         )
         
         ##################
@@ -130,13 +123,7 @@ class VPCStack(Stack):
         web_server_sg = ec2.SecurityGroup(
             self, 'web_server_sg',
             vpc=vpc_web,
-            allow_all_outbound=True
         )
-        # web_server_sg.add_ingress_rule(
-        #     admin_server_sg,
-        #     ec2.Port.tcp(22),
-        #     'Allow SSH access from anywhere'
-        # )
         web_server_sg.add_ingress_rule(
             ec2.Peer.any_ipv4(),
             ec2.Port.tcp(80),
@@ -179,14 +166,14 @@ class VPCStack(Stack):
                     volume=ec2.BlockDeviceVolume.ebs(
                         volume_size=8,
                         encrypted=True,
-                        delete_on_termination=test,
+                        delete_on_termination=TEST_ENV,
                     )),
                 ec2.BlockDevice(
                     device_name='/dev/xvdf',
                     volume=ec2.BlockDeviceVolume.ebs(
                         volume_size=4,
                         encrypted=True,
-                        delete_on_termination=test,
+                        delete_on_termination=TEST_ENV,
                     )),
             ],
         )
@@ -195,17 +182,17 @@ class VPCStack(Stack):
         ### S3 Bucket ###
         #################
 
-        s3_bucket = S3_Stack(self, 'S3_Bucket', resource_access=[web_server, admin_server], test=test)
+        s3_bucket = S3_Construct(self, 'S3_Bucket', resource_access=[web_server, admin_server])
 
         ##########################
         ### WebServer UserData ###
         ##########################
 
-        local_path = web_server.user_data.add_s3_download_command(
+        script_path = web_server.user_data.add_s3_download_command(
             bucket=s3_bucket.script_bucket,
             bucket_key='launch-web-server.sh',
         )
-        web_server.user_data.add_execute_file_command(file_path=local_path)
+        web_server.user_data.add_execute_file_command(file_path=script_path)
 
         ###################
         ### Backup Plan ###
@@ -213,5 +200,4 @@ class VPCStack(Stack):
         backup_plan = Backup_Construct(
             self, 'Backup-Plan',
             instances=[web_server],
-            test=test
         )
