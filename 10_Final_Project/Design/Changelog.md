@@ -6,7 +6,7 @@ Due to the security policy, the admin server has to be in a different VPC than t
 The region in which the servers should be launched are not specified, so for testing, we go with eu-central-1. The script is build to react to your settings of your AWS CLI.
 
 ## Instance Types and specifications
-The instance types have not been defined in the requirements. Since it's only a single server, we assume the load isn't huge. Therefor we choose to work with the T3.micro from the free tier.
+The instance types have not been defined in the requirements. Since it's only a single server, we assume the load isn't huge. Therefor we choose to work with the T3.nano because it is the cheapest option.
 For the EBS storage, I have simply kept it at the default size of 8gb. 
 We've picked Linux for the OS.
 

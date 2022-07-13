@@ -6,10 +6,11 @@ This is version 1.0 of the final project for the Tech Grounds Cloud Engineer coh
 # Quick Start Guide
 
 ## Requirements
-- Python 3 installed
-- NodeJS installed (npm)
-- AWS CLI installed
-- AWS CDK installed
+- [Python 3 installed (make sure it's added to the PATH)](https://www.python.org/)
+- [AWS CLI installed](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
+- [Configure your Access key + region for your AWS account](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)
+- [NodeJS installed (npm)](https://nodejs.org/)
+- AWS CDK installed (run: `npm install -g aws-cdk`)
 
 ## Preparations
 Create a virtualenv:
@@ -32,21 +33,29 @@ Once the virtualenv is activated, you can install the required dependencies.
 ```
 $ pip install -r requirements.txt
 ```
+## Configuration File
+There are two configurable settings:
+- **TRUSTED_IP** - Allow SSH access from these IP addresses
+- **TEST_ENV** - When set to true, certain resources such as S3 bucket, Backup Plans & Vaults will be deleted along with the stack. If you run a **production environment**, you want to keep these resources available, so it's **highly recommended** to set this setting to False.
 
-At this point you can now synthesize the CloudFormation template for this code.
+You can find the configuration file in the code directory, the file is named `_config.py`.
+
+Alternatively, you can run the following command to open it in VSC:
+```
+$ code ./code/_config.py
+```
+
+## Deploying
+
+Now you can bootstrap your environment to your stack (fill in your account settings such as region)
 
 ```
-$ cdk synth
+$ cdk bootstrap
 ```
 
+By default, the configuration has been set to TEST_MODE and your current public IP address will be used for the firewalls.  
+If that is alright and you want to continue to deploy:
 
-
-## Useful commands
-
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
-
-
+```
+$ cdk deploy
+```

@@ -5,7 +5,7 @@ from aws_cdk import (
 )
 from constructs import Construct
 
-from code.nacl_construct import NACLStack
+from code.nacl_construct import NACL_Construct
 from code.s3_construct import S3_Construct
 from code.backup_construct import Backup_Construct
 from code.sg_construct import Admin_SG_Construct, Web_SG_Construct
@@ -27,7 +27,6 @@ class VPCStack(Stack):
                     name='Public',
                     subnet_type=ec2.SubnetType.PUBLIC,
                     cidr_mask=26
-
                 ),
                 # # commented out for V1.0
                 # ec2.SubnetConfiguration(
@@ -73,7 +72,7 @@ class VPCStack(Stack):
                 vpc_peering_connection_id=vpc_peer.ref,
             )
 
-        network_acl = NACLStack(
+        network_acl = NACL_Construct(
             self, 'NACL',
             vpc_web=vpc_web,
             vpc_admin=vpc_admin,
@@ -93,7 +92,7 @@ class VPCStack(Stack):
             vpc=vpc_admin,
             vpc_subnets=ec2.SubnetType.PUBLIC,
             security_group=admin_server_sg.sg,
-            instance_type=ec2.InstanceType('t2.micro'),
+            instance_type=ec2.InstanceType('t3.nano'),
             machine_image=ec2.MachineImage.latest_amazon_linux(),
             key_name='ec2-key-pair',
             block_devices=[
@@ -133,7 +132,7 @@ class VPCStack(Stack):
             vpc_subnets=ec2.SubnetType.PUBLIC,
             role=web_server_role,
             security_group=web_server_sg.sg,
-            instance_type=ec2.InstanceType('t2.micro'),
+            instance_type=ec2.InstanceType('t3.nano'),
             machine_image=ec2.AmazonLinuxImage(
                 generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2
                 ),
@@ -149,7 +148,7 @@ class VPCStack(Stack):
                 ec2.BlockDevice(
                     device_name='/dev/xvdf',
                     volume=ec2.BlockDeviceVolume.ebs(
-                        volume_size=4,
+                        volume_size=2,
                         encrypted=True,
                         delete_on_termination=TEST_ENV,
                     ))],
