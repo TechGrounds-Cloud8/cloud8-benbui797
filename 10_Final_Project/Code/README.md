@@ -35,10 +35,12 @@ $ pip install -r requirements.txt
 ```
 ## Configuration File
 There are two configurable settings:
-- **TRUSTED_IP** - Allow SSH access from these IP addresses
-- **TEST_ENV** - When set to true, certain resources such as S3 bucket, Backup Plans & Vaults will be deleted along with the stack. If you run a **production environment**, you want to keep these resources available, so it's **highly recommended** to set this setting to False.
+- **TRUSTED_IP** - Allow SSH access from these IP addresses. By default, your current public IP will be added. Any additional IP addresses need to be added to the list as strings: `[my_ip, "35.68.133.14", "56.175.25.219"]`
+- **TEST_ENV** - When set to true, certain resources such as S3 bucket, Backup Plans & Vaults will be deleted along with the stack. If you run a **production environment**, you want to keep these resources available, so it's **highly recommended** to set this setting to False. The default setting is True, so all resources get deleted.
 
-You can find the configuration file in the code directory, the file is named `_config.py`.
+You can find the configuration file in the code directory, the file is named `_config.py`.  
+  
+[Click here for a shortcut](./code/_config.py)
 
 Alternatively, you can run the following command to open it in VSC:
 ```
@@ -47,7 +49,7 @@ $ code ./code/_config.py
 
 ## Deploying
 
-Now you can bootstrap your environment to your stack (fill in your account settings such as region)
+Now you can bootstrap your environment to your stack (this adds your account settings such as the region to the Stack)
 
 ```
 $ cdk bootstrap
@@ -59,3 +61,12 @@ If that is alright and you want to continue to deploy:
 ```
 $ cdk deploy
 ```
+
+## Cleaning Up
+
+After testing the infrastructure, you can destroy the whole stack with the following command:
+```
+$ cdk destroy
+```
+
+If the TEST_ENV setting in the configuration file was set to True, all resources will be deleted. Else you may need to manually delete an S3 bucket, Backup Plan & Vault and the additional EBS Volume.
