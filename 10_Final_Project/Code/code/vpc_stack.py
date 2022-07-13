@@ -8,9 +8,9 @@ from constructs import Construct
 from code.nacl_construct import NACLStack
 from code.s3_construct import S3_Construct
 from code.backup_construct import Backup_Construct
-from code.sg_construct import SG_Construct
+from code.sg_construct import Admin_SG_Construct, Web_SG_Construct
 
-from code._config import TEST_ENV, TRUSTED_IP
+from code._config import TEST_ENV, TRUSTED_IP 
 
 class VPCStack(Stack):
 
@@ -82,26 +82,17 @@ class VPCStack(Stack):
         ####################
         ### Admin Server ###
         ####################
-        
-        # AdminServerSG
-        admin_server_sg = ec2.SecurityGroup(
+
+        admin_server_sg = Admin_SG_Construct(
             self, 'admin_server_sg',
-            vpc=vpc_admin,
-            allow_all_outbound=True
-        )
-        
-        admin_server_sg.add_ingress_rule(
-            # ec2.Peer.ipv4(f'{my_ip}/32'),
-            ec2.Peer.any_ipv4(),
-            ec2.Port.tcp(22),
-            'Allow SSH access from trusted IP'
+            vpc=vpc_admin
         )
 
         admin_server = ec2.Instance(
             self, 'adminserver',
             vpc=vpc_admin,
             vpc_subnets=ec2.SubnetType.PUBLIC,
-            security_group=admin_server_sg,
+            security_group=admin_server_sg.sg,
             instance_type=ec2.InstanceType('t2.micro'),
             machine_image=ec2.MachineImage.latest_amazon_linux(),
             key_name='ec2-key-pair',
@@ -112,7 +103,7 @@ class VPCStack(Stack):
                         volume_size=8,
                         encrypted=True,
                         delete_on_termination=TEST_ENV
-                )),],
+                ))],
         )
         
         ##################
@@ -120,27 +111,14 @@ class VPCStack(Stack):
         ##################
 
         # WebServerSG
-        web_server_sg = ec2.SecurityGroup(
+
+        web_server_sg = Web_SG_Construct(
             self, 'web_server_sg',
             vpc=vpc_web,
-        )
-        web_server_sg.add_ingress_rule(
-            ec2.Peer.any_ipv4(),
-            ec2.Port.tcp(80),
-            'Allow HTTP traffic from anywhere'
-        )
-        web_server_sg.add_ingress_rule(
-            ec2.Peer.any_ipv4(),
-            ec2.Port.tcp(443),
-            'Allow HTTPS traffic from anywhere'
-        )
-        web_server_sg.connections.allow_from(
-            admin_server_sg,
-            ec2.Port.tcp(22),
-            'Allow SSH traffic from Admin Server SG'
-        )
+            trusted_source=admin_server_sg.sg
+            )
 
-        #WebServer Role
+        #WebServer Role for S3 read access
         web_server_role = iam.Role(
             self, 'webserver-role',
             assumed_by=iam.ServicePrincipal('ec2.amazonaws.com'),
@@ -154,11 +132,11 @@ class VPCStack(Stack):
             vpc=vpc_web,
             vpc_subnets=ec2.SubnetType.PUBLIC,
             role=web_server_role,
-            security_group=web_server_sg,
+            security_group=web_server_sg.sg,
             instance_type=ec2.InstanceType('t2.micro'),
             machine_image=ec2.AmazonLinuxImage(
-            generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2
-            ),
+                generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2
+                ),
             key_name='ec2-key-pair',
             block_devices=[
                 ec2.BlockDevice(
@@ -174,8 +152,7 @@ class VPCStack(Stack):
                         volume_size=4,
                         encrypted=True,
                         delete_on_termination=TEST_ENV,
-                    )),
-            ],
+                    ))],
         )
         
         #################
@@ -193,6 +170,12 @@ class VPCStack(Stack):
             bucket_key='launch-web-server.sh',
         )
         web_server.user_data.add_execute_file_command(file_path=script_path)
+
+        web_server.user_data.add_s3_download_command(
+            bucket=s3_bucket.script_bucket,
+            bucket_key='index.html',
+            local_file='/var/www/html/index.html'
+        )
 
         ###################
         ### Backup Plan ###

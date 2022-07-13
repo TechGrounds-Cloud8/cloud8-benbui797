@@ -9,7 +9,7 @@ my_ip = requests.get('https://api.ipify.org').text
 # When true, S3 buckets, Backup Vaults etc will be deleted along with the stack.
 TEST_ENV = True
 
-# Add IP addresses as strings, seperated by comma's: "192.168.10.24", "10.0.15.156"
+# Add IP addresses as strings, seperated by comma's: [my_ip, "192.168.10.24", "10.0.15.156"]
 TRUSTED_IP = [my_ip]
 
 if my_ip in TRUSTED_IP:

@@ -61,7 +61,6 @@ class NACLStack(Construct):
             cidr=ec2.AclCidr.ipv4(vpc_admin.vpc_cidr_block),
             rule_number=120,
             traffic=ec2.AclTraffic.tcp_port(22),
-            # traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
             direction=ec2.TrafficDirection.INGRESS,
             rule_action=ec2.Action.ALLOW
         )
@@ -70,7 +69,6 @@ class NACLStack(Construct):
             cidr=ec2.AclCidr.any_ipv4(),
             rule_number=120,
             traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
-            # traffic=ec2.AclTraffic.tcp_port(22),
             direction=ec2.TrafficDirection.EGRESS,
             rule_action=ec2.Action.ALLOW
         )
@@ -79,7 +77,6 @@ class NACLStack(Construct):
             cidr=ec2.AclCidr.any_ipv4(),
             rule_number=130,
             traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
-            # traffic=ec2.AclTraffic.tcp_port(22),
             direction=ec2.TrafficDirection.INGRESS,
             rule_action=ec2.Action.ALLOW
         )
