@@ -65,7 +65,7 @@ class NACL_Construct(Construct):
             rule_action=ec2.Action.ALLOW
         )
         vpc_web_nacl.add_entry(
-            'Ephemeral SSH outbound allow',
+            'Ephemeral outbound allow',
             cidr=ec2.AclCidr.any_ipv4(),
             rule_number=120,
             traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
@@ -123,7 +123,7 @@ class NACL_Construct(Construct):
 
             )
             vpc_admin_nacl.add_entry(
-                'SSH outbound allow AdminIP',
+                'Ephemeral outbound allow AdminIP',
                 cidr=ec2.AclCidr.ipv4(f'{ip_address}/32'),
                 rule_number=100,
                 traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),

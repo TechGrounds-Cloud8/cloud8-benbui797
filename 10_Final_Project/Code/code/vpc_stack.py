@@ -164,17 +164,25 @@ class VPCStack(Stack):
         ### WebServer UserData ###
         ##########################
 
+        # download webserver script
         script_path = web_server.user_data.add_s3_download_command(
             bucket=s3_bucket.script_bucket,
             bucket_key='launch-web-server.sh',
         )
         web_server.user_data.add_execute_file_command(file_path=script_path)
 
+        # download website page
         web_server.user_data.add_s3_download_command(
             bucket=s3_bucket.script_bucket,
             bucket_key='index.html',
             local_file='/var/www/html/index.html'
         )
+        # download ebs volume partition disk
+        ebs_disk_path = web_server.user_data.add_s3_download_command(
+            bucket=s3_bucket.script_bucket,
+            bucket_key='mount-ebs.sh'
+        )
+        web_server.user_data.add_execute_file_command(file_path=ebs_disk_path)
 
         ###################
         ### Backup Plan ###

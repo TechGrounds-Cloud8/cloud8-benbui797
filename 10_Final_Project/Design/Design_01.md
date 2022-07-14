@@ -35,8 +35,6 @@
 - Instance requirements? Resources?
 - What are the trusted IP addresses?
 
-- S3 with PostDeploymentScripts?
-
 ### Product Owner questions:
 - AdminServer office IP SSH - SSM is best practise?
 
@@ -58,3 +56,4 @@
 - https://stackoverflow.com/questions/26873289/how-to-check-a-disk-for-partitions-for-use-in-a-script-in-linux
 - https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs
 - https://linuxhint.com/what_is_dev_null/
+- https://aws.amazon.com/blogs/storage/automating-amazon-ebs-snapshot-and-ami-management-using-amazon-dlm/

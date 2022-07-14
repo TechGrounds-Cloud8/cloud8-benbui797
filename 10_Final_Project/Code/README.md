@@ -47,6 +47,11 @@ Alternatively, you can run the following command to open it in VSC:
 $ code ./code/_config.py
 ```
 
+## Creating EC2 key pair
+In the console, create an EC2 key pair (.pem file) in the same region you want to deploy in with the name `ec2-key-pair`
+  
+<img src="images/key_pair.png" alt="ec2-key-pair" width=50%>
+  
 ## Deploying
 
 Now you can bootstrap your environment to your stack (this adds your account settings such as the region to the Stack)
@@ -62,6 +67,23 @@ If that is alright and you want to continue to deploy:
 $ cdk deploy
 ```
 
+## Connecting through SSH
+Start the SSH agent
+```
+$ ssh-agent bash
+```
+Add the ec2 key pair to the SSH agent
+```
+$ ssh-add ec2-key-pair.pem
+```
+SSH to your Admin server's *public IP*. Add the -A flag to enable forwarding of the connection.
+```
+$ ssh -A ec2-user@<admin.server.public.ip>
+```
+In order to connect to the web server, make an SSH connection from the admin server's terminal. You have to use the web server's *private ip*.
+```
+$ ssh ec2-user@<web.server.private.ip>
+```
 ## Cleaning Up
 
 After testing the infrastructure, you can destroy the whole stack with the following command:

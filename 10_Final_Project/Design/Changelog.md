@@ -21,3 +21,5 @@ Daily at 5am UTC time (the recommended time by AWS) for backups.
 
 ## Test Boolean
 When this variable is set to True, the services that will be retained by default (S3 Buckets, Backup Vault & Plan, EBS volumes) will be destroyed.
+
+## Additional data disk for web server

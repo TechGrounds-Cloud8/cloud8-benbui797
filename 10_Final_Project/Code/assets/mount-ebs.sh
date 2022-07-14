@@ -1,17 +1,22 @@
 #!/bin/bash
 
-fs = "$(blkid | awk ' { print $4 } '"
+# check if disk is already partitioned
+sudo parted -s /dev/nvme1n1 print 1  &> /dev/null
 
-blkid | awk -F"=" '/UUID=/ { print $3 }' | grep -o '\w*-\w*-\w*-\w*-\w*'
+# if status code == 1, then partition not found 
+# partition disk, add to fstab and mount
+if [ $? -eq 1 ]; then
+    sudo mkfs -t xfs /dev/nvme1n1
+    sudo mkdir -p /data
 
-if []
+    #get UUID of device
+    UUID=`lsblk -f | grep 'nvme1n1' | awk '{ print $3 }'`
 
-sudo mkfs -t xfs /dev/xvdf
-sudo mkdir /data
-sudo mount /dev/xvdf /data
+    # make backup of fstab
+    sudo cp /etc/fstab /etc/fstab.orig
 
-sudo cp /etc/fstab /etc/fstab.orig
-blkid | egrep "/dev/xvdf: UUID="
-echo "UUID=xxx"
+    # add device to fstab
+    sudo echo "UUID=$UUID  /data  xfs  defaults,nofail  0  2" >> /etc/fstab
+fi
 
-# https://stackoverflow.com/questions/43889158/shell-script-to-list-unformatted-disks-partitions
+sudo mount -a
