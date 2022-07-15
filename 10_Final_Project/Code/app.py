@@ -7,7 +7,7 @@ from code.vpc_stack import VPCStack
 
 
 app = cdk.App()
-VPCStack(app, "TG-Final-Project-V1",
+VPCStack(app, "TG-FP-V1",
     # If you don't specify 'env', this stack will be environment-agnostic.
     # Account/Region-dependent features and context lookups will not work,
     # but a single synthesized template can be deployed anywhere.

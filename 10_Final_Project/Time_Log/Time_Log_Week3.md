@@ -32,13 +32,24 @@
 - N/A
 ---
 # Log 14-7-2022
+
+## Daily Report
+- Worked all day on my bash script that checks if a disk has a partition, if not, create it and mount it
+## Challenges
+- Lack of bash experience
+## Solutions
+- Google/StackOverflow
+## Learnings
+- Spend 6+ on this and have now enrolled in a udemy course about bash scripting that takes 6 hours... might have been more efficient.
+---
+# Log 15-7-2022
  
 ## Daily Report
 - 
 ## Challenges
-- N/A
+- 
 ## Solutions
-- N/A
+- 
 ## Learnings
-- N/A
+- 
 ---
