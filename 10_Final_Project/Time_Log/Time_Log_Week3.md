@@ -45,11 +45,11 @@
 # Log 15-7-2022
  
 ## Daily Report
-- 
+- I finished the project!
 ## Challenges
-- 
+- I wanted to upload a .zip file with website assets. /var/www/html is a root owned folder and doesn't allow unzipping into it
 ## Solutions
-- 
+- Change the permissions
 ## Learnings
 - 
 ---
