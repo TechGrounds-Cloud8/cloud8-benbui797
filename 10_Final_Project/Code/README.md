@@ -1,7 +1,18 @@
 # Tech Grounds Final Project V1.0
-This is version 1.0 of the final project for the Tech Grounds Cloud Engineer cohort. From our coaches, we received a document in which the specifications, requirements and a sketch were supplied. Our task was to implement it as Infrastructure as Code, make suggestions/improvements on the way and work with the Scrum methodology.
+This is version 1.0 of the final project for the Tech Grounds Cloud Engineer cohort. From our coaches, we received a document in which the specifications, requirements and a sketch were supplied. Our task was to implement it as Infrastructure as Code, make suggestions/improvements along the way and work with the Scrum methodology.
 
-# Design
+# Shortcuts
+
+- [Quick Start Guide](#quick-start-guide)
+  - [Requirements](#requirements)
+  - [Preparations](#preparations)
+  - [Configuration File](#configuration-file)
+  - [EC2 Key Pair](#creating-ec2-key-pair)
+  - [Deploying](#deploying)
+  - [SSH Connection](#connecting-through-ssh)
+  - [Cleaning Up](#cleaning-up)
+- [Design](#design)
+- [Changelog](#changelog)
 
 # Quick Start Guide
 
@@ -92,3 +103,9 @@ $ cdk destroy
 ```
 
 If the TEST_ENV setting in the configuration file was set to True, all resources will be deleted. Else you may need to manually delete an S3 bucket, Backup Plan & Vault and the additional EBS Volume.
+
+# Design
+
+![Design Diagram](./images/TGFP-V1.png)
+
+# Changelog

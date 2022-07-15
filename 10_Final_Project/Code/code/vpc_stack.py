@@ -19,7 +19,7 @@ class VPCStack(Stack):
 
         # Create 2 VPC's and VPC peering connection
         vpc_web = ec2.Vpc(
-            self, 'VPC-Web',
+            self, 'app-prd-vpc',
             cidr='10.10.10.0/24',
             max_azs=1,
             subnet_configuration=[
@@ -38,7 +38,7 @@ class VPCStack(Stack):
             )
 
         vpc_admin = ec2.Vpc(
-            self, 'VPC-Admin',
+            self, 'management-prd-vpc',
             cidr='10.10.20.0/24',
             max_azs=1,
             subnet_configuration=[
@@ -83,12 +83,12 @@ class VPCStack(Stack):
         ####################
 
         admin_server_sg = Admin_SG_Construct(
-            self, 'admin_server_sg',
+            self, 'management-sg',
             vpc=vpc_admin
         )
 
         admin_server = ec2.Instance(
-            self, 'adminserver',
+            self, 'management-server',
             vpc=vpc_admin,
             vpc_subnets=ec2.SubnetType.PUBLIC,
             security_group=admin_server_sg.sg,
@@ -112,7 +112,7 @@ class VPCStack(Stack):
         # WebServerSG
 
         web_server_sg = Web_SG_Construct(
-            self, 'web_server_sg',
+            self, 'production-sg',
             vpc=vpc_web,
             trusted_source=admin_server_sg.sg
             )
@@ -127,7 +127,7 @@ class VPCStack(Stack):
         )
 
         web_server = ec2.Instance(
-            self, 'webserver',
+            self, 'web-server',
             vpc=vpc_web,
             vpc_subnets=ec2.SubnetType.PUBLIC,
             role=web_server_role,
@@ -158,7 +158,7 @@ class VPCStack(Stack):
         ### S3 Bucket ###
         #################
 
-        s3_bucket = S3_Construct(self, 'S3_Bucket', resource_access=[web_server, admin_server])
+        s3_bucket = S3_Construct(self, 'PostDeploymentScripts', resource_access=[web_server, admin_server])
 
         ##########################
         ### WebServer UserData ###

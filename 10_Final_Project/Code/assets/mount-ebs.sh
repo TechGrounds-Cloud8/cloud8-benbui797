@@ -11,13 +11,13 @@ if [ $? -eq 1 ]; then
     sleep 3
 
     #get UUID of device
-    UUID=`lsblk -f | grep 'nvme1n1' | awk '{ print $3 }'`
+    UUID=$(lsblk -f | grep 'nvme1n1' | awk '{ print $3 }')
 
     # make backup of fstab
     sudo cp /etc/fstab /etc/fstab.orig
 
     # add device to fstab
-    sudo echo "UUID=${UUID}  /data  xfs  defaults,nofail  0  2" >> /etc/fstab
+    echo "UUID=${UUID}  /data  xfs  defaults,nofail  0  2" | sudo tee -a /etc/fstab
 
 fi
 

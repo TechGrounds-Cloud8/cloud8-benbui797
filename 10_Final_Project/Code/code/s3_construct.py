@@ -23,7 +23,7 @@ class S3_Construct(Construct):
             auto_removal = RemovalPolicy.RETAIN
 
         self.script_bucket = s3.Bucket(
-            self, 'Script Bucket',
+            self, construct_id,
             encryption=s3.BucketEncryption.S3_MANAGED,
             versioned=True,
             enforce_ssl=True,
