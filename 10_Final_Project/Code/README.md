@@ -13,6 +13,7 @@ We received a document in which the specifications, requirements and a sketch we
   - [Deploying](#deploying)
   - [SSH Connection](#connecting-through-ssh)
   - [Cleaning Up](#cleaning-up)
+- [Updating Web Content](#updating-web-content)
 - [Design](#design)
 - [Changelog](#changelog)
   - [Region](#region)
@@ -113,8 +114,8 @@ $ cdk destroy
 
 If the TEST_ENV setting in the configuration file was set to True, all resources will be deleted. Else you may need to manually delete an S3 bucket, Backup Plan & Vault and the additional EBS Volume.
 
-# Using the Web Server
-In the folder `assets` you can add more files for the website. These will
+# Updating Web Content
+Save a zip file called `website_content.zip` in the `assets` folder. This will automatically be downloaded and unpacked in the corresponding folder.
 
 # Design
 
