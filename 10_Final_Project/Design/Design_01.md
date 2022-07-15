@@ -24,8 +24,6 @@
 ## Assumptions:
 - Requirements don't say that the WebServer needs to be accessable from the internet. In the diagram, it is in the public subnet, which means it has a public IP.
 - IAM policy? EC2 Keys?
-- Automated Security Responses? (AWS Solutions library)
-- Can I export Stack to Diagram.io for drawing?
 
 ## Suggestions
 - Check Security Hub (Security Score) after network is up? Add security tips to documentation/recommendations?
@@ -34,10 +32,6 @@
 - Which regions?
 - Instance requirements? Resources?
 - What are the trusted IP addresses?
-
-### Product Owner questions:
-- AdminServer office IP SSH - SSM is best practise?
-
 
 ## Sources:
 - [CDK Workshop](https://cdkworkshop.com/30-python.html)

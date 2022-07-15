@@ -1,7 +1,9 @@
 # Tech Grounds Final Project V1.0
-This is version 1.0 of the final project for the Tech Grounds Cloud Engineer cohort. From our coaches, we received a document in which the specifications, requirements and a sketch were supplied. Our task was to implement it as Infrastructure as Code, make suggestions/improvements along the way and work with the Scrum methodology.
+This is version 1.0 of the final project for the Tech Grounds Cloud Engineer cohort.  
 
-# Shortcuts
+We received a document in which the specifications, requirements and a sketch were supplied. Our task was to implement it using AWS CDK (Infrastructure as Code), make suggestions/improvements along the way and work with the Scrum methodology.
+  
+# Content
 
 - [Quick Start Guide](#quick-start-guide)
   - [Requirements](#requirements)
@@ -13,7 +15,14 @@ This is version 1.0 of the final project for the Tech Grounds Cloud Engineer coh
   - [Cleaning Up](#cleaning-up)
 - [Design](#design)
 - [Changelog](#changelog)
-
+  - [Region](#region)
+  - [AZ](#availability-zones)
+  - [Instance Type](#instance-types)
+  - [Backup](#backup-schedule)
+  - [Additional EBS](#additional-ebs-volume)
+  - [Trusted IPs](#trusted-ips)
+  - [Encryption Keys](#encryption-keys)
+ 
 # Quick Start Guide
 
 ## Requirements
@@ -104,8 +113,36 @@ $ cdk destroy
 
 If the TEST_ENV setting in the configuration file was set to True, all resources will be deleted. Else you may need to manually delete an S3 bucket, Backup Plan & Vault and the additional EBS Volume.
 
+# Using the Web Server
+In the folder `assets` you can add more files for the website. These will
+
 # Design
 
 ![Design Diagram](./images/TGFP-V1.png)
 
 # Changelog
+
+## Region
+The stack will deploy in the region that has been set up for your account in your AWS CLI profile.  
+  
+In the initial diagram, the VPC's were split over two regions, but this doesn't add any benefit (it doesn't increase the availability in the current setup), so the stack will deploy in a single region. There are two VPCs in order to comply with the security protocol for the management server.
+
+## Availability Zones
+The provided diagram asked for two public subnets per VPC, but there is no use-case for that. Also having the webserver and the management server doesn't add any value or benefit. If the web server AZ is down, you could still access the management server, but not the web server. By having both of them in the AZ, you can't reach either of them, but the result is the same. 
+  
+For a future version, it is highly recommended to use Auto-Scaling with a load balancer and opt for a multi-AZ deployment! This greatly increases availability and resiliency!
+
+## Instance Types
+There weren't any specifications supplied for the performance requirements of the servers, therefore the instance types with the lowest costs have been chosen.
+
+## Backup Schedule
+The backups are done daily at 5am UTC (the recommended time by AWS).
+
+## Additional EBS volume
+It is a best practise to have seperate root and data volumes for your servers, this has been added for the webserver. Incase the instance terminates, the data volume should persist.
+
+## Trusted IPs
+These haven't been provided, the script retrieves the public IP address of the host that runs it and adds it to the firewalls as a trusted IP. Additional or custom IP's can be added in the configuration file.
+
+## Encryption Keys
+Data in transit and at rest has been encrypted. For most services, this has been done with the default key. A custom key can be used via KMS.
