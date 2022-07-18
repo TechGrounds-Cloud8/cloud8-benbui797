@@ -7,6 +7,8 @@ RDS Multi-AZ deployment (one standby) == Synchronous replication (failover backu
   
 RDS Multi-AZ deployment (read-replica's) == Asynchronous replication 
 
+RDS Single-AZ == No read replica's!!
+
 
 ## Backups & Maintenance
 **Automated Backups**

@@ -129,7 +129,7 @@ The stack will deploy in the region that has been set up for your account in you
 In the initial diagram, the VPC's were split over two regions, but this doesn't add any benefit (it doesn't increase the availability in the current setup), so the stack will deploy in a single region. There are two VPCs in order to comply with the security protocol for the management server.
 
 ## Availability Zones
-The provided diagram asked for two public subnets per VPC, but there is no use-case for that. Also having the webserver and the management server doesn't add any value or benefit. If the web server AZ is down, you could still access the management server, but not the web server. By having both of them in the AZ, you can't reach either of them, but the result is the same. 
+The provided diagram asked for two public subnets per VPC, but there is no use-case for that. Also having the webserver and the management server in different AZ's doesn't add any value or benefit. If the web server AZ is down, you could still access the management server, but not the web server. By having both of them in the AZ, you can't reach either of them, but the end result is the same. 
   
 For a future version, it is highly recommended to use Auto-Scaling with a load balancer and opt for a multi-AZ deployment! This greatly increases availability and resiliency!
 
