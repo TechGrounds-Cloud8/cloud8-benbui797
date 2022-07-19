@@ -134,13 +134,14 @@ class IACStack(Stack):
                         encrypted=True,
                         delete_on_termination=TEST_ENV,
                     )),
-                ec2.BlockDevice(
-                    device_name='/dev/xvdf',
-                    volume=ec2.BlockDeviceVolume.ebs(
-                        volume_size=2,
-                        encrypted=True,
-                        delete_on_termination=TEST_ENV,
-                    ))],
+                # ec2.BlockDevice(
+                #     device_name='/dev/xvdf',
+                #     volume=ec2.BlockDeviceVolume.ebs(
+                #         volume_size=2,
+                #         encrypted=True,
+                #         delete_on_termination=TEST_ENV,
+                #     ))
+                ],
         )
         
         #################
@@ -170,12 +171,12 @@ class IACStack(Stack):
         self.web_server.user_data.add_commands("chmod 755 -R /var/www/html/")
         self.web_server.user_data.add_commands("unzip /tmp/website_content.zip -d /var/www/html/")
         
-        # download ebs volume partition disk
-        ebs_disk_path = self.web_server.user_data.add_s3_download_command(
-            bucket=self.s3_bucket.script_bucket,
-            bucket_key='mount-ebs.sh'
-        )
-        self.web_server.user_data.add_execute_file_command(file_path=ebs_disk_path)
+        # # download ebs volume partition disk
+        # ebs_disk_path = self.web_server.user_data.add_s3_download_command(
+        #     bucket=self.s3_bucket.script_bucket,
+        #     bucket_key='mount-ebs.sh'
+        # )
+        # self.web_server.user_data.add_execute_file_command(file_path=ebs_disk_path)
 
         # ###################
         # ### Backup Plan ###

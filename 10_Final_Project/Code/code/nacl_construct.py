@@ -74,9 +74,26 @@ class NACL_Construct(Construct):
             rule_action=ec2.Action.ALLOW
         )
 
-                # web private subnets
 
-    
+
+
+
+
+        ## TEMPORARY ###
+        vpc_web_nacl.add_entry(
+            'SSH inbound allow',
+            cidr=ec2.AclCidr.ipv4(vpc_admin.vpc_cidr_block),
+            rule_number=5000,
+            traffic=ec2.AclTraffic.tcp_port(22),
+            direction=ec2.TrafficDirection.INGRESS,
+            rule_action=ec2.Action.ALLOW
+        )
+
+
+        ###########################
+        ### web private subnets ###
+        ###########################
+        #    
         vpc_web_priv_nacl = ec2.NetworkAcl(
             self, 'NACL-Web-Private',
             vpc=vpc_web.vpc_web,
@@ -128,14 +145,6 @@ class NACL_Construct(Construct):
 
         # Add rules to NACL
         vpc_admin_nacl.add_entry(
-            'SSH inbound allow Subnet',
-            cidr=ec2.AclCidr.ipv4(vpc_web.vpc_web.vpc_cidr_block),
-            rule_number=100,
-            traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
-            direction=ec2.TrafficDirection.INGRESS,
-            rule_action=ec2.Action.ALLOW
-        )
-        vpc_admin_nacl.add_entry(
             'SSH outbound allow Subnet',
             cidr=ec2.AclCidr.ipv4(vpc_web.vpc_web.vpc_cidr_block),
             rule_number=100,
@@ -143,9 +152,26 @@ class NACL_Construct(Construct):
             direction=ec2.TrafficDirection.EGRESS,
             rule_action=ec2.Action.ALLOW
         )
+        vpc_admin_nacl.add_entry(
+            'Ephemeral inbound allow Subnet',
+            cidr=ec2.AclCidr.ipv4(vpc_web.vpc_web.vpc_cidr_block),
+            rule_number=10000,
+            traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
+            direction=ec2.TrafficDirection.INGRESS,
+            rule_action=ec2.Action.ALLOW
+        )
+        vpc_admin_nacl.add_entry(
+            'Ephemeral outbound allow Subnet',
+            cidr=ec2.AclCidr.ipv4(vpc_web.vpc_web.vpc_cidr_block),
+            rule_number=10000,
+            traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
+            direction=ec2.TrafficDirection.EGRESS,
+            rule_action=ec2.Action.ALLOW
+        )
+        
         
         # Add all trusted IP addresses 
-        rule_number = 200
+        rule_number = 500
 
         for ip_address in TRUSTED_IP:
             vpc_admin_nacl.add_entry(
@@ -155,14 +181,38 @@ class NACL_Construct(Construct):
                 traffic=ec2.AclTraffic.tcp_port(22),
                 direction=ec2.TrafficDirection.INGRESS,
                 rule_action=ec2.Action.ALLOW
-
+            )
+            # vpc_admin_nacl.add_entry(
+            #     'RDP inbound allow AdminIP',
+            #     cidr=ec2.AclCidr.ipv4(f'{ip_address}/32'),
+            #     rule_number=rule_number,
+            #     traffic=ec2.AclTraffic.tcp_port(3389),
+            #     direction=ec2.TrafficDirection.INGRESS,
+            #     rule_action=ec2.Action.ALLOW
+            # )
+            # vpc_admin_nacl.add_entry(
+            #     'WinRM inbound allow AdminIP',
+            #     cidr=ec2.AclCidr.ipv4(f'{ip_address}/32'),
+            #     rule_number=rule_number,
+            #     traffic=ec2.AclTraffic.tcp_port(5985),
+            #     direction=ec2.TrafficDirection.INGRESS,
+            #     rule_action=ec2.Action.ALLOW
+            # )
+            vpc_admin_nacl.add_entry(
+                'Ephemeral inbound allow AdminIP',
+                cidr=ec2.AclCidr.ipv4(f'{ip_address}/32'),
+                rule_number=(rule_number+100),
+                traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
+                direction=ec2.TrafficDirection.INGRESS,
+                rule_action=ec2.Action.ALLOW
             )
             vpc_admin_nacl.add_entry(
                 'Ephemeral outbound allow AdminIP',
                 cidr=ec2.AclCidr.ipv4(f'{ip_address}/32'),
-                rule_number=rule_number,
+                rule_number=(rule_number+100),
                 traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
                 direction=ec2.TrafficDirection.EGRESS,
                 rule_action=ec2.Action.ALLOW
             )
+
             rule_number += 100
