@@ -24,16 +24,18 @@ class WEB_VPC_Construct(Construct):
         )
 
         # Add private subnets to VPC
-        private_network_number = 1
+        private_network_address = 1
+        self.private_subnet_list = {}
         for az in AVAILABILITY_ZONES:
-            private_subnets = ec2.PrivateSubnet(
-                self, f'{az}-private-subnet',
+            name = f'{az}-private-subnet'
+            private_subnet = ec2.PrivateSubnet(
+                self, name,
                 vpc_id=self.vpc_web.vpc_id,
-                cidr_block=f'10.10.{private_network_number}.0/24',
+                cidr_block=f'10.10.{private_network_address}.0/24',
                 availability_zone=az                
             )
-            private_network_number += 1
-
+            private_network_address += 1
+            self.private_subnet_list[name] = private_subnet
 
 
 class ADMIN_VPC_Construct(Construct):
