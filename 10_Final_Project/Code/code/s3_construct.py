@@ -14,7 +14,7 @@ path = os.getcwd()
 
 class S3_Construct(Construct):
 
-    def __init__(self, scope: Construct, construct_id: str, resource_access, **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, resource_access=[], **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         if TEST_ENV:
