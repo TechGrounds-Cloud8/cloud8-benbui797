@@ -3,7 +3,7 @@ from aws_cdk import (
 )
 from constructs import Construct
 
-from code._config import TRUSTED_IP, AVAILABILITY_ZONES
+from code._config import TRUSTED_IP
 
 class WEB_VPC_Construct(Construct):
 
@@ -14,29 +14,31 @@ class WEB_VPC_Construct(Construct):
             self, 'app-prd-vpc',
             cidr='10.10.0.0/16',
             nat_gateways=0,
-            max_azs=1,
+            max_azs=3,
             subnet_configuration=[
                 ec2.SubnetConfiguration(
                     name='Public',
                     subnet_type=ec2.SubnetType.PUBLIC,
                     cidr_mask=24
-                )]
+                ),                
+                ec2.SubnetConfiguration(
+                    name='Private',
+                    subnet_type=ec2.SubnetType.PRIVATE_ISOLATED,
+                    cidr_mask=24
+                )],
+            gateway_endpoints={
+                'S3': ec2.GatewayVpcEndpointOptions(
+                    service=ec2.GatewayVpcEndpointAwsService.S3
+                )
+            }
         )
 
-        # Add private subnets to VPC
-        private_network_address = 1
-        self.private_subnet_list = {}
-        for az in AVAILABILITY_ZONES:
-            name = f'{az}-private-subnet'
-            private_subnet = ec2.PrivateSubnet(
-                self, name,
-                vpc_id=self.vpc_web.vpc_id,
-                cidr_block=f'10.10.{private_network_address}.0/24',
-                availability_zone=az                
-            )
-            private_network_address += 1
-            self.private_subnet_list[name] = private_subnet
-
+        # s3_endpoint = self.vpc_web.add_gateway_endpoint(
+        #     'S3Endpoint',
+        #     service=ec2.GatewayVpcEndpointAwsService.S3            
+        #     )
+        # s3_endpoint.add_to_policy
+        
 
 class ADMIN_VPC_Construct(Construct):
 

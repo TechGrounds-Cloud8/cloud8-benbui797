@@ -3,7 +3,7 @@ from aws_cdk import (
 )
 from constructs import Construct
 
-from code._config import TRUSTED_IP, AVAILABILITY_ZONES
+from code._config import TRUSTED_IP
 
 
 class NACL_Construct(Construct):
@@ -18,7 +18,7 @@ class NACL_Construct(Construct):
         # web public subnet
         vpc_web_nacl = ec2.NetworkAcl(
             self, 'NACL-Web-Public',
-            vpc=vpc_web.vpc_web,
+            vpc=vpc_web,
             subnet_selection=ec2.SubnetSelection(
                 subnet_type=ec2.SubnetType.PUBLIC
             )
@@ -79,7 +79,7 @@ class NACL_Construct(Construct):
 
 
 
-        ## TEMPORARY ###
+        ## TEMPORARY ####################################################################################
         vpc_web_nacl.add_entry(
             'SSH inbound allow',
             cidr=ec2.AclCidr.ipv4(vpc_admin.vpc_cidr_block),
@@ -93,10 +93,13 @@ class NACL_Construct(Construct):
         ###########################
         ### web private subnets ###
         ###########################
-        #    
+
         vpc_web_priv_nacl = ec2.NetworkAcl(
             self, 'NACL-Web-Private',
-            vpc=vpc_web.vpc_web,
+            vpc=vpc_web,
+            subnet_selection=ec2.SubnetSelection(
+                subnet_type=ec2.SubnetType.PRIVATE_ISOLATED
+            )
         )
 
         # Add rules to NACL for Private subnet
@@ -125,12 +128,6 @@ class NACL_Construct(Construct):
             rule_action=ec2.Action.ALLOW
         )
 
-        for subnet in vpc_web.private_subnet_list.values():
-            subnet.associate_network_acl(
-                f'{subnet}-NACL',
-                network_acl=vpc_web_priv_nacl
-            )
-
         ########################################
         ### Create Network ACL for VPC Admin ###
         ########################################
@@ -146,7 +143,7 @@ class NACL_Construct(Construct):
         # Add rules to NACL
         vpc_admin_nacl.add_entry(
             'SSH outbound allow Subnet',
-            cidr=ec2.AclCidr.ipv4(vpc_web.vpc_web.vpc_cidr_block),
+            cidr=ec2.AclCidr.ipv4(vpc_web.vpc_cidr_block),
             rule_number=100,
             traffic=ec2.AclTraffic.tcp_port(22),
             direction=ec2.TrafficDirection.EGRESS,
@@ -154,7 +151,7 @@ class NACL_Construct(Construct):
         )
         vpc_admin_nacl.add_entry(
             'Ephemeral inbound allow Subnet',
-            cidr=ec2.AclCidr.ipv4(vpc_web.vpc_web.vpc_cidr_block),
+            cidr=ec2.AclCidr.ipv4(vpc_web.vpc_cidr_block),
             rule_number=10000,
             traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
             direction=ec2.TrafficDirection.INGRESS,
@@ -162,7 +159,7 @@ class NACL_Construct(Construct):
         )
         vpc_admin_nacl.add_entry(
             'Ephemeral outbound allow Subnet',
-            cidr=ec2.AclCidr.ipv4(vpc_web.vpc_web.vpc_cidr_block),
+            cidr=ec2.AclCidr.ipv4(vpc_web.vpc_cidr_block),
             rule_number=10000,
             traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
             direction=ec2.TrafficDirection.EGRESS,
