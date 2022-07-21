@@ -1,11 +1,12 @@
 from aws_cdk import (
+    CfnParameter,
     aws_ec2 as ec2,
+    aws_ssm as ssm
 )
 
 from constructs import Construct
 
 from code._config import TRUSTED_IP
-
 
 class Admin_SG_Construct(Construct):
 
@@ -18,8 +19,17 @@ class Admin_SG_Construct(Construct):
             allow_all_outbound=False
         )
 
+        trusted_ips = ssm.StringParameter.value_for_string_parameter(
+            self, parameter_name='tgfp-trusted-ip')
+
+
+        trusted_ips = trusted_ips.split(",")
+
+        print(trusted_ips)
+
         # Allow SSH from trusted IPs
-        for ip in TRUSTED_IP:
+        # for ip in TRUSTED_IP:
+        for ip in trusted_ips:
             self.sg.add_ingress_rule(
                 peer=ec2.Peer.ipv4(f'{ip}/32'),
                 connection=ec2.Port.tcp(22),

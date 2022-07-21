@@ -102,6 +102,41 @@ class NACL_Construct(Construct):
             )
         )
 
+        ######################################################## TEMPORARY ALLOW ALL HTTPS
+
+        vpc_web_priv_nacl.add_entry(
+            'HTTP inbound allow',
+            cidr=ec2.AclCidr.any_ipv4(),
+            rule_number=1000,
+            traffic=ec2.AclTraffic.tcp_port(80),
+            direction=ec2.TrafficDirection.INGRESS,
+            rule_action=ec2.Action.ALLOW
+        )
+        vpc_web_priv_nacl.add_entry(
+            'HTTPS inbound allow',
+            cidr=ec2.AclCidr.any_ipv4(),
+            rule_number=1000,
+            traffic=ec2.AclTraffic.tcp_port(443),
+            direction=ec2.TrafficDirection.INGRESS,
+            rule_action=ec2.Action.ALLOW
+        )
+        vpc_web_priv_nacl.add_entry(
+            'HTTP outbound allow',
+            cidr=ec2.AclCidr.any_ipv4(),
+            rule_number=1100,
+            traffic=ec2.AclTraffic.tcp_port(80),
+            direction=ec2.TrafficDirection.EGRESS,
+            rule_action=ec2.Action.ALLOW
+        )
+        vpc_web_priv_nacl.add_entry(
+            'HTTPS outbound allow',
+            cidr=ec2.AclCidr.any_ipv4(),
+            rule_number=1100,
+            traffic=ec2.AclTraffic.tcp_port(443),
+            direction=ec2.TrafficDirection.EGRESS,
+            rule_action=ec2.Action.ALLOW
+        )
+
         # Add rules to NACL for Private subnet
         vpc_web_priv_nacl.add_entry(
             'SSH inbound allow',

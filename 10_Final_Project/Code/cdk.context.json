@@ -3,5 +3,6 @@
     "eu-central-1a",
     "eu-central-1b",
     "eu-central-1c"
-  ]
+  ],
+  "ssm:account=880133342642:parameterName=tgfp-ami:region=eu-central-1": "AQICAHj0r1LG0UuXExZKCLG0blpUfW3DGqNXqf32IIAERF2zvQGAvwc2CArQ4THCsMMdYotNAAAAczBxBgkqhkiG9w0BBwagZDBiAgEAMF0GCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQM87pTZp3W8zwOqvDYAgEQgDDaoKzcgwsUXA0olHciYQz39TwRWcKSwcNv5TET/Qmjur2/T7SL2BbM2LZHdx3RIPo="
 }

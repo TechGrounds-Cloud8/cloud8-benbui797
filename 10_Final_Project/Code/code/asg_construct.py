@@ -1,47 +1,37 @@
 from aws_cdk import (
     aws_ec2 as ec2,
-    aws_autoscaling as autoscaling
+    aws_autoscaling as autoscaling,
+    aws_ssm as ssm
 )
 
 from constructs import Construct
 
-from code._config import MIN_CAPACITY, MAX_CAPACITY, TEST_ENV
+from code._config import MIN_CAPACITY, MAX_CAPACITY
 
 class ASG_Construct(Construct):
 
     def __init__(self, scope: Construct, construct_id: str, vpc_web, security_group, role, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        # # AMI
-        # self.custom_AMI = ec2.GenericLinuxImage(
-        #     ami_map={
-        #         'eu-central-1': 'ami-id'                                                ############# ADD CUSTOM AMI ID
-        #     }
-        # )
+        self.ssm_ami = ssm.StringParameter.value_for_string_parameter(
+            self, parameter_name='tgfp-myami')
 
-        user_data = ec2.UserData.for_linux()
-        user_data.add_commands('sudo yum update -y && sudo yum install httpd -y && sudo systemctl start httpd && sudo systemctl enable httpd.service')
+        # lookup AMI
+        self.custom_AMI = ec2.GenericLinuxImage(
+            ami_map={
+                'eu-central-1': self.ssm_ami,
+            }
+        )
         
         # Create Launch Template
         self.launch_template = ec2.LaunchTemplate(
             self, 'Launch Template',
             launch_template_name='app-prod-launch-template',
             instance_type=ec2.InstanceType('t3.nano'),
-            machine_image=ec2.AmazonLinuxImage(
-                generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2
-                ),                                                                               ########## EDIT TO CUSTOM AMI LATER!
+            machine_image=self.custom_AMI,
             key_name='ec2-key-pair',
             security_group=security_group,
-            role=role,
-            block_devices=[
-                ec2.BlockDevice(
-                    device_name='/dev/xvda',
-                    volume=ec2.BlockDeviceVolume.ebs(
-                        volume_size=8,
-                        encrypted=True,
-                        delete_on_termination=TEST_ENV,
-                    ))],
-            user_data=user_data
+            role=role
         )
 
         # Create AutoScaling Group

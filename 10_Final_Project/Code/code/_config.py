@@ -1,7 +1,10 @@
-import aws_cdk as cdk
+
+
 import requests
 
 my_ip = requests.get('https://api.ipify.org').text
+
+
 
 ########################
 ### CONFIG VARIABLES ###
@@ -16,6 +19,14 @@ TRUSTED_IP = [my_ip]
 # Capacity settings for Auto-Scaling Group
 MIN_CAPACITY = 1
 MAX_CAPACITY = 3
+
+# AMI_MAP = {
+#     'eu-central-1': 'ami-0ca44d0a8fc1ada8a',
+#     }
+
+# ARN of your SSL certificate that will be installed on ALB and Instances
+CERTIFICATE_ARN = 'arn:aws:acm:eu-central-1:880133342642:certificate/e2e7d9e5-2253-4762-9e6c-ed335ff8f0c1'
+
 
 if my_ip in TRUSTED_IP:
     print(f'Local IP found: {my_ip}')

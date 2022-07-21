@@ -11,7 +11,6 @@ from code.s3_construct import S3_Construct
 from code.backup_construct import Backup_Construct
 from code.sg_construct import Admin_SG_Construct, Web_SG_Construct
 from code.vpc_construct import WEB_VPC_Construct, ADMIN_VPC_Construct
-from code.ec2_construct import EC2_Construct
 from code.elb_construct import ELB_Construct
 
 from code._config import TEST_ENV
@@ -67,9 +66,9 @@ class IACStack(Stack):
         #     vpc_admin=self.vpc_admin,
         # )
 
-        ####################
-        ### Admin Server ###
-        ####################
+        # ####################
+        # ### Admin Server ###
+        # ####################
 
         self.admin_server_sg = Admin_SG_Construct(
             self, 'management-sg',

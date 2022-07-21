@@ -18,3 +18,9 @@ It is a best practise to seperate the root disk and data disk, but when we use a
 
 ## Environment
 [It's recommended for production stacks to explicitly specify the environment for the stack in the .app file.](https://docs.aws.amazon.com/cdk/v2/guide/environments.html)
+
+## Certificate
+Import certificate in ACM
+
+## SSL offloading
+Encryption and decryption require a bit of computing power, so in order to speed up traffic over the internal network, we allow for SSL offloading at the ALB.
