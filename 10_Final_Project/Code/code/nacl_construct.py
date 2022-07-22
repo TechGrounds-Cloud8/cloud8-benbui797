@@ -104,39 +104,6 @@ class NACL_Construct(Construct):
 
         ######################################################## TEMPORARY ALLOW ALL HTTPS
 
-        vpc_web_priv_nacl.add_entry(
-            'HTTP inbound allow',
-            cidr=ec2.AclCidr.any_ipv4(),
-            rule_number=1000,
-            traffic=ec2.AclTraffic.tcp_port(80),
-            direction=ec2.TrafficDirection.INGRESS,
-            rule_action=ec2.Action.ALLOW
-        )
-        vpc_web_priv_nacl.add_entry(
-            'HTTPS inbound allow',
-            cidr=ec2.AclCidr.any_ipv4(),
-            rule_number=1000,
-            traffic=ec2.AclTraffic.tcp_port(443),
-            direction=ec2.TrafficDirection.INGRESS,
-            rule_action=ec2.Action.ALLOW
-        )
-        vpc_web_priv_nacl.add_entry(
-            'HTTP outbound allow',
-            cidr=ec2.AclCidr.any_ipv4(),
-            rule_number=1100,
-            traffic=ec2.AclTraffic.tcp_port(80),
-            direction=ec2.TrafficDirection.EGRESS,
-            rule_action=ec2.Action.ALLOW
-        )
-        vpc_web_priv_nacl.add_entry(
-            'HTTPS outbound allow',
-            cidr=ec2.AclCidr.any_ipv4(),
-            rule_number=1100,
-            traffic=ec2.AclTraffic.tcp_port(443),
-            direction=ec2.TrafficDirection.EGRESS,
-            rule_action=ec2.Action.ALLOW
-        )
-
         # Add rules to NACL for Private subnet
         vpc_web_priv_nacl.add_entry(
             'SSH inbound allow',
@@ -147,17 +114,33 @@ class NACL_Construct(Construct):
             rule_action=ec2.Action.ALLOW
         )
         vpc_web_priv_nacl.add_entry(
-            'Ephemeral outbound allow',
-            cidr=ec2.AclCidr.ipv4(vpc_admin.vpc_cidr_block),
+            'HTTP inbound allow',
+            cidr=ec2.AclCidr.any_ipv4(),
             rule_number=200,
+            traffic=ec2.AclTraffic.tcp_port(80),
+            direction=ec2.TrafficDirection.INGRESS,
+            rule_action=ec2.Action.ALLOW
+        )
+        vpc_web_priv_nacl.add_entry(
+            'HTTP outbound allow',
+            cidr=ec2.AclCidr.any_ipv4(),
+            rule_number=200,
+            traffic=ec2.AclTraffic.tcp_port(80),
+            direction=ec2.TrafficDirection.EGRESS,
+            rule_action=ec2.Action.ALLOW
+        )
+        vpc_web_priv_nacl.add_entry(
+            'Ephemeral outbound allow',
+            cidr=ec2.AclCidr.any_ipv4(),
+            rule_number=300,
             traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
             direction=ec2.TrafficDirection.EGRESS,
             rule_action=ec2.Action.ALLOW,
         )
         vpc_web_priv_nacl.add_entry(
             'Ephemeral inbound allow',
-            cidr=ec2.AclCidr.ipv4(vpc_admin.vpc_cidr_block),
-            rule_number=200,
+            cidr=ec2.AclCidr.any_ipv4(),
+            rule_number=300,
             traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
             direction=ec2.TrafficDirection.INGRESS,
             rule_action=ec2.Action.ALLOW
@@ -200,7 +183,6 @@ class NACL_Construct(Construct):
             direction=ec2.TrafficDirection.EGRESS,
             rule_action=ec2.Action.ALLOW
         )
-        
         
         # Add all trusted IP addresses 
         rule_number = 500

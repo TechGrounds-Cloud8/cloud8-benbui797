@@ -11,7 +11,7 @@ from code._config import TEST_ENV
 
 class Backup_Construct(Construct):
 
-    def __init__(self, scope: Construct, construct_id: str, instances: list, **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, efs_resources: list, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
         
         # Create backup vault
@@ -32,10 +32,10 @@ class Backup_Construct(Construct):
             self.backup_plan.apply_removal_policy(RemovalPolicy.DESTROY)
 
         # Add instances to the backup plan resources
-        for instance in instances:
+        for efs in efs_resources:
             self.backup_plan.add_selection(
-                'Instances',
-                resources=[backup.BackupResource.from_ec2_instance(instance)],
+                'EFS',
+                resources=[backup.BackupResource.from_efs_file_system(efs)],
                 allow_restores=True,
             )
         

@@ -22,6 +22,8 @@ class ASG_Construct(Construct):
                 'eu-central-1': self.ssm_ami,
             }
         )
+
+        self.user_data = ec2.UserData.for_linux()
         
         # Create Launch Template
         self.launch_template = ec2.LaunchTemplate(
@@ -31,7 +33,8 @@ class ASG_Construct(Construct):
             machine_image=self.custom_AMI,
             key_name='ec2-key-pair',
             security_group=security_group,
-            role=role
+            role=role,
+            user_data=self.user_data
         )
 
         # Create AutoScaling Group

@@ -1,11 +1,11 @@
 from aws_cdk import (
     Duration,
     aws_elasticloadbalancingv2 as elbv2,
-    aws_certificatemanager as acm
+    aws_certificatemanager as acm,
+    aws_ssm as ssm
 )
 from constructs import Construct
 
-from code._config import CERTIFICATE_ARN
 
 class ELB_Construct(Construct):
 
@@ -17,17 +17,18 @@ class ELB_Construct(Construct):
             self, 'ALB',
             vpc=vpc,
             internet_facing=True,
-            # idle_timeout=65,
-            # vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PUBLIC)
         )
 
         # Redirect HTTP to HTTPS
         self.alb.add_redirect()
 
+        self.certificate_arn = ssm.StringParameter.value_for_string_parameter(
+            self, parameter_name='tgfp-certificate-arn')
+
         # Import SSL Certificate
         certificate = acm.Certificate.from_certificate_arn(
             self, 'Certificate',
-            certificate_arn=CERTIFICATE_ARN
+            certificate_arn=self.certificate_arn
             )
 
         # Add listener to ALB

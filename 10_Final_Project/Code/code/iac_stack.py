@@ -4,16 +4,18 @@ from aws_cdk import (
     aws_iam as iam,
 )
 from constructs import Construct
-from code.asg_construct import ASG_Construct
 
+from code.asg_construct import ASG_Construct
+from code.efs_construct import EFS_Construct
 from code.nacl_construct import NACL_Construct
 from code.s3_construct import S3_Construct
 from code.backup_construct import Backup_Construct
 from code.sg_construct import Admin_SG_Construct, Web_SG_Construct
 from code.vpc_construct import WEB_VPC_Construct, ADMIN_VPC_Construct
 from code.elb_construct import ELB_Construct
+from code.ami_instance import AMI_Construct
 
-from code._config import TEST_ENV
+from code._config import TEST_ENV, AMI_SERVER
 
 class IACStack(Stack):
 
@@ -49,7 +51,6 @@ class IACStack(Stack):
                 vpc_peering_connection_id=self.vpc_peer.ref,
             )
 
-
         # VPC admin Public
         for subnet in self.vpc_admin.public_subnets:
             route_table_entry = ec2.CfnRoute(
@@ -59,16 +60,16 @@ class IACStack(Stack):
                 vpc_peering_connection_id=self.vpc_peer.ref,
             )
 
-        # # Add Network ACLs to the VPCs
-        # self.network_acl = NACL_Construct(
-        #     self, 'NACL',
-        #     vpc_web=self.vpc_web,
-        #     vpc_admin=self.vpc_admin,
-        # )
+        # Add Network ACLs to the VPCs
+        self.network_acl = NACL_Construct(
+            self, 'NACL',
+            vpc_web=self.vpc_web,
+            vpc_admin=self.vpc_admin,
+        )
 
-        # ####################
-        # ### Admin Server ###
-        # ####################
+        ####################
+        ### Admin Server ###
+        ####################
 
         self.admin_server_sg = Admin_SG_Construct(
             self, 'management-sg',
@@ -131,85 +132,68 @@ class IACStack(Stack):
             asg=self.asg.auto_scaling_group,
         )
 
+        #################
+        ### S3 Bucket ###
+        #################
 
+        self.s3_bucket = S3_Construct(self, 'PostDeploymentScripts')
 
+        ####################
+        ### AMI Instance ###
+        ####################
 
-
-
-
-
-
-
-
-
-
-        # self.web_server = ec2.Instance(
-        #     self, 'web-server',
-        #     vpc=self.vpc_web,
-        #     vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PUBLIC),
-        #     role=self.web_server_role,
-        #     security_group=self.web_server_sg.sg,
-        #     instance_type=ec2.InstanceType('t3.nano'),
-        #     machine_image=ec2.AmazonLinuxImage(
-        #         generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2
-        #         ),
-        #     key_name='ec2-key-pair',
-        #     block_devices=[
-        #         ec2.BlockDevice(
-        #             device_name='/dev/xvda',
-        #             volume=ec2.BlockDeviceVolume.ebs(
-        #                 volume_size=8,
-        #                 encrypted=True,
-        #                 delete_on_termination=TEST_ENV,
-        #             )),
-        #         # ec2.BlockDevice(
-        #         #     device_name='/dev/xvdf',
-        #         #     volume=ec2.BlockDeviceVolume.ebs(
-        #         #         volume_size=2,
-        #         #         encrypted=True,
-        #         #         delete_on_termination=TEST_ENV,
-        #         #     ))
-        #         ],
-        # )
+        if AMI_SERVER:
+            self.ami_instance = AMI_Construct(
+                self, 'AMI-Instance',
+                vpc=self.vpc_web,
+                security_group=self.web_server_sg.sg,
+                role=self.web_server_role,
+                s3_bucket=self.s3_bucket
+                )
         
-        # #################
-        # ### S3 Bucket ###
-        # #################
+        #######################
+        ### EFS File System ###
+        #######################
 
-        # self.s3_bucket = S3_Construct(self, 'PostDeploymentScripts')
+        self.efs = EFS_Construct(
+            self, 'EFS',
+            vpc=self.vpc_web
+            )
 
-        # ##########################
-        # ### WebServer UserData ###
-        # ##########################
+        self.efs.efs.connections.allow_default_port_from(self.asg.auto_scaling_group)
 
-        # # download webserver script
-        # script_path = self.web_server.user_data.add_s3_download_command(
-        #     bucket=self.s3_bucket.script_bucket,
-        #     bucket_key='launch-web-server.sh',
-        # )
-        # self.web_server.user_data.add_execute_file_command(file_path=script_path)
+        ####################
+        ### ASG UserData ###
+        ####################
 
-        # # download website content
-        # self.web_server.user_data.add_s3_download_command(
-        #     bucket=self.s3_bucket.script_bucket,
-        #     bucket_key='website_content.zip',
-        #     local_file='/tmp/website_content.zip'
-        # )
-        # # unzip website content
-        # self.web_server.user_data.add_commands("chmod 755 -R /var/www/html/")
-        # self.web_server.user_data.add_commands("unzip /tmp/website_content.zip -d /var/www/html/")
-        
-        # # download ebs volume partition disk
-        # ebs_disk_path = self.web_server.user_data.add_s3_download_command(
-        #     bucket=self.s3_bucket.script_bucket,
-        #     bucket_key='mount-ebs.sh'
-        # )
-        # self.web_server.user_data.add_execute_file_command(file_path=ebs_disk_path)
+        self.asg.user_data.add_commands(
+            'yum check-update -y',
+            'yum upgrade -y',
+            'yum install -y amazon-efs-utils',
+            'yum install -y nfs-utils',
+            'file_system_id_1=' + self.efs.efs.file_system_id,
+            'efs_mount_point_1=/mnt/efs/fs1',
+            'mkdir -p "${efs_mount_point_1}"',
+            'test -f "/sbin/mount.efs" && echo "${file_system_id_1}:/ ${efs_mount_point_1} efs defaults,_netdev" >> /etc/fstab || " + "echo "${file_system_id_1}.efs.' + Stack.of(self).region + 'cd .amazonaws.com:/ ${efs_mount_point_1} nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev 0 0" >> /etc/fstab',
+            'mount -a -t efs,nfs4 defaults'
+            )
 
-        # ###################
-        # ### Backup Plan ###
-        # ###################
-        # backup_plan = Backup_Construct(
-        #     self, 'Backup-Plan',
-        #     instances=[self.web_server],
-        # )
+        self.asg.user_data.add_commands("rm -rf /var/www/html && ln -s /var/www/html /mnt/efs/fs1/html")
+
+        # download website content
+        self.asg.user_data.add_s3_download_command(
+            bucket=self.s3_bucket.script_bucket,
+            bucket_key='website_content.zip',
+            local_file='/tmp/website_content.zip'
+        )
+        # unzip website content
+        self.asg.user_data.add_commands("chmod 755 -R /var/www/html/")
+        self.asg.user_data.add_commands("unzip /tmp/website_content.zip -d /var/www/html/")
+
+        ###################
+        ### Backup Plan ###
+        ###################
+        backup_plan = Backup_Construct(
+            self, 'Backup-Plan',
+            efs_resources=[self.efs.efs],
+        )
