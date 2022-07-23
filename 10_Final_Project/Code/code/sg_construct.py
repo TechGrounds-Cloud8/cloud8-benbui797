@@ -30,6 +30,34 @@ class Admin_SG_Construct(Construct):
                 connection=ec2.Port.tcp(22),
                 description='Allow SSH access from trusted IP'
             )
+            # self.sg.add_egress_rule(
+            #     peer=ec2.Peer.ipv4(f'{ip}/32'),
+            #     connection=ec2.Port.tcp(22),
+            #     description='Allow SSH access from trusted IP'
+            # )
+            self.sg.add_ingress_rule(
+                peer=ec2.Peer.ipv4(f'{ip}/32'),
+                connection=ec2.Port.tcp(3389),
+                description='Allow SSH access from trusted IP'
+            )
+
+        self.sg.add_egress_rule(
+                peer=ec2.Peer.any_ipv4(),
+                connection=ec2.Port.tcp(22),
+                description='Allow outbound SSH to other VPC'
+            )
+
+        # Allow HTTP(S) to download OpenSSH
+        self.sg.add_egress_rule(
+                peer=ec2.Peer.any_ipv4(),
+                connection=ec2.Port.tcp(80),
+                description='Allow outbound HTTP'
+            )
+        self.sg.add_egress_rule(
+            peer=ec2.Peer.any_ipv4(),
+            connection=ec2.Port.tcp(443),
+            description='Allow outbound HTTPS'
+        )
 
 
 class Web_SG_Construct(Construct):

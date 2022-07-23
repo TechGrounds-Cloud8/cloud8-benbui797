@@ -1,4 +1,5 @@
 from aws_cdk import (
+    CfnOutput,
     Stack,
     aws_ec2 as ec2,
     aws_iam as iam,
@@ -82,21 +83,34 @@ class IACStack(Stack):
             vpc_subnets=ec2.SubnetType.PUBLIC,
             security_group=self.admin_server_sg.sg,
             instance_type=ec2.InstanceType('t3.nano'),
-            machine_image=ec2.AmazonLinuxImage(
-                generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2
-                ),
-            # machine_image=ec2.WindowsImage(ec2.WindowsVersion.WINDOWS_SERVER_2022_DUTCH_FULL_BASE),
+            # machine_image=ec2.AmazonLinuxImage(
+            #     generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2
+            #     ),
+            machine_image=ec2.WindowsImage(ec2.WindowsVersion.WINDOWS_SERVER_2022_DUTCH_FULL_BASE),
             key_name='ec2-key-pair',
             block_devices=[
                 ec2.BlockDevice(
-                    device_name='/dev/xvda',
+                    device_name='/dev/sda1',
                     volume=ec2.BlockDeviceVolume.ebs(
-                        volume_size=8,
+                        volume_size=30,
                         encrypted=True,
                         delete_on_termination=TEST_ENV
                 ))],
         )
         
+        # Install OpenSSH on Admin Server
+        self.admin_server.user_data.for_windows()
+        self.admin_server.add_user_data(
+            'Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0',
+            'Start-Service sshd',
+            "Set-Service -Name sshd -StartupType 'Automatic'",
+            "New-NetFirewallRule -Name sshd -DisplayName 'Allow SSH' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22"
+            )
+
+        # https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_server_configuration
+        # https://adamtheautomator.com/openssh-windows/
+        # https://www.redhat.com/sysadmin/ssh-proxy-bastion-proxyjump
+
         ########################
         ### Web Server Fleet ###
         ########################
@@ -177,8 +191,8 @@ class IACStack(Stack):
             'test -f "/sbin/mount.efs" && echo "${file_system_id_1}:/ ${efs_mount_point_1} efs defaults,_netdev" >> /etc/fstab || " + "echo "${file_system_id_1}.efs.' + Stack.of(self).region + 'cd .amazonaws.com:/ ${efs_mount_point_1} nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev 0 0" >> /etc/fstab',
             'mount -a -t efs,nfs4 defaults'
             )
-
-        self.asg.user_data.add_commands("rm -rf /var/www/html && ln -s /var/www/html /mnt/efs/fs1/html")
+        
+        self.asg.user_data.add_commands("rm -rf /var/www/html && ln -s /mnt/efs/fs1/html /var/www/html")
 
         # download website content
         self.asg.user_data.add_s3_download_command(
@@ -187,13 +201,28 @@ class IACStack(Stack):
             local_file='/tmp/website_content.zip'
         )
         # unzip website content
-        self.asg.user_data.add_commands("chmod 755 -R /var/www/html/")
-        self.asg.user_data.add_commands("unzip /tmp/website_content.zip -d /var/www/html/")
+        self.asg.user_data.add_commands("chmod 755 -R /mnt/efs/fs1/html")
+        self.asg.user_data.add_commands("unzip /tmp/website_content.zip -d /mnt/efs/fs1/html")
 
-        ###################
-        ### Backup Plan ###
-        ###################
-        backup_plan = Backup_Construct(
-            self, 'Backup-Plan',
-            efs_resources=[self.efs.efs],
-        )
+        # self.asg.user_data.add_commands("rm -rf /var/www/html && ln -s /var/www/html /mnt/efs/fs1/html")
+
+        # # download website content
+        # self.asg.user_data.add_s3_download_command(
+        #     bucket=self.s3_bucket.script_bucket,
+        #     bucket_key='website_content.zip',
+        #     local_file='/tmp/website_content.zip'
+        # )
+        # # unzip website content
+        # self.asg.user_data.add_commands("chmod 755 -R /var/www/html/")
+        # self.asg.user_data.add_commands("unzip /tmp/website_content.zip -d /var/www/html/")
+
+        # ###################
+        # ### Backup Plan ###
+        # ###################
+        # backup_plan = Backup_Construct(
+        #     self, 'Backup-Plan',
+        #     efs_resources=[self.efs.efs],
+        # )
+
+        CfnOutput(self, 'ALB DNS', value=self.alb.alb.load_balancer_dns_name)
+        CfnOutput(self, 'MGMT IP', value=self.admin_server.instance_public_ip)

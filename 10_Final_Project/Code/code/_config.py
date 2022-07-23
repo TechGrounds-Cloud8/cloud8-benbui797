@@ -2,8 +2,6 @@ import requests
 
 my_ip = requests.get('https://api.ipify.org').text
 
-
-
 ########################
 ### CONFIG VARIABLES ###
 ########################
