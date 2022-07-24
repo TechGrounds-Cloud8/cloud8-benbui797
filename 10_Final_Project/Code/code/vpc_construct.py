@@ -32,12 +32,6 @@ class WEB_VPC_Construct(Construct):
                 )
             }
         )
-
-        # s3_endpoint = self.vpc_web.add_gateway_endpoint(
-        #     'S3Endpoint',
-        #     service=ec2.GatewayVpcEndpointAwsService.S3            
-        #     )
-        # s3_endpoint.add_to_policy
         
 
 class ADMIN_VPC_Construct(Construct):

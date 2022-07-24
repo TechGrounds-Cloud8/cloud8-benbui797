@@ -12,7 +12,7 @@ TEST_ENV = True
 # Launch AMI server
 AMI_SERVER = False
 
-# Add IP addresses as strings, seperated by comma's: [my_ip, "192.168.10.24", "10.0.15.156"]
+# Add IP addresses as strings, seperated by comma's: [my_ip, "192.168.10.24", "10.0.15.156"]. Or add IPs in the parameter store for more security.
 TRUSTED_IP = [my_ip]
 
 # Capacity settings for Auto-Scaling Group

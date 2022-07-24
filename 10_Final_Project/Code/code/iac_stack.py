@@ -107,9 +107,7 @@ class IACStack(Stack):
             "New-NetFirewallRule -Name sshd -DisplayName 'Allow SSH' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22"
             )
 
-        # https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_server_configuration
-        # https://adamtheautomator.com/openssh-windows/
-        # https://www.redhat.com/sysadmin/ssh-proxy-bastion-proxyjump
+        
 
         ########################
         ### Web Server Fleet ###
@@ -204,25 +202,13 @@ class IACStack(Stack):
         self.asg.user_data.add_commands("chmod 755 -R /mnt/efs/fs1/html")
         self.asg.user_data.add_commands("unzip /tmp/website_content.zip -d /mnt/efs/fs1/html")
 
-        # self.asg.user_data.add_commands("rm -rf /var/www/html && ln -s /var/www/html /mnt/efs/fs1/html")
-
-        # # download website content
-        # self.asg.user_data.add_s3_download_command(
-        #     bucket=self.s3_bucket.script_bucket,
-        #     bucket_key='website_content.zip',
-        #     local_file='/tmp/website_content.zip'
-        # )
-        # # unzip website content
-        # self.asg.user_data.add_commands("chmod 755 -R /var/www/html/")
-        # self.asg.user_data.add_commands("unzip /tmp/website_content.zip -d /var/www/html/")
-
-        # ###################
-        # ### Backup Plan ###
-        # ###################
-        # backup_plan = Backup_Construct(
-        #     self, 'Backup-Plan',
-        #     efs_resources=[self.efs.efs],
-        # )
+        ###################
+        ### Backup Plan ###
+        ###################
+        backup_plan = Backup_Construct(
+            self, 'Backup-Plan',
+            efs_resources=[self.efs.efs],
+        )
 
         CfnOutput(self, 'ALB DNS', value=self.alb.alb.load_balancer_dns_name)
         CfnOutput(self, 'MGMT IP', value=self.admin_server.instance_public_ip)

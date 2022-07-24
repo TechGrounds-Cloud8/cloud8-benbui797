@@ -32,3 +32,10 @@ Encryption and decryption require a bit of computing power, so in order to speed
 
 ## Backup
 The backups get made of the EFS filesystem instead of single EC2 instances
+
+
+## Windows Admin Server
+
+https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_server_configuration
+https://adamtheautomator.com/openssh-windows/
+https://www.redhat.com/sysadmin/ssh-proxy-bastion-proxyjump
