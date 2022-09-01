@@ -96,7 +96,7 @@ class IACStack(Stack):
                         encrypted=True,
                         delete_on_termination=TEST_ENV
                 ))],
-            role= iam.Role(self, "admin-role",
+            role=iam.Role(self, "admin-role",
                 assumed_by=iam.ServicePrincipal('ec2.amazonaws.com'),
                 managed_policies=[
                     iam.ManagedPolicy.from_aws_managed_policy_name('AmazonSSMManagedInstanceCore')
@@ -131,7 +131,8 @@ class IACStack(Stack):
             self, 'webserver-role',
             assumed_by=iam.ServicePrincipal('ec2.amazonaws.com'),
             managed_policies=[
-                iam.ManagedPolicy.from_aws_managed_policy_name('AmazonS3ReadOnlyAccess'),
+                # iam.ManagedPolicy.from_aws_managed_policy_name('AmazonS3ReadOnlyAccess'),
+                iam.ManagedPolicy.from_aws_managed_policy_name('AmazonS3FullAccess'),
                 iam.ManagedPolicy.from_aws_managed_policy_name('AmazonSSMManagedInstanceCore')
                 ],
         )
@@ -155,20 +156,20 @@ class IACStack(Stack):
         ### S3 Bucket ###
         #################
 
-        self.s3_bucket = S3_Construct(self, 'PostDeploymentScripts', resource_access=[self.web_server_role, self.admin_server])
+        self.s3_bucket = S3_Construct(self, 'PostDeploymentScripts', resource_access=[self.web_server_role, self.admin_server.role])
 
         ####################
         ### AMI Instance ###
         ####################
 
-        if AMI_SERVER:
-            self.ami_instance = AMI_Construct(
-                self, 'AMI-Instance',
-                vpc=self.vpc_web,
-                security_group=self.web_server_sg.sg,
-                role=self.web_server_role,
-                s3_bucket=self.s3_bucket
-                )
+        # if AMI_SERVER:
+        #     self.ami_instance = AMI_Construct(
+        #         self, 'AMI-Instance',
+        #         vpc=self.vpc_web,
+        #         security_group=self.web_server_sg.sg,
+        #         role=self.web_server_role,
+        #         s3_bucket=self.s3_bucket
+        #         )
         
         #######################
         ### EFS File System ###
@@ -185,29 +186,41 @@ class IACStack(Stack):
         ### ASG UserData ###
         ####################
 
-        self.asg.user_data.add_commands(
-            'yum check-update -y',
-            'yum upgrade -y',
+        # download webserver script
+        script_path = self.asg.auto_scaling_group.user_data.add_s3_download_command(
+            bucket=self.s3_bucket.script_bucket,
+            bucket_key='launch-web-server.sh',
+            region=self.region
+        )
+        self.asg.auto_scaling_group.user_data.add_execute_file_command(file_path=script_path)
+
+        self.asg.auto_scaling_group.user_data.add_commands(
+            # 'yum check-update -y',
+            # 'yum upgrade -y',
             'yum install -y amazon-efs-utils',
             'yum install -y nfs-utils',
             'file_system_id_1=' + self.efs.efs.file_system_id,
             'efs_mount_point_1=/mnt/efs/fs1',
             'mkdir -p "${efs_mount_point_1}"',
-            'test -f "/sbin/mount.efs" && echo "${file_system_id_1}:/ ${efs_mount_point_1} efs defaults,_netdev" >> /etc/fstab || " + "echo "${file_system_id_1}.efs.' + Stack.of(self).region + 'cd .amazonaws.com:/ ${efs_mount_point_1} nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev 0 0" >> /etc/fstab',
+            'test -f "/sbin/mount.efs" && echo "${file_system_id_1}:/ ${efs_mount_point_1} efs defaults,_netdev" >> /etc/fstab || " + "echo "${file_system_id_1}.efs.' + Stack.of(self).region + '.amazonaws.com:/ ${efs_mount_point_1} nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev 0 0" >> /etc/fstab',
             'mount -a -t efs,nfs4 defaults'
             )
         
-        self.asg.user_data.add_commands("rm -rf /var/www/html && ln -s /mnt/efs/fs1/html /var/www/html")
+        self.asg.auto_scaling_group.user_data.add_commands(
+            "mkdir /mnt/efs/fs1/html",
+            "rm -rf /var/www/html && ln -s /mnt/efs/fs1/html /var/www/html",
+            )
 
         # download website content
-        self.asg.user_data.add_s3_download_command(
+        self.asg.auto_scaling_group.user_data.add_s3_download_command(
             bucket=self.s3_bucket.script_bucket,
             bucket_key='website_content.zip',
-            local_file='/tmp/website_content.zip'
+            local_file='/tmp/website_content.zip',
+            region=self.region
         )
         # unzip website content
-        self.asg.user_data.add_commands("chmod 755 -R /mnt/efs/fs1/html")
-        self.asg.user_data.add_commands("unzip /tmp/website_content.zip -d /mnt/efs/fs1/html")
+        self.asg.auto_scaling_group.user_data.add_commands("chmod 755 -R /mnt/efs/fs1/html")
+        self.asg.auto_scaling_group.user_data.add_commands("unzip /tmp/website_content.zip -d /mnt/efs/fs1/html")
 
         # ###################
         # ### Backup Plan ###
@@ -219,3 +232,4 @@ class IACStack(Stack):
 
         CfnOutput(self, 'ALB DNS', value=self.alb.alb.load_balancer_dns_name)
         CfnOutput(self, 'MGMT IP', value=self.admin_server.instance_public_ip)
+

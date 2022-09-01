@@ -45,7 +45,7 @@ class ASG_Construct(Construct):
             self, 'Auto-Scaling Group',
             vpc=vpc_web,
             vpc_subnets=ec2.SubnetSelection(
-                subnet_type=ec2.SubnetType.PRIVATE_ISOLATED),
+            subnet_type=ec2.SubnetType.PRIVATE_ISOLATED),
             launch_template=self.launch_template,
             min_capacity=MIN_CAPACITY,
             max_capacity=MAX_CAPACITY,

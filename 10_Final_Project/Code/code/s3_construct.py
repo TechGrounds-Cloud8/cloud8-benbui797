@@ -1,5 +1,7 @@
+from inspect import stack
 from aws_cdk import (
     Duration,
+    Stack,
     RemovalPolicy,
     aws_s3 as s3,
     aws_s3_deployment as s3deploy,
@@ -23,10 +25,11 @@ class S3_Construct(Construct):
             auto_removal = RemovalPolicy.RETAIN
 
         self.script_bucket = s3.Bucket(
-            self, construct_id,
+            self, f"{Stack.of(self).account}-scriptbucket",
             encryption=s3.BucketEncryption.S3_MANAGED,
             versioned=True,
             enforce_ssl=True,
+            block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
             removal_policy=auto_removal,
             auto_delete_objects=TEST_ENV,
         )
@@ -42,9 +45,18 @@ class S3_Construct(Construct):
         # self.script_bucket.add_to_resource_policy(
         #     iam.PolicyStatement(
         #         effect=iam.Effect.ALLOW,
-        #         principals=[iam.ServicePrincipal('ec2.amazonaws.com')],
-        #         actions=['s3:GetObject'],
-        #         resources=[f'{self.script_bucket.bucket_arn}/*'])
+        #         principals=[
+        #             iam.ServicePrincipal('ec2.amazonaws.com')
+        #             ],
+        #         actions=[
+        #             's3:GetObject',
+        #             's3:PutObject',
+        #             's3:ListBucket',
+        #             ],
+        #         resources=[
+        #             f'{self.script_bucket.bucket_arn}/*',
+        #             f'{self.script_bucket.bucket_arn}'
+        #             ])
         # )
 
         for resource in resource_access:

@@ -9,7 +9,7 @@ env=cdk.Environment(account=os.getenv('CDK_DEFAULT_ACCOUNT'), region=os.getenv('
 
 app = cdk.App()
 
-IACStack(app, "TG-FP-V1",
+IACStack(app, "TG-FinalProject-V1-1",
     env=env
     # env=cdk.Environment(account='880133342642', region='eu-central-1'),
     )

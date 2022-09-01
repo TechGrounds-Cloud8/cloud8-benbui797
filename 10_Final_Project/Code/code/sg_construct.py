@@ -14,7 +14,7 @@ class Admin_SG_Construct(Construct):
         self.sg = ec2.SecurityGroup(
             self, construct_id,
             vpc=vpc,
-            # allow_all_outbound=False
+            allow_all_outbound=True
         )
 
         office_ip = ssm.StringParameter.value_for_string_parameter(
@@ -67,7 +67,7 @@ class Web_SG_Construct(Construct):
         self.sg = ec2.SecurityGroup(
             self, construct_id,
             vpc=vpc,
-            # allow_all_outbound=False
+            allow_all_outbound=True
         )
 
         self.sg.connections.allow_from(
@@ -84,6 +84,12 @@ class Web_SG_Construct(Construct):
             peer=ec2.Peer.any_ipv4(),
             connection=ec2.Port.tcp(443),
             description='Allow HTTPS traffic from anywhere'
+        )
+
+        self.sg.add_ingress_rule(
+            peer=ec2.Peer.ipv4(vpc.vpc_cidr_block),
+            connection=ec2.Port.all_tcp(),
+            description='Allow all TCP within VPC'
         )
 
         # # Allow selected outbound traffic

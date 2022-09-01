@@ -1,5 +1,7 @@
 from aws_cdk import (
     aws_ec2 as ec2,
+    aws_iam as iam,
+    Stack
 )
 from constructs import Construct
 
@@ -14,7 +16,9 @@ class WEB_VPC_Construct(Construct):
             self, 'app-prd-vpc',
             cidr='10.10.0.0/16',
             nat_gateways=0,
-            max_azs=3,
+            max_azs=2,
+            enable_dns_hostnames=True,
+            enable_dns_support=True,
             subnet_configuration=[
                 ec2.SubnetConfiguration(
                     name='Public',
@@ -32,7 +36,7 @@ class WEB_VPC_Construct(Construct):
                 )
             }
         )
-
+        
         self.vpc_web.add_interface_endpoint("ec2messages", service=ec2.InterfaceVpcEndpointAwsService.EC2_MESSAGES)
         self.vpc_web.add_interface_endpoint("ssm", service=ec2.InterfaceVpcEndpointAwsService.SSM)
         self.vpc_web.add_interface_endpoint("ssmmessages", service=ec2.InterfaceVpcEndpointAwsService.SSM_MESSAGES)
