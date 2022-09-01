@@ -14,7 +14,7 @@ path = os.getcwd()
 
 class S3_Construct(Construct):
 
-    def __init__(self, scope: Construct, construct_id: str, resource_access=[], **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, resource_access: list, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         if TEST_ENV:
@@ -27,11 +27,6 @@ class S3_Construct(Construct):
             encryption=s3.BucketEncryption.S3_MANAGED,
             versioned=True,
             enforce_ssl=True,
-            intelligent_tiering_configurations=[s3.IntelligentTieringConfiguration(
-                name='Intelligent-Tiering',
-                archive_access_tier_time=Duration.days(90),
-                deep_archive_access_tier_time=Duration.days(180),
-            )],
             removal_policy=auto_removal,
             auto_delete_objects=TEST_ENV,
         )
@@ -43,11 +38,14 @@ class S3_Construct(Construct):
             sources=[s3deploy.Source.asset(os.path.join(path, "assets"))]
             )
         
-        # Allow EC2 instances to get files from the bucket
-        self.script_bucket.add_to_resource_policy(
-            iam.PolicyStatement(
-                effect=iam.Effect.ALLOW,
-                principals=[iam.ServicePrincipal('ec2.amazonaws.com')],
-                actions=['s3:GetObject'],
-                resources=[f'{self.script_bucket.bucket_arn}/*'])
-        )
+        # # Allow EC2 instances to get files from the bucket
+        # self.script_bucket.add_to_resource_policy(
+        #     iam.PolicyStatement(
+        #         effect=iam.Effect.ALLOW,
+        #         principals=[iam.ServicePrincipal('ec2.amazonaws.com')],
+        #         actions=['s3:GetObject'],
+        #         resources=[f'{self.script_bucket.bucket_arn}/*'])
+        # )
+
+        for resource in resource_access:
+            self.script_bucket.grant_read(resource)

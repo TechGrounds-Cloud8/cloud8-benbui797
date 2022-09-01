@@ -16,7 +16,7 @@ from code.vpc_construct import WEB_VPC_Construct, ADMIN_VPC_Construct
 from code.elb_construct import ELB_Construct
 from code.ami_instance import AMI_Construct
 
-from code._config import TEST_ENV, AMI_SERVER
+from code._config import TEST_ENV, AMI_SERVER, KEY_PAIR
 
 class IACStack(Stack):
 
@@ -61,12 +61,12 @@ class IACStack(Stack):
                 vpc_peering_connection_id=self.vpc_peer.ref,
             )
 
-        # Add Network ACLs to the VPCs
-        self.network_acl = NACL_Construct(
-            self, 'NACL',
-            vpc_web=self.vpc_web,
-            vpc_admin=self.vpc_admin,
-        )
+        # # Add Network ACLs to the VPCs
+        # self.network_acl = NACL_Construct(
+        #     self, 'NACL',
+        #     vpc_web=self.vpc_web,
+        #     vpc_admin=self.vpc_admin,
+        # )
 
         ####################
         ### Admin Server ###
@@ -86,8 +86,8 @@ class IACStack(Stack):
             # machine_image=ec2.AmazonLinuxImage(
             #     generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2
             #     ),
-            machine_image=ec2.WindowsImage(ec2.WindowsVersion.WINDOWS_SERVER_2022_DUTCH_FULL_BASE),
-            key_name='ec2-key-pair',
+            machine_image=ec2.WindowsImage(ec2.WindowsVersion.WINDOWS_SERVER_2019_ENGLISH_CORE_BASE),
+            key_name=KEY_PAIR,
             block_devices=[
                 ec2.BlockDevice(
                     device_name='/dev/sda1',
@@ -96,6 +96,12 @@ class IACStack(Stack):
                         encrypted=True,
                         delete_on_termination=TEST_ENV
                 ))],
+            role= iam.Role(self, "admin-role",
+                assumed_by=iam.ServicePrincipal('ec2.amazonaws.com'),
+                managed_policies=[
+                    iam.ManagedPolicy.from_aws_managed_policy_name('AmazonSSMManagedInstanceCore')
+                ],
+            )
         )
         
         # Install OpenSSH on Admin Server
@@ -125,7 +131,8 @@ class IACStack(Stack):
             self, 'webserver-role',
             assumed_by=iam.ServicePrincipal('ec2.amazonaws.com'),
             managed_policies=[
-                iam.ManagedPolicy.from_aws_managed_policy_name('AmazonS3ReadOnlyAccess')
+                iam.ManagedPolicy.from_aws_managed_policy_name('AmazonS3ReadOnlyAccess'),
+                iam.ManagedPolicy.from_aws_managed_policy_name('AmazonSSMManagedInstanceCore')
                 ],
         )
 
@@ -148,7 +155,7 @@ class IACStack(Stack):
         ### S3 Bucket ###
         #################
 
-        self.s3_bucket = S3_Construct(self, 'PostDeploymentScripts')
+        self.s3_bucket = S3_Construct(self, 'PostDeploymentScripts', resource_access=[self.web_server_role, self.admin_server])
 
         ####################
         ### AMI Instance ###
@@ -202,13 +209,13 @@ class IACStack(Stack):
         self.asg.user_data.add_commands("chmod 755 -R /mnt/efs/fs1/html")
         self.asg.user_data.add_commands("unzip /tmp/website_content.zip -d /mnt/efs/fs1/html")
 
-        ###################
-        ### Backup Plan ###
-        ###################
-        backup_plan = Backup_Construct(
-            self, 'Backup-Plan',
-            efs_resources=[self.efs.efs],
-        )
+        # ###################
+        # ### Backup Plan ###
+        # ###################
+        # backup_plan = Backup_Construct(
+        #     self, 'Backup-Plan',
+        #     efs_resources=[self.efs.efs],
+        # )
 
         CfnOutput(self, 'ALB DNS', value=self.alb.alb.load_balancer_dns_name)
         CfnOutput(self, 'MGMT IP', value=self.admin_server.instance_public_ip)

@@ -4,7 +4,7 @@ from aws_cdk import (
 
 from constructs import Construct
 
-from code._config import TEST_ENV
+from code._config import TEST_ENV, KEY_PAIR
 
 class AMI_Construct(Construct):
 
@@ -21,7 +21,7 @@ class AMI_Construct(Construct):
             machine_image=ec2.AmazonLinuxImage(
                 generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2
                 ),
-            key_name='ec2-key-pair',
+            key_name=KEY_PAIR,
             block_devices=[
                 ec2.BlockDevice(
                     device_name='/dev/xvda',

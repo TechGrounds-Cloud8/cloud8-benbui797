@@ -4,5 +4,15 @@
     "eu-central-1b",
     "eu-central-1c"
   ],
-  "ssm:account=880133342642:parameterName=tgfp-ami:region=eu-central-1": "AQICAHj0r1LG0UuXExZKCLG0blpUfW3DGqNXqf32IIAERF2zvQGAvwc2CArQ4THCsMMdYotNAAAAczBxBgkqhkiG9w0BBwagZDBiAgEAMF0GCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQM87pTZp3W8zwOqvDYAgEQgDDaoKzcgwsUXA0olHciYQz39TwRWcKSwcNv5TET/Qmjur2/T7SL2BbM2LZHdx3RIPo="
+  "ssm:account=880133342642:parameterName=tgfp-ami:region=eu-central-1": "AQICAHj0r1LG0UuXExZKCLG0blpUfW3DGqNXqf32IIAERF2zvQGAvwc2CArQ4THCsMMdYotNAAAAczBxBgkqhkiG9w0BBwagZDBiAgEAMF0GCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQM87pTZp3W8zwOqvDYAgEQgDDaoKzcgwsUXA0olHciYQz39TwRWcKSwcNv5TET/Qmjur2/T7SL2BbM2LZHdx3RIPo=",
+  "availability-zones:account=031986729456:region=eu-west-1": [
+    "eu-west-1a",
+    "eu-west-1b",
+    "eu-west-1c"
+  ],
+  "availability-zones:account=031986729456:region=eu-central-1": [
+    "eu-central-1a",
+    "eu-central-1b",
+    "eu-central-1c"
+  ]
 }

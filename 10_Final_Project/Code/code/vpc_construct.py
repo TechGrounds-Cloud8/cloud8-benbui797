@@ -32,6 +32,10 @@ class WEB_VPC_Construct(Construct):
                 )
             }
         )
+
+        self.vpc_web.add_interface_endpoint("ec2messages", service=ec2.InterfaceVpcEndpointAwsService.EC2_MESSAGES)
+        self.vpc_web.add_interface_endpoint("ssm", service=ec2.InterfaceVpcEndpointAwsService.SSM)
+        self.vpc_web.add_interface_endpoint("ssmmessages", service=ec2.InterfaceVpcEndpointAwsService.SSM_MESSAGES)
         
 
 class ADMIN_VPC_Construct(Construct):

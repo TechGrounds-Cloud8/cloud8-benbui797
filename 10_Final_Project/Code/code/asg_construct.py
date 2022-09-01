@@ -6,7 +6,7 @@ from aws_cdk import (
 
 from constructs import Construct
 
-from code._config import MIN_CAPACITY, MAX_CAPACITY
+from code._config import MIN_CAPACITY, MAX_CAPACITY, KEY_PAIR
 
 class ASG_Construct(Construct):
 
@@ -30,8 +30,11 @@ class ASG_Construct(Construct):
             self, 'Launch Template',
             launch_template_name='app-prod-launch-template',
             instance_type=ec2.InstanceType('t3.nano'),
-            machine_image=self.custom_AMI,
-            key_name='ec2-key-pair',
+            # machine_image=self.custom_AMI,
+            machine_image=ec2.AmazonLinuxImage(
+                generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2
+                ),
+            key_name=KEY_PAIR,
             security_group=security_group,
             role=role,
             user_data=self.user_data

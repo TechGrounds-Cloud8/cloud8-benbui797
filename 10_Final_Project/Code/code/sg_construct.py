@@ -2,7 +2,6 @@ from aws_cdk import (
     aws_ec2 as ec2,
     aws_ssm as ssm
 )
-
 from constructs import Construct
 
 from code._config import TRUSTED_IP
@@ -15,7 +14,7 @@ class Admin_SG_Construct(Construct):
         self.sg = ec2.SecurityGroup(
             self, construct_id,
             vpc=vpc,
-            allow_all_outbound=False
+            # allow_all_outbound=False
         )
 
         office_ip = ssm.StringParameter.value_for_string_parameter(
@@ -41,23 +40,23 @@ class Admin_SG_Construct(Construct):
                 description='Allow SSH access from trusted IP'
             )
 
-        self.sg.add_egress_rule(
-                peer=ec2.Peer.any_ipv4(),
-                connection=ec2.Port.tcp(22),
-                description='Allow outbound SSH to other VPC'
-            )
+        # self.sg.add_egress_rule(
+        #         peer=ec2.Peer.any_ipv4(),
+        #         connection=ec2.Port.tcp(22),
+        #         description='Allow outbound SSH to other VPC'
+        #     )
 
-        # Allow HTTP(S) to download OpenSSH
-        self.sg.add_egress_rule(
-                peer=ec2.Peer.any_ipv4(),
-                connection=ec2.Port.tcp(80),
-                description='Allow outbound HTTP'
-            )
-        self.sg.add_egress_rule(
-            peer=ec2.Peer.any_ipv4(),
-            connection=ec2.Port.tcp(443),
-            description='Allow outbound HTTPS'
-        )
+        # # Allow HTTP(S) to download OpenSSH
+        # self.sg.add_egress_rule(
+        #         peer=ec2.Peer.any_ipv4(),
+        #         connection=ec2.Port.tcp(80),
+        #         description='Allow outbound HTTP'
+        #     )
+        # self.sg.add_egress_rule(
+        #     peer=ec2.Peer.any_ipv4(),
+        #     connection=ec2.Port.tcp(443),
+        #     description='Allow outbound HTTPS'
+        # )
 
 
 class Web_SG_Construct(Construct):
@@ -68,7 +67,7 @@ class Web_SG_Construct(Construct):
         self.sg = ec2.SecurityGroup(
             self, construct_id,
             vpc=vpc,
-            allow_all_outbound=False
+            # allow_all_outbound=False
         )
 
         self.sg.connections.allow_from(
@@ -87,14 +86,14 @@ class Web_SG_Construct(Construct):
             description='Allow HTTPS traffic from anywhere'
         )
 
-        # Allow selected outbound traffic
-        self.sg.add_egress_rule(
-                peer=ec2.Peer.any_ipv4(),
-                connection=ec2.Port.tcp(80),
-                description='Allow HTTP out to any IP'
-            )
-        self.sg.add_egress_rule(
-                peer=ec2.Peer.any_ipv4(),
-                connection=ec2.Port.tcp(443),
-                description='Allow HTTPS out to any IP'
-            )
+        # # Allow selected outbound traffic
+        # self.sg.add_egress_rule(
+        #         peer=ec2.Peer.any_ipv4(),
+        #         connection=ec2.Port.tcp(80),
+        #         description='Allow HTTP out to any IP'
+        #     )
+        # self.sg.add_egress_rule(
+        #         peer=ec2.Peer.any_ipv4(),
+        #         connection=ec2.Port.tcp(443),
+        #         description='Allow HTTPS out to any IP'
+        #     )
