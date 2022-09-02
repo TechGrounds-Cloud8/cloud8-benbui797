@@ -82,9 +82,6 @@ class IACStack(Stack):
             vpc_subnets=ec2.SubnetType.PUBLIC,
             security_group=self.admin_server_sg.sg,
             instance_type=ec2.InstanceType('t3.nano'),
-            # machine_image=ec2.AmazonLinuxImage(
-            #     generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2
-            #     ),
             machine_image=ec2.WindowsImage(ec2.WindowsVersion.WINDOWS_SERVER_2019_ENGLISH_CORE_BASE),
             key_name=KEY_PAIR,
             block_devices=[
@@ -111,7 +108,6 @@ class IACStack(Stack):
             "Set-Service -Name sshd -StartupType 'Automatic'",
             "New-NetFirewallRule -Name sshd -DisplayName 'Allow SSH' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22"
             )
-        
 
         ########################
         ### Web Server Fleet ###
@@ -130,7 +126,6 @@ class IACStack(Stack):
             assumed_by=iam.ServicePrincipal('ec2.amazonaws.com'),
             managed_policies=[
                 iam.ManagedPolicy.from_aws_managed_policy_name('AmazonS3ReadOnlyAccess'),
-                # iam.ManagedPolicy.from_aws_managed_policy_name('AmazonS3FullAccess'),
                 iam.ManagedPolicy.from_aws_managed_policy_name('AmazonSSMManagedInstanceCore')
                 ],
         )

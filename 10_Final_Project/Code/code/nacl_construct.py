@@ -172,23 +172,6 @@ class NACL_Construct(Construct):
             rule_action=ec2.Action.ALLOW
         )
 
-        # vpc_web_priv_nacl.add_entry(
-        #     'Ephemeral outbound allow Admin Subnet',
-        #     cidr=ec2.AclCidr.ipv4(vpc_admin.vpc_cidr_block),
-        #     rule_number=10100,
-        #     traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
-        #     direction=ec2.TrafficDirection.EGRESS,
-        #     rule_action=ec2.Action.ALLOW,
-        # )
-        # vpc_web_priv_nacl.add_entry(
-        #     'Ephemeral inbound allow Admin Subnet',
-        #     cidr=ec2.AclCidr.ipv4(vpc_admin.vpc_cidr_block),
-        #     rule_number=10100,
-        #     traffic=ec2.AclTraffic.tcp_port_range(1024, 65535),
-        #     direction=ec2.TrafficDirection.INGRESS,
-        #     rule_action=ec2.Action.ALLOW
-        # )
-
         ########################################
         ### Create Network ACL for VPC Admin ###
         ########################################
