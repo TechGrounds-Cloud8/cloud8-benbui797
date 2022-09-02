@@ -41,23 +41,5 @@ class S3_Construct(Construct):
             sources=[s3deploy.Source.asset(os.path.join(path, "assets"))]
             )
         
-        # # Allow EC2 instances to get files from the bucket
-        # self.script_bucket.add_to_resource_policy(
-        #     iam.PolicyStatement(
-        #         effect=iam.Effect.ALLOW,
-        #         principals=[
-        #             iam.ServicePrincipal('ec2.amazonaws.com')
-        #             ],
-        #         actions=[
-        #             's3:GetObject',
-        #             's3:PutObject',
-        #             's3:ListBucket',
-        #             ],
-        #         resources=[
-        #             f'{self.script_bucket.bucket_arn}/*',
-        #             f'{self.script_bucket.bucket_arn}'
-        #             ])
-        # )
-
         for resource in resource_access:
             self.script_bucket.grant_read(resource)

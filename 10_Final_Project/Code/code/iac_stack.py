@@ -14,9 +14,8 @@ from code.backup_construct import Backup_Construct
 from code.sg_construct import Admin_SG_Construct, Web_SG_Construct
 from code.vpc_construct import WEB_VPC_Construct, ADMIN_VPC_Construct
 from code.elb_construct import ELB_Construct
-from code.ami_instance import AMI_Construct
 
-from code._config import TEST_ENV, AMI_SERVER, KEY_PAIR
+from code._config import TEST_ENV, KEY_PAIR
 
 class IACStack(Stack):
 
@@ -61,12 +60,12 @@ class IACStack(Stack):
                 vpc_peering_connection_id=self.vpc_peer.ref,
             )
 
-        # # Add Network ACLs to the VPCs
-        # self.network_acl = NACL_Construct(
-        #     self, 'NACL',
-        #     vpc_web=self.vpc_web,
-        #     vpc_admin=self.vpc_admin,
-        # )
+        # Add Network ACLs to the VPCs
+        self.network_acl = NACL_Construct(
+            self, 'NACL',
+            vpc_web=self.vpc_web,
+            vpc_admin=self.vpc_admin,
+        )
 
         ####################
         ### Admin Server ###
@@ -112,7 +111,6 @@ class IACStack(Stack):
             "Set-Service -Name sshd -StartupType 'Automatic'",
             "New-NetFirewallRule -Name sshd -DisplayName 'Allow SSH' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22"
             )
-
         
 
         ########################
@@ -131,8 +129,8 @@ class IACStack(Stack):
             self, 'webserver-role',
             assumed_by=iam.ServicePrincipal('ec2.amazonaws.com'),
             managed_policies=[
-                # iam.ManagedPolicy.from_aws_managed_policy_name('AmazonS3ReadOnlyAccess'),
-                iam.ManagedPolicy.from_aws_managed_policy_name('AmazonS3FullAccess'),
+                iam.ManagedPolicy.from_aws_managed_policy_name('AmazonS3ReadOnlyAccess'),
+                # iam.ManagedPolicy.from_aws_managed_policy_name('AmazonS3FullAccess'),
                 iam.ManagedPolicy.from_aws_managed_policy_name('AmazonSSMManagedInstanceCore')
                 ],
         )
@@ -157,19 +155,6 @@ class IACStack(Stack):
         #################
 
         self.s3_bucket = S3_Construct(self, 'PostDeploymentScripts', resource_access=[self.web_server_role, self.admin_server.role])
-
-        ####################
-        ### AMI Instance ###
-        ####################
-
-        # if AMI_SERVER:
-        #     self.ami_instance = AMI_Construct(
-        #         self, 'AMI-Instance',
-        #         vpc=self.vpc_web,
-        #         security_group=self.web_server_sg.sg,
-        #         role=self.web_server_role,
-        #         s3_bucket=self.s3_bucket
-        #         )
         
         #######################
         ### EFS File System ###
@@ -195,8 +180,6 @@ class IACStack(Stack):
         self.asg.auto_scaling_group.user_data.add_execute_file_command(file_path=script_path)
 
         self.asg.auto_scaling_group.user_data.add_commands(
-            # 'yum check-update -y',
-            # 'yum upgrade -y',
             'yum install -y amazon-efs-utils',
             'yum install -y nfs-utils',
             'file_system_id_1=' + self.efs.efs.file_system_id,
@@ -222,13 +205,13 @@ class IACStack(Stack):
         self.asg.auto_scaling_group.user_data.add_commands("chmod 755 -R /mnt/efs/fs1/html")
         self.asg.auto_scaling_group.user_data.add_commands("unzip /tmp/website_content.zip -d /mnt/efs/fs1/html")
 
-        # ###################
-        # ### Backup Plan ###
-        # ###################
-        # backup_plan = Backup_Construct(
-        #     self, 'Backup-Plan',
-        #     efs_resources=[self.efs.efs],
-        # )
+        ###################
+        ### Backup Plan ###
+        ###################
+        backup_plan = Backup_Construct(
+            self, 'Backup-Plan',
+            efs_resources=[self.efs.efs],
+        )
 
         CfnOutput(self, 'ALB DNS', value=self.alb.alb.load_balancer_dns_name)
         CfnOutput(self, 'MGMT IP', value=self.admin_server.instance_public_ip)

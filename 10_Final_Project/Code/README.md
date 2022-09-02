@@ -19,13 +19,14 @@ In the second half of the project, we only received a list of requirements for t
 - [Updating Web Content](#updating-web-content)
 - [Design](#design)
 - [Changelog](#changelog)
-  - [Region](#region)
-  - [AZ](#availability-zones)
-  - [Instance Type](#instance-types)
-  - [Backup](#backup-schedule)
-  - [Additional EBS](#additional-ebs-volume)
-  - [Trusted IPs](#trusted-ips)
-  - [Encryption Keys](#encryption-keys)
+  - [CIDR Blocks](#cidr-blocks)
+  - [Private Subnets](#private-subnets)
+  - [S3 Endpoint](#s3-endpoint)
+  - [EFS file system](#efs-file-system)
+  - [Windows Admin Server](#windows-admin-server)
+  - [SSM Agent](#ssm-agent)
+  - [SSL offloading](#ssl-offloading)
+  - [Backups](#backups)
  
 # Quick Start Guide
 
@@ -156,14 +157,17 @@ The subnets will use /24.
 ## Private Subnets
 The max amount of servers the ASG can scale to is 3, but in order to design for high availability, we'll create 3 private subnets so every server will be launched in a different AZ. This only applies to the "app-prd-vpc". The management vpc doesn't require private subnets, so will remain unchanged.
 
-## S3 Endpoint in the VPC
-An S3 Endpoint has been created in the VPC so traffic to S3 doesn't have to traverse the internet.
+## S3 Endpoint
+An S3 Endpoint has been created in the VPC so traffic to S3 doesn't have to traverse the internet. Also the private instances can reach the Yum repo via an AWS Hosted repository on S3.
 
 ## EFS file system
 It is a best practise to seperate the root disk and data disk, but when we use auto-scaling, EFS is easier to accomplish this than EBS. 
 
 ## Windows Admin server
 The Admin server now runs Windows OS.
+
+## SSM Agent
+SSM Agent and corresponding policy has been attached to the instances, so you can now connect to them via the Session Manager instead of SSH. This is much safer, as you won't need to store a key on your local computer.
 
 ## SSL offloading
 Encryption and decryption require a bit of computing power, so in order to speed up traffic over the internal network, we allow for SSL offloading at the ALB.

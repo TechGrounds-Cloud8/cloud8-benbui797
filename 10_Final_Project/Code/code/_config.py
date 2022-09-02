@@ -9,9 +9,6 @@ my_ip = requests.get('https://api.ipify.org').text
 # When true, S3 buckets, Backup Vaults etc will be deleted along with the stack.
 TEST_ENV = True
 
-# Launch AMI server
-AMI_SERVER = False
-
 # Add IP addresses as strings, seperated by comma's: [my_ip, "192.168.10.24", "10.0.15.156"]. Or add IPs in the parameter store for more security.
 TRUSTED_IP = [my_ip]
 
